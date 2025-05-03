@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import StoryCard from "@/components/stories/story-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Story } from "@shared/schema";
+import { useTranslation } from "react-i18next";
 
 interface StoryListProps {
   queryKey: string;
@@ -13,14 +14,21 @@ interface StoryListProps {
 export default function StoryList({ 
   queryKey, 
   title, 
-  emptyMessage = "Nenhuma estória encontrada.",
+  emptyMessage,
   variant = "large" 
 }: StoryListProps) {
+  const { t } = useTranslation();
   const { data: stories, isLoading } = useQuery<Story[]>({
     queryKey: [queryKey],
   });
   
-  console.log("StoryList queryKey:", queryKey, "stories:", stories?.length || 0);
+  // Usar message personalizada ou padrão da tradução
+  const noResultsMessage = emptyMessage || t('stories.noResults');
+  
+  // Para propósitos de depuração
+  if (import.meta.env.DEV) {
+    console.log("StoryList queryKey:", queryKey, "stories:", stories?.length || 0);
+  }
 
   const columns = variant === "large" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2";
 
@@ -29,7 +37,7 @@ export default function StoryList({
       <section className="mb-10">
         <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6">{title}</h2>
         <div className={`grid ${columns} gap-6`}>
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: variant === "large" ? 6 : 4 }).map((_, index) => (
             <div key={index} className="bg-white rounded-xl shadow-soft overflow-hidden">
               {variant === "large" ? (
                 <>
@@ -66,7 +74,7 @@ export default function StoryList({
       <section className="mb-10">
         <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6">{title}</h2>
         <div className="bg-white rounded-xl p-8 text-center shadow-soft">
-          <p className="text-gray-600">{emptyMessage}</p>
+          <p className="text-gray-600">{noResultsMessage}</p>
         </div>
       </section>
     );
