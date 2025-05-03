@@ -43,12 +43,12 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 font-heading">Categorias</h3>
+            <h3 className="text-lg font-bold mb-4 font-heading">{t('home.categories.title')}</h3>
             <ul className="space-y-2">
-              <li><Link href="/categorias?categoria=amor" className="hover:text-primary">Amor</Link></li>
-              <li><Link href="/categorias?categoria=paz" className="hover:text-primary">Paz</Link></li>
-              <li><Link href="/categorias?categoria=sabedoria" className="hover:text-primary">Sabedoria</Link></li>
-              <li><Link href="/categorias?categoria=bondade" className="hover:text-primary">Bondade</Link></li>
+              <li><Link href="/categorias?categoria=amor" className="hover:text-primary">{t('categories.amor')}</Link></li>
+              <li><Link href="/categorias?categoria=paz" className="hover:text-primary">{t('categories.paz')}</Link></li>
+              <li><Link href="/categorias?categoria=sabedoria" className="hover:text-primary">{t('categories.sabedoria')}</Link></li>
+              <li><Link href="/categorias?categoria=bondade" className="hover:text-primary">{t('categories.bondade')}</Link></li>
             </ul>
           </div>
           

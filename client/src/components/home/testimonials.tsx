@@ -7,7 +7,7 @@ export default function Testimonials() {
   const { t } = useTranslation();
   const { data: testimonials, isLoading } = useQuery({
     queryKey: ['/api/testimonials'],
-  });
+  }) as { data: any[], isLoading: boolean };
 
   return (
     <section className="mb-10">

@@ -3,6 +3,7 @@ import { Story } from "@shared/schema";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCategoryInfo, getFallbackImage } from "@/lib/data";
+import { useTranslation } from "react-i18next";
 
 interface StoryCardProps {
   story: Story;
