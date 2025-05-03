@@ -27,14 +27,14 @@ export default function StoryNarrator({ storyTitle }: StoryNarratorProps) {
     if (recordingUrl && recordingBlob) {
       const link = document.createElement("a");
       link.href = recordingUrl;
-      link.download = `Minha narração - ${storyTitle}.webm`;
+      link.download = `${t('stories.narrator.myNarration')} - ${storyTitle}.webm`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       
       toast({
-        title: "Download iniciado!",
-        description: "Sua narração está sendo baixada.",
+        title: t('stories.narrator.downloadStarted'),
+        description: t('stories.narrator.downloadDescription'),
         duration: 3000,
       });
     }
@@ -44,26 +44,26 @@ export default function StoryNarrator({ storyTitle }: StoryNarratorProps) {
     if (recordingBlob) {
       try {
         if (navigator.share) {
-          const file = new File([recordingBlob], `Minha narração - ${storyTitle}.webm`, {
+          const file = new File([recordingBlob], `${t('stories.narrator.myNarration')} - ${storyTitle}.webm`, {
             type: "audio/webm",
           });
           
           await navigator.share({
-            title: `Minha narração da estória "${storyTitle}"`,
+            title: t('stories.narrator.shareTitle', { title: storyTitle }),
             files: [file],
           });
         } else {
           toast({
-            title: "Compartilhamento não disponível",
-            description: "Seu navegador não suporta o compartilhamento. Tente baixar e compartilhar manualmente.",
+            title: t('stories.narrator.shareNotAvailable'),
+            description: t('stories.narrator.shareNotSupportedDesc'),
             variant: "destructive",
           });
         }
       } catch (error) {
-        console.error("Erro ao compartilhar:", error);
+        console.error(t('errors.shareError'), error);
         toast({
-          title: "Erro ao compartilhar",
-          description: "Ocorreu um erro ao tentar compartilhar sua narração.",
+          title: t('stories.narrator.shareError'),
+          description: t('stories.narrator.shareErrorDesc'),
           variant: "destructive",
         });
       }
@@ -107,7 +107,7 @@ export default function StoryNarrator({ storyTitle }: StoryNarratorProps) {
                 onClick={handleDownload}
               >
                 <Download className="h-4 w-4 mr-2" />
-                Baixar
+                {t('common.download')}
               </Button>
               
               <Button 
@@ -116,7 +116,7 @@ export default function StoryNarrator({ storyTitle }: StoryNarratorProps) {
                 onClick={handleShare}
               >
                 <Share2 className="h-4 w-4 mr-2" />
-                Compartilhar
+                {t('common.share')}
               </Button>
             </div>
           )}
