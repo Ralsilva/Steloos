@@ -15,13 +15,21 @@ app.use((req, res, next) => {
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
     capturedJsonResponse = bodyJson;
+    
+    // Add a header to track if response is from cache
+    const isCached = Boolean(req.headers['x-cache-hit']);
+    if (isCached) {
+      res.setHeader('X-Cache', 'HIT');
+    }
+    
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+      const cacheStatus = res.getHeader('X-Cache') ? '(cached)' : '';
+      let logLine = `${req.method} ${path} ${res.statusCode} ${cacheStatus} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }

@@ -3,8 +3,12 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertNewsletterSubscriberSchema } from "@shared/schema";
+import { cacheMiddleware } from "./cache";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Cache middleware for GET requests
+  app.use('/api', cacheMiddleware(300)); // Cache API responses for 5 minutes
+  
   // API routes
   
   // Category routes
@@ -155,6 +159,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Error processing subscription" });
     }
   });
+
+  // Cache management endpoints - restricted to development environment
+  if (process.env.NODE_ENV === 'development') {
+    const { clearCache, getCacheStats } = require('./cache');
+    
+    app.get("/api/_admin/cache/stats", (req, res) => {
+      res.json(getCacheStats());
+    });
+    
+    app.post("/api/_admin/cache/clear", (req, res) => {
+      clearCache();
+      res.json({ message: "Cache cleared successfully" });
+    });
+  }
 
   const httpServer = createServer(app);
   return httpServer;
