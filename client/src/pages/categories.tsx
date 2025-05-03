@@ -4,8 +4,10 @@ import { categoryInfo } from "@/lib/data";
 import { Category, Story } from "@shared/schema";
 import StoryCard from "@/components/stories/story-card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "react-i18next";
 
 export default function Categories() {
+  const { t } = useTranslation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   
   // Carrega todas as categorias
@@ -38,7 +40,7 @@ export default function Categories() {
   
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-3xl md:text-4xl font-bold font-heading mb-6 text-text">Categorias de Estórias</h1>
+      <h1 className="text-3xl md:text-4xl font-bold font-heading mb-6 text-text">{t('categories.title')}</h1>
       
       {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) ? (
         <div className="mb-6">
@@ -46,7 +48,7 @@ export default function Categories() {
             onClick={() => setSelectedCategoryId(null)}
             className="text-secondary hover:text-accent font-medium inline-flex items-center"
           >
-            <i className="fas fa-arrow-left mr-2"></i> Voltar para todas as categorias
+            <i className="fas fa-arrow-left mr-2"></i> {t('categories.backToAll')}
           </button>
         </div>
       ) : null}

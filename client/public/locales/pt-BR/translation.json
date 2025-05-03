@@ -76,7 +76,9 @@
     "storiesCount": "{{count}} estórias",
     "exploration": "Explore nossas estórias por temas",
     "subtitle": "Explore nossas estórias por categorias",
-    "empty": "Nenhuma estória encontrada nesta categoria."
+    "empty": "Nenhuma estória encontrada nesta categoria.",
+    "backToAll": "Voltar para todas as categorias",
+    "storiesOf": "Estórias de {{category}}"
   },
   "about": {
     "title": "Sobre Nós",

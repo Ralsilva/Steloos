@@ -48,6 +48,11 @@
     "readingTime": "Reading Time",
     "minutes": "{{count}} minutes",
     "relatedStories": "Related Stories",
+    "searchResults": "Results for \"{{query}}\"",
+    "categoryResults": "Stories of {{category}}",
+    "filterByCategory": "Filter by category",
+    "allCategories": "All categories",
+    "noStoriesForSearch": "No stories found for \"{{query}}\".",
     "narrator": {
       "title": "Story Narrator",
       "instructions": "Click the button to narrate this story",
@@ -71,7 +76,9 @@
     "storiesCount": "{{count}} stories",
     "exploration": "Explore our stories by themes",
     "subtitle": "Explore our stories by categories",
-    "empty": "No stories found in this category."
+    "empty": "No stories found in this category.",
+    "backToAll": "Back to all categories",
+    "storiesOf": "Stories of {{category}}"
   },
   "about": {
     "title": "About Us",

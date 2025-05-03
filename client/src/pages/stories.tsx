@@ -43,8 +43,8 @@ export default function Stories() {
       : "/api/stories";
   
   const emptyMessage = searchQuery 
-    ? `Nenhuma estória encontrada para "${searchQuery}".` 
-    : "Nenhuma estória encontrada.";
+    ? t('stories.noStoriesForSearch', { query: searchQuery }) 
+    : t('stories.noResults');
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -56,7 +56,7 @@ export default function Stories() {
       
       <div className="mb-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
         <div className="w-full sm:w-64">
-          <Label htmlFor="category-filter" className="mb-2 block">Filtrar por categoria</Label>
+          <Label htmlFor="category-filter" className="mb-2 block">{t('stories.filterByCategory')}</Label>
           <Select 
             value={categoryFilter} 
             onValueChange={(value) => {
@@ -68,10 +68,10 @@ export default function Stories() {
             }}
           >
             <SelectTrigger id="category-filter" className="w-full">
-              <SelectValue placeholder="Todas as categorias" />
+              <SelectValue placeholder={t('stories.allCategories')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todas as categorias</SelectItem>
+              <SelectItem value="all">{t('stories.allCategories')}</SelectItem>
               {categories?.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}
