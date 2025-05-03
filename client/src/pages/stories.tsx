@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
+import { Category } from "@shared/schema";
 import SearchBar from "@/components/home/search-bar";
 import StoryList from "@/components/stories/story-list";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
 export default function Stories() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [searchParams, setSearchParams] = useState<URLSearchParams>();
   const [categoryFilter, setCategoryFilter] = useState<string>("");
   
-  const { data: categories } = useQuery({
+  const { data: categories = [] } = useQuery<Category[]>({
     queryKey: ['/api/categories'],
   });
   
@@ -57,11 +58,10 @@ export default function Stories() {
           <Select 
             value={categoryFilter} 
             onValueChange={(value) => {
-              const [_, navigate] = useLocation();
               if (value) {
-                navigate(`/historias?categoria=${value}`);
+                setLocation(`/historias?categoria=${value}`);
               } else {
-                navigate('/historias');
+                setLocation('/historias');
               }
             }}
           >
