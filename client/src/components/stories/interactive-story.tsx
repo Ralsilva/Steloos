@@ -8,6 +8,7 @@ import {
   Maximize, Minimize, Star, Sparkles
 } from "lucide-react";
 import StarAnimation from "@/components/ui/star-animation";
+import AnimatedScene from "@/components/ui/animated-scene";
 import { categoryInfo } from "@/lib/data";
 
 // Palavras-chave para efeitos de som e animações
@@ -236,12 +237,48 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
     return processedText;
   };
   
+  // Mapeamento de categoria para tema da cena animada
+  const getCategoryTheme = (categoryId: string): 'nature' | 'sky' | 'forest' | 'peace' | 'friendship' | 'wisdom' | 'love' => {
+    switch(categoryId) {
+      case 'amor': return 'love';
+      case 'paz': return 'peace';
+      case 'sabedoria': return 'wisdom';
+      case 'bondade': return 'friendship';
+      case 'protecao': return 'peace';
+      case 'natureza': return 'nature';
+      case 'familia': return 'love';
+      case 'amizade': return 'friendship';
+      default: return 'nature';
+    }
+  };
+  
+  // Tratamento de elementos animados clicados
+  const handleAnimatedElementClick = (element: string) => {
+    switch(element) {
+      case 'star':
+        playSound('star');
+        break;
+      case 'bird':
+        playSound('birds');
+        break;
+      case 'butterfly':
+        playSound('magic');
+        break;
+      case 'tree':
+        playSound('nature');
+        break;
+      default:
+        playSound('water');
+    }
+  };
+  
   // Render do conteúdo interativo
   const renderInteractiveContent = () => {
     if (!isActive) return null;
     
     const currentContent = pages[currentPage];
     const paragraphsToDisplay = currentContent.split('\n\n');
+    const categoryTheme = getCategoryTheme(categoryId);
     
     return (
       <div className="interactive-content-wrapper p-6 rounded-lg border border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-inner">
@@ -251,6 +288,14 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
             {t('common.page')} {currentPage + 1} / {pages.length}
           </div>
         </div>
+        
+        {/* Cena animada interativa */}
+        <AnimatedScene 
+          theme={categoryTheme} 
+          className="mb-6"
+          interactive={soundsEnabled}
+          onElementClick={soundsEnabled ? handleAnimatedElementClick : undefined}
+        />
         
         <div className="prose prose-amber max-w-none my-4">
           {paragraphsToDisplay.map((paragraph: string, idx: number) => (
