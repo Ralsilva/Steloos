@@ -6,11 +6,15 @@ export default function Hero() {
   return (
     <section className="rounded-2xl bg-gradient-to-br from-secondary to-accent p-6 md:p-10 mb-10 text-white flex flex-col md:flex-row items-center shadow-floating">
       <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading mb-4">
-          Histórias que Iluminam Corações
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading mb-4 rainbow-animation">
+          Estrelinha de Luz
         </h1>
-        <p className="text-lg md:text-xl mb-6">
+        <h2 className="text-2xl md:text-3xl font-heading mb-4">
+          Histórias que Iluminam Corações
+        </h2>
+        <p className="text-lg md:text-xl mb-6 font-content">
           Aventuras cheias de amor, paz e sabedoria para crianças de todas as idades.
+          Descubra um mundo mágico de aprendizado e diversão!
         </p>
         <div className="flex flex-wrap gap-4">
           <Button
