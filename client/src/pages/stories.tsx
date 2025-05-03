@@ -41,8 +41,8 @@ export default function Stories() {
       : "/api/stories";
   
   const emptyMessage = searchQuery 
-    ? `Nenhuma história encontrada para "${searchQuery}".` 
-    : "Nenhuma história encontrada.";
+    ? `Nenhuma estória encontrada para "${searchQuery}".` 
+    : "Nenhuma estória encontrada.";
 
   return (
     <div className="container mx-auto px-4 py-6">

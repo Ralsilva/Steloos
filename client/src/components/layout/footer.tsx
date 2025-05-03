@@ -15,7 +15,7 @@ export default function Footer() {
               />
               <span className="text-2xl font-bold text-white font-heading">Estrelinha</span>
             </Link>
-            <p className="mb-4">Histórias de luz para iluminar o coração das crianças.</p>
+            <p className="mb-4">Estórias de luz para iluminar o coração das crianças.</p>
             <div className="flex space-x-4">
               <a href="#" className="text-white hover:text-primary">
                 <i className="fab fa-facebook-f"></i>
@@ -33,7 +33,7 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4 font-heading">Navegação</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="hover:text-primary">Início</Link></li>
-              <li><Link href="/historias" className="hover:text-primary">Histórias</Link></li>
+              <li><Link href="/estorias" className="hover:text-primary">Estórias</Link></li>
               <li><Link href="/categorias" className="hover:text-primary">Categorias</Link></li>
               <li><Link href="/sobre" className="hover:text-primary">Sobre Nós</Link></li>
             </ul>

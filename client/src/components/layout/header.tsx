@@ -7,7 +7,7 @@ import childrenReading from "@/assets/children-reading.png";
 
 const navigation = [
   { name: "Início", href: "/" },
-  { name: "Histórias", href: "/historias" },
+  { name: "Estórias", href: "/estorias" },
   { name: "Categorias", href: "/categorias" },
   { name: "Sobre Nós", href: "/sobre" },
 ];

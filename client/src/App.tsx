@@ -16,9 +16,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/historias" component={Stories} />
+      <Route path="/estorias" component={Stories} />
       <Route path="/categorias" component={Categories} />
-      <Route path="/historia/:id" component={StoryDetails} />
+      <Route path="/estoria/:id" component={StoryDetails} />
       <Route path="/sobre" component={About} />
       <Route component={NotFound} />
     </Switch>
