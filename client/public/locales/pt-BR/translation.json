@@ -99,6 +99,7 @@
   "common": {
     "loading": "Carregando...",
     "error": "Ocorreu um erro. Por favor, tente novamente.",
+    "success": "Sucesso!",
     "backToHome": "Voltar ao Início",
     "readMore": "Ler Mais",
     "share": "Compartilhar",

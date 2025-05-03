@@ -34,9 +34,9 @@ export default function Testimonials() {
           testimonials?.map((testimonial) => (
             <div key={testimonial.id} className="bg-white p-6 rounded-xl shadow-soft">
               <div className="flex items-center mb-4">
-                <div className="text-yellow-400 flex">
+                <div className="text-yellow-400 flex gap-1">
                   {Array.from({ length: 5 }).map((_, index) => (
-                    <i key={index} className="fas fa-star"></i>
+                    <Star key={index} className="h-4 w-4 fill-yellow-400" />
                   ))}
                 </div>
               </div>
