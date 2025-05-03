@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRoute, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Sparkle } from "lucide-react";
 import { getCategoryInfo, getFallbackImage } from "@/lib/data";
 import StoryNarrator from "@/components/stories/story-narrator";
+import InteractiveStory from "@/components/stories/interactive-story";
 import { Story } from "@shared/schema";
 import { useTranslation } from "react-i18next";
 
@@ -167,6 +168,23 @@ export default function StoryDetails() {
             {story.content.split('\n\n').map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
+          </div>
+          
+          {/* Modo Interativo */}
+          <div className="my-8 pt-6 border-t border-gray-200">
+            <h3 className="text-xl font-bold font-heading mb-4 flex items-center">
+              <Sparkles className="h-5 w-5 text-amber-500 mr-2" />
+              <span>{t('stories.interactive.title')}</span>
+              <Sparkle className="h-5 w-5 text-amber-500 ml-2" />
+            </h3>
+            <p className="mb-4 text-gray-600">
+              {t('stories.interactive.description')}
+            </p>
+            <InteractiveStory
+              content={story.content}
+              title={story.title}
+              categoryId={story.categoryId}
+            />
           </div>
           
           {/* Narrador de Estórias */}

@@ -1,8 +1,37 @@
-import { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/button';
-import { Volume2, VolumeX, Music, Maximize } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { 
+  Volume2, VolumeX, Music, MusicOff, 
+  Maximize, Minimize, Star, Sparkles
+} from "lucide-react";
+import StarAnimation from "@/components/ui/star-animation";
+import { categoryInfo } from "@/lib/data";
+
+// Palavras-chave para efeitos de som e animações
+const INTERACTIVE_KEYWORDS = {
+  star: ["estrela", "estrelas", "estrelinha", "brilho", "luz", "luzes", "brilhante", "star", "stars", "light", "shine"],
+  magic: ["magia", "mágico", "mágica", "encanto", "encantado", "milagre", "feitiço", "magic", "magical", "spell", "enchanted", "miracle"],
+  animals: ["animal", "animais", "cachorro", "gato", "pássaro", "borboleta", "animals", "dog", "cat", "bird", "butterfly"],
+  water: ["água", "rio", "mar", "lago", "oceano", "chuva", "water", "river", "sea", "lake", "ocean", "rain"],
+  wind: ["vento", "brisa", "ar", "sopro", "ventania", "wind", "breeze", "air", "blow"],
+  birds: ["pássaro", "pássaros", "passarinho", "ave", "aves", "bird", "birds"],
+  laughter: ["riso", "risada", "gargalhada", "alegria", "laughter", "laugh", "joy", "happy", "feliz", "alegre"],
+};
+
+// Mapeamento de categorias para sons ambiente
+const CATEGORY_AMBIENT_SOUNDS: Record<string, string> = {
+  "amor": "loving.mp3",
+  "paz": "peaceful.mp3",
+  "sabedoria": "wisdom.mp3",
+  "bondade": "kindness.mp3",
+  "protecao": "protection.mp3",
+  "natureza": "nature.mp3",
+  "familia": "family.mp3",
+  "amizade": "friendship.mp3",
+};
 
 interface InteractiveStoryProps {
   content: string;
@@ -12,306 +41,325 @@ interface InteractiveStoryProps {
 
 export default function InteractiveStory({ content, title, categoryId }: InteractiveStoryProps) {
   const { t } = useTranslation();
-  const [paragraphs, setParagraphs] = useState<string[]>([]);
-  const [soundsEnabled, setSoundsEnabled] = useState(false);
-  const [musicEnabled, setMusicEnabled] = useState(false);
-  const [visibleParagraphs, setVisibleParagraphs] = useState(0);
-  const [fullscreenMode, setFullscreenMode] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [soundsEnabled, setSoundsEnabled] = useState(true);
+  const [musicEnabled, setMusicEnabled] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  
   const containerRef = useRef<HTMLDivElement>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
-
-  // Lazy load ambient music based on category
-  const categoryMusicMap: Record<string, string> = {
-    amor: '/sounds/ambient/loving.mp3',
-    paz: '/sounds/ambient/peaceful.mp3',
-    sabedoria: '/sounds/ambient/wisdom.mp3',
-    bondade: '/sounds/ambient/kindness.mp3',
-    protecao: '/sounds/ambient/protection.mp3',
-    natureza: '/sounds/ambient/nature.mp3',
-    familia: '/sounds/ambient/family.mp3',
-    amizade: '/sounds/ambient/friendship.mp3',
-  };
-
-  // Map of sound effects for interactive elements
-  const soundEffects = {
-    star: '/sounds/effects/star.mp3',
-    magic: '/sounds/effects/magic.mp3',
-    animal: '/sounds/effects/animal.mp3',
-    water: '/sounds/effects/water.mp3',
-    wind: '/sounds/effects/wind.mp3',
-    birds: '/sounds/effects/birds.mp3',
-    laugh: '/sounds/effects/child-laugh.mp3',
-  };
-
-  // Animation patterns for interactive elements
-  const animationPatterns = [
-    'animate-float',
-    'animate-pulse-gentle',
-    'animate-wiggle',
-    'animate-sparkle',
-    'animate-spin-slow',
-  ];
-
-  useEffect(() => {
-    if (content) {
-      // Split content into paragraphs
-      const contentParagraphs = content.split('\n\n');
-      setParagraphs(contentParagraphs);
-      
-      // Initialize with first paragraph visible
-      setVisibleParagraphs(1);
+  const musicRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Dividir o conteúdo em parágrafos
+  const paragraphs = content.split('\n\n');
+  const pages = [];
+  let currentPageContent: string[] = [];
+  
+  // Criar páginas com no máximo 3 parágrafos cada
+  for (let i = 0; i < paragraphs.length; i++) {
+    currentPageContent.push(paragraphs[i]);
+    if (currentPageContent.length === 3 || i === paragraphs.length - 1) {
+      pages.push(currentPageContent.join('\n\n'));
+      currentPageContent = [];
     }
-  }, [content]);
-
+  }
+  
+  // Efeito para tocar música de fundo quando o modo interativo está ativo
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    
-    // Auto-scroll effect when new paragraphs become visible
-    if (visibleParagraphs > 0 && visibleParagraphs <= paragraphs.length) {
-      // When a new paragraph becomes visible, scroll to it
-      const currentParagraph = document.getElementById(`paragraph-${visibleParagraphs - 1}`);
-      if (currentParagraph) {
-        currentParagraph.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (isActive && musicEnabled) {
+      // Tentar carregar a música de fundo para a categoria
+      const categorySound = CATEGORY_AMBIENT_SOUNDS[categoryId] || "peaceful.mp3";
+      const audioPath = `/sounds/ambient/${categorySound}`;
+      
+      try {
+        const audio = new Audio(audioPath);
+        audio.volume = 0.2;
+        audio.loop = true;
+        
+        // Verificar se o arquivo existe
+        audio.addEventListener('error', () => {
+          console.warn(`Música ambiente não encontrada: ${audioPath}`);
+        });
+        
+        // Tocar a música
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.warn("Reprodução automática bloqueada pelo navegador:", error);
+          });
+        }
+        
+        musicRef.current = audio;
+      } catch (error) {
+        console.error("Erro ao carregar música ambiente:", error);
       }
     }
     
-    // Clear interval on component unmount
+    // Limpar ao desmontar ou desativar
     return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [visibleParagraphs, paragraphs.length]);
-
-  useEffect(() => {
-    // Set up background music
-    if (musicEnabled && categoryId && categoryMusicMap[categoryId]) {
-      if (!bgMusicRef.current) {
-        bgMusicRef.current = new Audio(categoryMusicMap[categoryId]);
-        bgMusicRef.current.loop = true;
-        bgMusicRef.current.volume = 0.3;
-      }
-      
-      bgMusicRef.current.play().catch(err => {
-        console.error('Error playing background music:', err);
-      });
-    } else if (bgMusicRef.current) {
-      bgMusicRef.current.pause();
-    }
-    
-    // Clean up audio on unmount
-    return () => {
-      if (bgMusicRef.current) {
-        bgMusicRef.current.pause();
-        bgMusicRef.current = null;
+      if (musicRef.current) {
+        musicRef.current.pause();
+        musicRef.current = null;
       }
     };
-  }, [musicEnabled, categoryId]);
-
-  const playSound = (soundName: keyof typeof soundEffects) => {
-    if (!soundsEnabled) return;
-    
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    
-    audioRef.current = new Audio(soundEffects[soundName]);
-    audioRef.current.volume = 0.6;
-    audioRef.current.play().catch(err => {
-      console.error('Error playing sound effect:', err);
-    });
-  };
-
+  }, [isActive, musicEnabled, categoryId]);
+  
+  // Alternar o modo de tela cheia
   const toggleFullscreen = () => {
-    if (!containerRef.current) return;
-    
     if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().catch(err => {
-        console.error('Error attempting to enable fullscreen:', err);
+      containerRef.current?.requestFullscreen().catch(err => {
+        console.warn(`Erro ao tentar entrar em tela cheia: ${err.message}`);
       });
-      setFullscreenMode(true);
     } else {
       document.exitFullscreen();
-      setFullscreenMode(false);
     }
   };
-
-  const handleNextParagraph = () => {
-    if (visibleParagraphs < paragraphs.length) {
-      setVisibleParagraphs(prev => prev + 1);
-      
-      // Play page turn sound if enabled
-      if (soundsEnabled) {
+  
+  // Monitorar mudanças no estado de tela cheia
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+  
+  // Efeito para tocar som de página ao virar
+  useEffect(() => {
+    if (isActive && soundsEnabled && currentPage > 0) {
+      try {
         const pageSound = new Audio('/sounds/effects/page-turn.mp3');
-        pageSound.volume = 0.3;
-        pageSound.play().catch(err => {
-          console.error('Error playing page turn sound:', err);
-        });
+        pageSound.volume = 0.5;
+        pageSound.play().catch(err => console.warn("Erro ao tocar som de página:", err));
+      } catch (error) {
+        console.warn("Som de virar página não encontrado");
       }
     }
+  }, [currentPage, isActive, soundsEnabled]);
+  
+  // Função para reproduzir um efeito sonoro
+  const playSound = (soundName: string) => {
+    if (!isActive || !soundsEnabled) return;
+    
+    try {
+      const audio = new Audio(`/sounds/effects/${soundName}.mp3`);
+      audio.volume = 0.6;
+      audio.play().catch(err => console.warn(`Erro ao tocar som ${soundName}:`, err));
+    } catch (error) {
+      console.warn(`Som não encontrado: ${soundName}`);
+    }
   };
-
-  // Detect and replace special words with interactive elements
-  const processText = (text: string, index: number) => {
-    // Keywords that will trigger interactive elements
-    const interactiveWords = {
-      estrela: 'star',
-      estrelas: 'star',
-      estrelinha: 'star',
-      pássaro: 'birds',
-      pássaros: 'birds',
-      passarinho: 'birds',
-      magia: 'magic',
-      mágico: 'magic',
-      mágica: 'magic',
-      água: 'water',
-      rio: 'water',
-      mar: 'water',
-      vento: 'wind',
-      brisa: 'wind',
-      animal: 'animal',
-      animais: 'animal',
-      risada: 'laugh',
-      sorriso: 'laugh',
-      riso: 'laugh',
-    };
-    
-    // English translations for detection
-    const englishWords = {
-      star: 'star',
-      stars: 'star',
-      little_star: 'star',
-      bird: 'birds',
-      birds: 'birds',
-      magic: 'magic',
-      magical: 'magic',
-      water: 'water',
-      river: 'water',
-      sea: 'water',
-      wind: 'wind',
-      breeze: 'wind',
-      animal: 'animal',
-      animals: 'animal',
-      laugh: 'laugh',
-      smile: 'laugh',
-      laughter: 'laugh',
-    };
-    
-    // Merge dictionaries based on current language
-    const wordMap = { ...interactiveWords, ...englishWords };
-    
+  
+  // Função para verificar e reproduzir sons baseados em palavras-chave
+  const processTextForInteractivity = (text: string) => {
+    const words = text.toLowerCase().split(/\s+/);
     let processedText = text;
-    let wordCount = 0;
     
-    // Replace interactive words with clickable spans
-    Object.entries(wordMap).forEach(([word, soundType]) => {
-      const regex = new RegExp(`\\b${word}\\b`, 'gi');
-      processedText = processedText.replace(regex, (match) => {
-        wordCount++;
-        // Limit interactive elements per paragraph to avoid clutter
-        if (wordCount > 3) return match;
-        
-        // Select a random animation for this element
-        const animationClass = animationPatterns[
-          Math.floor(Math.random() * animationPatterns.length)
-        ];
-        
-        return `<span 
-          class="interactive-element ${animationClass} font-medium cursor-pointer text-primary" 
-          data-sound="${soundType}"
-        >${match}</span>`;
-      });
+    // Adicionar marcadores para efeitos
+    words.forEach(word => {
+      if (INTERACTIVE_KEYWORDS.star.includes(word)) {
+        playSound("star");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight star-word">${word}</span>`
+        );
+      } else if (INTERACTIVE_KEYWORDS.magic.includes(word)) {
+        playSound("magic");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight magic-word">${word}</span>`
+        );
+      } else if (INTERACTIVE_KEYWORDS.animals.includes(word)) {
+        playSound("animal");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight animal-word">${word}</span>`
+        );
+      } else if (INTERACTIVE_KEYWORDS.water.includes(word)) {
+        playSound("water");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight water-word">${word}</span>`
+        );
+      } else if (INTERACTIVE_KEYWORDS.wind.includes(word)) {
+        playSound("wind");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight wind-word">${word}</span>`
+        );
+      } else if (INTERACTIVE_KEYWORDS.birds.includes(word)) {
+        playSound("birds");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight bird-word">${word}</span>`
+        );
+      } else if (INTERACTIVE_KEYWORDS.laughter.includes(word)) {
+        playSound("child-laugh");
+        processedText = processedText.replace(
+          new RegExp(`\\b${word}\\b`, 'i'),
+          `<span class="interactive-highlight laugh-word">${word}</span>`
+        );
+      }
     });
     
-    return {
-      __html: processedText,
-    };
+    return processedText;
   };
-
-  return (
-    <div 
-      ref={containerRef}
-      className={cn(
-        "prose prose-lg max-w-none transition-all duration-500",
-        fullscreenMode && "bg-gradient-to-b from-white to-amber-50 p-8 min-h-screen flex flex-col"
-      )}
-    >
-      <div className="controls-bar flex items-center justify-end gap-2 mb-4 sticky top-0 bg-white/80 backdrop-blur-sm p-2 rounded-lg z-10">
-        <Button
-          size="sm"
-          variant={soundsEnabled ? "default" : "outline"}
-          onClick={() => setSoundsEnabled(!soundsEnabled)}
-          className="rounded-full"
-          title={soundsEnabled ? t('stories.interactive.soundsOn') : t('stories.interactive.soundsOff')}
-        >
-          {soundsEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
-        </Button>
+  
+  // Render do conteúdo interativo
+  const renderInteractiveContent = () => {
+    if (!isActive) return null;
+    
+    const currentContent = pages[currentPage];
+    const paragraphs = currentContent.split('\n\n');
+    
+    return (
+      <div className="interactive-content-wrapper p-6 rounded-lg border border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-inner">
+        <div className="mb-4 flex justify-between items-center">
+          <h4 className="font-bold text-xl">{title}</h4>
+          <div className="text-sm text-gray-500">
+            {t('common.page')} {currentPage + 1} / {pages.length}
+          </div>
+        </div>
         
-        <Button
-          size="sm"
-          variant={musicEnabled ? "default" : "outline"}
-          onClick={() => setMusicEnabled(!musicEnabled)}
-          className="rounded-full"
-          title={musicEnabled ? t('stories.interactive.musicOn') : t('stories.interactive.musicOff')}
-        >
-          <Music size={16} />
-        </Button>
-        
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={toggleFullscreen}
-          className="rounded-full"
-          title={t('stories.interactive.toggleFullscreen')}
-        >
-          <Maximize size={16} />
-        </Button>
-      </div>
-      
-      <div className={cn(
-        "interactive-content",
-        fullscreenMode && "flex-1 overflow-y-auto"
-      )}>
-        {paragraphs.slice(0, visibleParagraphs).map((paragraph, i) => (
-          <div
-            key={i}
-            id={`paragraph-${i}`}
-            className={cn(
-              "interactive-paragraph mb-6 opacity-0 translate-y-4",
-              "animate-in fade-in-50 slide-in-from-bottom-4 duration-700 fill-mode-forwards",
-              i === visibleParagraphs - 1 && "animate-highlight"
-            )}
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
+        <div className="prose prose-amber max-w-none my-4">
+          {paragraphs.map((paragraph, idx) => (
             <p 
-              dangerouslySetInnerHTML={processText(paragraph, i)}
-              onClick={(e) => {
-                // Handle clicks on interactive elements
-                if ((e.target as HTMLElement).classList.contains('interactive-element')) {
-                  const soundType = (e.target as HTMLElement).getAttribute('data-sound');
-                  if (soundType && soundType in soundEffects) {
-                    playSound(soundType as keyof typeof soundEffects);
-                  }
-                  
-                  // Add visual effect on click
-                  (e.target as HTMLElement).classList.add('effect-clicked');
-                  setTimeout(() => {
-                    (e.target as HTMLElement).classList.remove('effect-clicked');
-                  }, 700);
-                }
+              key={idx} 
+              className="relative" 
+              dangerouslySetInnerHTML={{ 
+                __html: processTextForInteractivity(paragraph) 
               }}
             />
-          </div>
-        ))}
-      </div>
-      
-      {visibleParagraphs < paragraphs.length && (
-        <div className="flex justify-center my-8">
-          <Button 
-            onClick={handleNextParagraph}
-            className="px-8 py-6 rounded-full text-lg shadow-lg animate-pulse-slow"
+          ))}
+        </div>
+        
+        <div className="flex justify-between mt-6">
+          <Button
+            variant="outline"
+            onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}
+            disabled={currentPage === 0}
           >
-            {t('stories.interactive.continueReading')}
+            ← {t('common.previous')}
           </Button>
+          
+          <Button
+            variant="default"
+            onClick={() => setCurrentPage(prev => Math.min(pages.length - 1, prev + 1))}
+            disabled={currentPage === pages.length - 1}
+          >
+            {t('common.next')} →
+          </Button>
+        </div>
+      </div>
+    );
+  };
+  
+  return (
+    <div ref={containerRef} className={`interactive-story ${isFullscreen ? 'fullscreen-mode' : ''}`}>
+      {!isActive ? (
+        <Button
+          onClick={() => setIsActive(true)}
+          className="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium"
+        >
+          <Sparkles className="mr-2 h-4 w-4" />
+          {t('stories.interactive.enableInteractive')}
+        </Button>
+      ) : (
+        <div className="interactive-container">
+          <div className="interactive-controls mb-4 flex flex-wrap gap-4 justify-between items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsActive(false)}
+              className="border-amber-300 text-amber-700"
+            >
+              {t('stories.interactive.disableInteractive')}
+            </Button>
+            
+            <div className="flex space-x-4">
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="sounds-toggle"
+                  checked={soundsEnabled}
+                  onCheckedChange={setSoundsEnabled}
+                />
+                <Label htmlFor="sounds-toggle" className="text-sm flex items-center">
+                  {soundsEnabled ? (
+                    <>
+                      <Volume2 className="h-4 w-4 mr-1" />
+                      {t('stories.interactive.soundsOn')}
+                    </>
+                  ) : (
+                    <>
+                      <VolumeX className="h-4 w-4 mr-1" />
+                      {t('stories.interactive.soundsOff')}
+                    </>
+                  )}
+                </Label>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="music-toggle"
+                  checked={musicEnabled}
+                  onCheckedChange={checked => {
+                    setMusicEnabled(checked);
+                    if (!checked && musicRef.current) {
+                      musicRef.current.pause();
+                    } else if (checked && musicRef.current) {
+                      musicRef.current.play().catch(err => 
+                        console.warn("Erro ao retomar a música:", err)
+                      );
+                    }
+                  }}
+                />
+                <Label htmlFor="music-toggle" className="text-sm flex items-center">
+                  {musicEnabled ? (
+                    <>
+                      <Music className="h-4 w-4 mr-1" />
+                      {t('stories.interactive.musicOn')}
+                    </>
+                  ) : (
+                    <>
+                      <Music2Off className="h-4 w-4 mr-1" />
+                      {t('stories.interactive.musicOff')}
+                    </>
+                  )}
+                </Label>
+              </div>
+              
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleFullscreen}
+                className="h-8 w-8"
+                title={t('stories.interactive.toggleFullscreen')}
+              >
+                {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
+              </Button>
+            </div>
+          </div>
+          
+          {renderInteractiveContent()}
+          
+          {/* Animações flutuantes */}
+          <div className="star-animations absolute top-0 left-0 w-full h-full pointer-events-none">
+            <StarAnimation 
+              size={30} 
+              className="absolute top-[10%] right-[10%] text-amber-400 animate-float" 
+            />
+            <StarAnimation 
+              size={20} 
+              className="absolute top-[30%] left-[5%] text-amber-300 animate-float-delayed" 
+            />
+            <StarAnimation 
+              size={25} 
+              className="absolute bottom-[20%] right-[15%] text-amber-500 animate-float-slow" 
+            />
+          </div>
         </div>
       )}
     </div>

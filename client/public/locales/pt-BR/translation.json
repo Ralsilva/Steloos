@@ -59,6 +59,18 @@
     "exploreMore": "Explore mais estórias encantadoras que ensinam valores importantes.",
     "viewMoreStories": "Ver mais estórias",
     "recommendedAge": "Idade recomendada: {{age}}",
+    "interactive": {
+      "title": "Modo Interativo",
+      "description": "Explore a estória com sons e animações!",
+      "enableInteractive": "Ativar Modo Interativo",
+      "disableInteractive": "Desativar Modo Interativo",
+      "soundsOn": "Sons Ativados",
+      "soundsOff": "Sons Desativados",
+      "musicOn": "Música Ativada",
+      "musicOff": "Música Desativada",
+      "toggleFullscreen": "Alternar Tela Cheia",
+      "continueReading": "Continuar Lendo"
+    },
     "notFound": {
       "title": "Estória não encontrada",
       "text": "Desculpe, não conseguimos encontrar esta estória."

@@ -59,6 +59,18 @@
     "exploreMore": "Explore more enchanting stories that teach important values.",
     "viewMoreStories": "View more stories",
     "recommendedAge": "Recommended age: {{age}}",
+    "interactive": {
+      "title": "Interactive Mode",
+      "description": "Explore the story with sounds and animations!",
+      "enableInteractive": "Enable Interactive Mode",
+      "disableInteractive": "Disable Interactive Mode",
+      "soundsOn": "Sounds On",
+      "soundsOff": "Sounds Off",
+      "musicOn": "Music On",
+      "musicOff": "Music Off",
+      "toggleFullscreen": "Toggle Fullscreen",
+      "continueReading": "Continue Reading"
+    },
     "notFound": {
       "title": "Story not found",
       "text": "Sorry, we couldn't find this story."
