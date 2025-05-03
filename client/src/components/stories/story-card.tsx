@@ -9,22 +9,39 @@ interface StoryCardProps {
   variant?: "large" | "small";
 }
 
-// Função para formatar a URL da imagem com parâmetros de tamanho
+// Função para formatar a URL da imagem
 function formatImageUrl(url: string, variant: "large" | "small"): string {
-  if (!url) return "";
+  if (!url) return "https://via.placeholder.com/600x400?text=Estrelinha";
   
-  // Se a URL já contém parâmetros, não modificamos
-  if (url.includes("?")) return url;
+  // Fallback padrão para imagens
+  const fallbackUrl = variant === "large" 
+    ? "https://via.placeholder.com/600x400?text=Estrelinha" 
+    : "https://via.placeholder.com/300x200?text=Estrelinha";
   
-  // Para imagens do Unsplash
-  if (url.includes("unsplash.com")) {
-    // Parâmetros para controlar tamanho e qualidade
-    const size = variant === "large" ? "w=600&h=400" : "w=300&h=200";
-    const quality = "&q=80&fit=crop";
-    return `${url}?${size}${quality}`;
+  try {
+    // Verifica se a URL é válida
+    new URL(url);
+    
+    // Se a URL já contém parâmetros, não modificamos
+    if (url.includes("?")) return url;
+    
+    // Para imagens do Unsplash
+    if (url.includes("unsplash.com")) {
+      // Remove qualquer parâmetro existente
+      const baseUrl = url.split('?')[0];
+      
+      // Parâmetros para controlar tamanho e qualidade
+      const size = variant === "large" ? "w=600&h=400" : "w=300&h=200";
+      const quality = "&q=80&fit=crop&auto=format";
+      
+      return `${baseUrl}?${size}${quality}`;
+    }
+    
+    return url;
+  } catch (error) {
+    console.error("URL de imagem inválida:", url);
+    return fallbackUrl;
   }
-  
-  return url;
 }
 
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
@@ -61,13 +78,14 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
   
   return (
     <div className="story-card bg-white rounded-xl shadow-soft overflow-hidden hover-bounce">
-      <div className="w-full h-48 bg-gray-100">
+      <div className="w-full h-48 bg-gray-100 relative">
         <img 
           src={imageUrl} 
           alt={story.title} 
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover absolute inset-0"
           loading="lazy"
           onError={(e) => {
+            console.log("Erro ao carregar imagem:", story.imageUrl);
             e.currentTarget.src = "https://via.placeholder.com/600x400?text=Estrelinha";
           }}
         />
