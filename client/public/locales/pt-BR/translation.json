@@ -64,13 +64,21 @@
       "text": "Desculpe, não conseguimos encontrar esta estória."
     },
     "narrator": {
-      "title": "Narrador de Estórias",
-      "instructions": "Clique no botão para narrar esta estória",
+      "title": "Narrar esta estória",
+      "instructions": "Grave sua voz narrando esta estória e compartilhe com amigos e familiares!",
       "startRecording": "Iniciar Narração",
       "stopRecording": "Parar Narração",
       "listen": "Ouvir Narração",
       "shareStory": "Compartilhar Estória",
-      "recordingComplete": "Narração concluída!"
+      "recordingComplete": "Sua narração foi gravada! Você pode ouvi-la, baixá-la ou compartilhá-la.",
+      "myNarration": "Minha narração",
+      "downloadStarted": "Download iniciado!",
+      "downloadDescription": "Sua narração está sendo baixada.",
+      "shareTitle": "Minha narração da estória \"{{title}}\"",
+      "shareNotAvailable": "Compartilhamento não disponível",
+      "shareNotSupportedDesc": "Seu navegador não suporta o compartilhamento. Tente baixar e compartilhar manualmente.",
+      "shareError": "Erro ao compartilhar",
+      "shareErrorDesc": "Ocorreu um erro ao tentar compartilhar sua narração."
     },
     "childNarrator": {
       "title": "Narrador Infantil",
@@ -136,6 +144,7 @@
     "backToStories": "Voltar para estórias",
     "readMore": "Ler Mais",
     "share": "Compartilhar",
+    "download": "Baixar",
     "print": "Imprimir estória",
     "linkCopied": "Link copiado para a área de transferência!",
     "notFound": {
@@ -148,5 +157,8 @@
     "navigation": "Navegação",
     "contact": "Contato",
     "follow": "Siga-nos"
+  },
+  "errors": {
+    "shareError": "Erro ao compartilhar:"
   }
 }

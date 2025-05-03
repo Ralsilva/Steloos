@@ -64,13 +64,21 @@
       "text": "Sorry, we couldn't find this story."
     },
     "narrator": {
-      "title": "Story Narrator",
-      "instructions": "Click the button to narrate this story",
+      "title": "Narrate this story",
+      "instructions": "Record your voice narrating this story and share with friends and family!",
       "startRecording": "Start Narration",
       "stopRecording": "Stop Narration",
       "listen": "Listen to Narration",
       "shareStory": "Share Story",
-      "recordingComplete": "Narration complete!"
+      "recordingComplete": "Your narration has been recorded! You can listen to it, download it, or share it.",
+      "myNarration": "My narration",
+      "downloadStarted": "Download started!",
+      "downloadDescription": "Your narration is being downloaded.",
+      "shareTitle": "My narration of the story \"{{title}}\"",
+      "shareNotAvailable": "Sharing not available",
+      "shareNotSupportedDesc": "Your browser doesn't support sharing. Try downloading and sharing manually.",
+      "shareError": "Error sharing",
+      "shareErrorDesc": "An error occurred while trying to share your narration."
     },
     "childNarrator": {
       "title": "Child Narrator",
@@ -149,5 +157,8 @@
     "navigation": "Navigation",
     "contact": "Contact",
     "follow": "Follow us"
+  },
+  "errors": {
+    "shareError": "Error sharing:"
   }
 }
