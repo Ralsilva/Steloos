@@ -43,8 +43,13 @@ function formatImageUrl(url: string | undefined, large = true): string {
 }
 
 export default function StoryDetails() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(['translation', 'stories']);
   const [match, params] = useRoute<{ id: string }>("/estoria/:id");
+  const [translatedStory, setTranslatedStory] = useState<{
+    title?: string;
+    excerpt?: string;
+    content?: string;
+  }>({});
   
   const { data: story, isLoading } = useQuery<Story>({
     queryKey: [`/api/stories/${params?.id}`],
@@ -54,6 +59,41 @@ export default function StoryDetails() {
     queryKey: [`/api/stories/related/${params?.id}`],
     enabled: !!story,
   });
+  
+  // Carregar traduções da estória
+  useEffect(() => {
+    if (story && params?.id) {
+      try {
+        const loadStoryTranslations = async () => {
+          try {
+            // Usar fetch para carregar as traduções como recomendado pelos avisos do Vite
+            const response = await fetch(`/locales/${i18n.language}/stories.json`);
+            if (!response.ok) {
+              throw new Error(`Failed to load stories for ${i18n.language}: ${response.status}`);
+            }
+            
+            const translations = await response.json();
+            const storyTranslations = translations[params.id];
+            
+            if (storyTranslations) {
+              setTranslatedStory(storyTranslations);
+            } else {
+              console.warn(`No translation found for story ${params.id} in ${i18n.language}`);
+              setTranslatedStory({});
+            }
+          } catch (err) {
+            console.warn(`Could not load story translations for ${i18n.language}:`, err);
+            setTranslatedStory({});
+          }
+        };
+        
+        loadStoryTranslations();
+      } catch (error) {
+        console.error("Error loading translations:", error);
+        setTranslatedStory({});
+      }
+    }
+  }, [story, params?.id, i18n.language]);
   
   useEffect(() => {
     // Scroll to top when story changes
@@ -158,14 +198,16 @@ export default function StoryDetails() {
         <div className="p-8">
           <div className="mb-8">
             <span className={`inline-block px-3 py-1 text-sm font-medium ${categoryInfo.color} text-white rounded-full mb-2`}>
-              {story.categoryName}
+              {t(`categories.${story.categoryId}`)}
             </span>
-            <h1 className="text-3xl md:text-4xl font-bold font-heading mb-3">{story.title}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold font-heading mb-3">
+              {translatedStory.title || story.title}
+            </h1>
             <p className="text-gray-600">{t('stories.recommendedAge', { age: story.ageRange })}</p>
           </div>
           
           <div className="prose prose-lg max-w-none">
-            {story.content.split('\n\n').map((paragraph, i) => (
+            {(translatedStory.content || story.content).split('\n\n').map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
           </div>
