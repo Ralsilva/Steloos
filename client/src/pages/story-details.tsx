@@ -223,8 +223,8 @@ export default function StoryDetails() {
               {t('stories.interactive.description')}
             </p>
             <InteractiveStory
-              content={story.content}
-              title={story.title}
+              content={translatedStory.content || story.content}
+              title={translatedStory.title || story.title}
               categoryId={story.categoryId}
             />
           </div>
@@ -239,7 +239,7 @@ export default function StoryDetails() {
             <p className="mb-4 text-gray-600">
               {t('stories.childNarrator.description')}
             </p>
-            <StoryNarrator storyTitle={story.title} />
+            <StoryNarrator storyTitle={translatedStory.title || story.title} />
           </div>
           
           <div className="mt-8 flex justify-between items-center pt-6 border-t border-gray-200">
@@ -261,8 +261,8 @@ export default function StoryDetails() {
                 size="icon"
                 onClick={() => {
                   navigator.share({
-                    title: story.title,
-                    text: story.excerpt,
+                    title: translatedStory.title || story.title,
+                    text: translatedStory.excerpt || story.excerpt,
                     url: window.location.href
                   }).catch(() => {
                     // Fallback if Web Share API is not supported
