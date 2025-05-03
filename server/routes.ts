@@ -162,15 +162,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Cache management endpoints - restricted to development environment
   if (process.env.NODE_ENV === 'development') {
-    const { clearCache, getCacheStats } = require('./cache');
-    
-    app.get("/api/_admin/cache/stats", (req, res) => {
-      res.json(getCacheStats());
-    });
-    
-    app.post("/api/_admin/cache/clear", (req, res) => {
-      clearCache();
-      res.json({ message: "Cache cleared successfully" });
+    // Import dynamically since these are dev-only endpoints
+    import('./cache.js').then(({ clearCache, getCacheStats }) => {
+      app.get("/api/_admin/cache/stats", (req, res) => {
+        res.json(getCacheStats());
+      });
+      
+      app.post("/api/_admin/cache/clear", (req, res) => {
+        clearCache();
+        res.json({ message: "Cache cleared successfully" });
+      });
     });
   }
 
