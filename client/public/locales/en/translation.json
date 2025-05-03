@@ -1,17 +1,17 @@
 {
   "app": {
-    "name": "Little Star of Light",
+    "name": "Star of Light",
     "slogan": "Stories that touch the heart"
   },
   "menu": {
     "home": "Home",
     "stories": "Stories",
     "categories": "Categories",
-    "about": "About Us"
+    "about": "About us"
   },
   "home": {
     "hero": {
-      "title": "Light Stories for Children",
+      "title": "Stories of Light for Children",
       "subtitle": "Sharing values of love, peace, and wisdom",
       "button": "Explore Stories"
     },
@@ -20,7 +20,7 @@
       "viewAll": "View all"
     },
     "newest": {
-      "title": "Latest Stories",
+      "title": "Recent Stories",
       "viewAll": "View all"
     },
     "categories": {
@@ -32,7 +32,7 @@
     },
     "newsletter": {
       "title": "Receive New Stories",
-      "subtitle": "Subscribe to get notified when we publish new stories",
+      "subtitle": "Subscribe to receive notifications when we publish new stories",
       "placeholder": "Your email",
       "button": "Subscribe",
       "success": "Thank you for subscribing!",
@@ -43,73 +43,74 @@
     "title": "All Stories",
     "searchPlaceholder": "Search stories...",
     "noResults": "No stories found.",
-    "readMore": "Read story",
-    "backToList": "Back to stories",
-    "relatedStories": "You might also like",
-    "ageRange": "Recommended age",
-    "print": "Print story",
-    "share": "Share story",
-    "copied": "Link copied to clipboard!",
-    "likedStory": "Did you like this story?",
-    "exploreMore": "Explore more enchanting stories that teach important values."
+    "category": "Category",
+    "ageRange": "Recommended Age",
+    "readingTime": "Reading Time",
+    "minutes": "{{count}} minutes",
+    "relatedStories": "Related Stories",
+    "narrator": {
+      "title": "Story Narrator",
+      "instructions": "Click the button to narrate this story",
+      "startRecording": "Start Narration",
+      "stopRecording": "Stop Narration",
+      "listen": "Listen to Narration",
+      "shareStory": "Share Story",
+      "recordingComplete": "Narration complete!"
+    }
   },
   "categories": {
     "title": "Categories",
-    "allStories": "All Stories",
-    "amor": "Love",
-    "paz": "Peace",
-    "sabedoria": "Wisdom",
-    "bondade": "Kindness",
-    "protecao": "Protection",
-    "natureza": "Nature",
-    "familia": "Family",
-    "amizade": "Friendship"
+    "storiesCount": "{{count}} stories",
+    "exploration": "Explore our stories by themes"
   },
   "about": {
-    "title": "About Little Star of Light",
+    "title": "About Us",
     "mission": {
       "title": "Our Mission",
-      "content": "To provide children with inspiring stories that cultivate values such as love, peace, wisdom, and kindness, helping them develop a spiritual and ethical awareness from an early age."
+      "text": "Our goal is to provide educational and inspiring content for children, which helps in their spiritual and emotional development through stories that convey values such as love, peace, wisdom, kindness, and compassion."
     },
     "values": {
       "title": "Our Values",
-      "love": "Love",
-      "peace": "Peace",
-      "wisdom": "Wisdom",
-      "kindness": "Kindness"
-    },
-    "team": {
-      "title": "Our Team",
-      "description": "We are a group of educators, writers, and illustrators passionate about children's literature and spiritual development."
+      "items": [
+        {
+          "title": "Love and Respect",
+          "description": "We promote love for others and respect for all forms of life."
+        },
+        {
+          "title": "Wisdom and Reflection",
+          "description": "We encourage critical thinking and wisdom through reflective narratives."
+        },
+        {
+          "title": "Peace and Harmony",
+          "description": "We value inner peace and harmony in personal relationships."
+        },
+        {
+          "title": "Inclusion and Diversity",
+          "description": "We celebrate diversity and promote inclusion in our stories."
+        }
+      ]
     },
     "contact": {
       "title": "Contact Us",
-      "email": "contact@littlestarlight.com"
+      "text": "Have a suggestion or feedback? We would love to hear from you!",
+      "email": "contact@staroflight.com"
     }
-  },
-  "narrator": {
-    "title": "Children's Narrator",
-    "description": "Children can record their own narration of this story and share it with their family!",
-    "record": "Record",
-    "stop": "Stop",
-    "play": "Listen",
-    "download": "Download",
-    "recording": "Recording...",
-    "permission": "Please allow microphone access to record.",
-    "error": "Error starting recording. Check if the microphone is connected."
-  },
-  "footer": {
-    "rights": "All rights reserved",
-    "navTitle": "Navigation",
-    "contactTitle": "Contact",
-    "socialTitle": "Social Media"
   },
   "common": {
     "loading": "Loading...",
-    "notFound": "Page not found",
-    "backToHome": "Back to home",
-    "error": "An error occurred",
-    "tryAgain": "Try again",
-    "quote": "Each story is a seed of light that we plant in children's hearts."
+    "error": "An error occurred. Please try again.",
+    "backToHome": "Back to Home",
+    "readMore": "Read More",
+    "share": "Share",
+    "notFound": {
+      "title": "Page not found",
+      "text": "The page you are looking for does not exist or has been moved."
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "follow": "Follow us"
   }
 }

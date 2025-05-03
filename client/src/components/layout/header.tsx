@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/ui/language-switcher";
 import estrelinhaLogo from "@/assets/estrelinha-logo.png";
 import childrenReading from "@/assets/children-reading.png";
-
-const navigation = [
-  { name: "Início", href: "/" },
-  { name: "Estórias", href: "/estorias" },
-  { name: "Categorias", href: "/categorias" },
-  { name: "Sobre Nós", href: "/sobre" },
-];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { t } = useTranslation();
+  
+  const navigation = useMemo(() => [
+    { name: t('menu.home'), href: "/" },
+    { name: t('menu.stories'), href: "/estorias" },
+    { name: t('menu.categories'), href: "/categorias" },
+    { name: t('menu.about'), href: "/sobre" },
+  ], [t]);
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -27,10 +30,10 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             <img 
               src={estrelinhaLogo} 
-              alt="Estrelinha de Luz" 
+              alt={t('app.name')} 
               className="h-12 w-12 mr-3 hover-bounce"
             />
-            <span className="text-2xl md:text-3xl font-bold text-primary font-heading">Estrelinha de Luz</span>
+            <span className="text-2xl md:text-3xl font-bold text-primary font-heading">{t('app.name')}</span>
           </Link>
           <div className="md:hidden">
             <Button
@@ -45,7 +48,7 @@ export default function Header() {
           </div>
         </div>
         
-        <nav className="hidden md:flex space-x-10 items-center">
+        <nav className="hidden md:flex space-x-8 items-center">
           {navigation.map((item) => (
             <Link 
               key={item.name} 
@@ -59,6 +62,7 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
+          <LanguageSwitcher />
         </nav>
       </div>
       
@@ -78,6 +82,9 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
+          <div className="mt-4 flex justify-center">
+            <LanguageSwitcher />
+          </div>
         </div>
       )}
     </header>

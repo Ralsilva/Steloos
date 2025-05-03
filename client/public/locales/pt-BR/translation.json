@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "Estrelinha de Luz",
-    "slogan": "Histórias que tocam o coração"
+    "slogan": "Estórias que tocam o coração"
   },
   "menu": {
     "home": "Início",
@@ -43,73 +43,74 @@
     "title": "Todas as Estórias",
     "searchPlaceholder": "Buscar estórias...",
     "noResults": "Nenhuma estória encontrada.",
-    "readMore": "Ler estória",
-    "backToList": "Voltar para estórias",
-    "relatedStories": "Você também pode gostar",
-    "ageRange": "Idade recomendada",
-    "print": "Imprimir estória",
-    "share": "Compartilhar estória",
-    "copied": "Link copiado para a área de transferência!",
-    "likedStory": "Gostou desta estória?",
-    "exploreMore": "Explore mais estórias encantadoras que ensinam valores importantes."
+    "category": "Categoria",
+    "ageRange": "Idade Recomendada",
+    "readingTime": "Tempo de Leitura",
+    "minutes": "{{count}} minutos",
+    "relatedStories": "Estórias Relacionadas",
+    "narrator": {
+      "title": "Narrador de Estórias",
+      "instructions": "Clique no botão para narrar esta estória",
+      "startRecording": "Iniciar Narração",
+      "stopRecording": "Parar Narração",
+      "listen": "Ouvir Narração",
+      "shareStory": "Compartilhar Estória",
+      "recordingComplete": "Narração concluída!"
+    }
   },
   "categories": {
     "title": "Categorias",
-    "allStories": "Todas as Estórias",
-    "amor": "Amor",
-    "paz": "Paz",
-    "sabedoria": "Sabedoria",
-    "bondade": "Bondade",
-    "protecao": "Proteção",
-    "natureza": "Natureza",
-    "familia": "Família",
-    "amizade": "Amizade"
+    "storiesCount": "{{count}} estórias",
+    "exploration": "Explore nossas estórias por temas"
   },
   "about": {
-    "title": "Sobre o Estrelinha de Luz",
+    "title": "Sobre Nós",
     "mission": {
       "title": "Nossa Missão",
-      "content": "Proporcionar às crianças histórias inspiradoras que cultivem valores como amor, paz, sabedoria e bondade, ajudando-as a desenvolver uma consciência espiritual e ética desde cedo."
+      "text": "Nosso objetivo é oferecer conteúdo educativo e inspirador para crianças, que ajude no seu desenvolvimento espiritual e emocional através de estórias que transmitem valores como amor, paz, sabedoria, bondade e compaixão."
     },
     "values": {
       "title": "Nossos Valores",
-      "love": "Amor",
-      "peace": "Paz",
-      "wisdom": "Sabedoria",
-      "kindness": "Bondade"
-    },
-    "team": {
-      "title": "Nossa Equipe",
-      "description": "Somos um grupo de educadores, escritores e ilustradores apaixonados por literatura infantil e desenvolvimento espiritual."
+      "items": [
+        {
+          "title": "Amor e Respeito",
+          "description": "Promovemos o amor ao próximo e o respeito a todas as formas de vida."
+        },
+        {
+          "title": "Sabedoria e Reflexão",
+          "description": "Incentivamos o pensamento crítico e a sabedoria através de narrativas reflexivas."
+        },
+        {
+          "title": "Paz e Harmonia",
+          "description": "Valorizamos a paz interior e a harmonia nas relações pessoais."
+        },
+        {
+          "title": "Inclusão e Diversidade",
+          "description": "Celebramos a diversidade e promovemos a inclusão em nossas estórias."
+        }
+      ]
     },
     "contact": {
       "title": "Entre em Contato",
-      "email": "contato@estrelinhaluz.com.br"
+      "text": "Tem alguma sugestão ou feedback? Adoraríamos ouvir de você!",
+      "email": "contato@estrelinhadeluz.com.br"
     }
-  },
-  "narrator": {
-    "title": "Narrador Infantil",
-    "description": "As crianças podem gravar sua própria narração desta estória e compartilhar com a família!",
-    "record": "Gravar",
-    "stop": "Parar",
-    "play": "Ouvir",
-    "download": "Baixar",
-    "recording": "Gravando...",
-    "permission": "Por favor, permita o acesso ao microfone para gravar.",
-    "error": "Erro ao iniciar a gravação. Verifique se o microfone está conectado."
-  },
-  "footer": {
-    "rights": "Todos os direitos reservados",
-    "navTitle": "Navegação",
-    "contactTitle": "Contato",
-    "socialTitle": "Redes Sociais"
   },
   "common": {
     "loading": "Carregando...",
-    "notFound": "Página não encontrada",
-    "backToHome": "Voltar para o início",
-    "error": "Ocorreu um erro",
-    "tryAgain": "Tentar novamente",
-    "quote": "Cada estória é uma semente de luz que plantamos no coração das crianças."
+    "error": "Ocorreu um erro. Por favor, tente novamente.",
+    "backToHome": "Voltar ao Início",
+    "readMore": "Ler Mais",
+    "share": "Compartilhar",
+    "notFound": {
+      "title": "Página não encontrada",
+      "text": "A página que você está procurando não existe ou foi movida."
+    }
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados",
+    "navigation": "Navegação",
+    "contact": "Contato",
+    "follow": "Siga-nos"
   }
 }
