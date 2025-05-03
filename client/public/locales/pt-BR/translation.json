@@ -1,0 +1,115 @@
+{
+  "app": {
+    "name": "Estrelinha de Luz",
+    "slogan": "Histórias que tocam o coração"
+  },
+  "menu": {
+    "home": "Início",
+    "stories": "Estórias",
+    "categories": "Categorias",
+    "about": "Sobre nós"
+  },
+  "home": {
+    "hero": {
+      "title": "Estórias de Luz para Crianças",
+      "subtitle": "Compartilhando valores de amor, paz e sabedoria",
+      "button": "Explorar Estórias"
+    },
+    "featured": {
+      "title": "Estórias em Destaque",
+      "viewAll": "Ver todas"
+    },
+    "newest": {
+      "title": "Estórias Recentes",
+      "viewAll": "Ver todas"
+    },
+    "categories": {
+      "title": "Explorar por Categoria",
+      "viewAll": "Ver todas"
+    },
+    "testimonials": {
+      "title": "O que as Famílias dizem"
+    },
+    "newsletter": {
+      "title": "Receba Novas Estórias",
+      "subtitle": "Inscreva-se para receber notificações quando publicarmos novas estórias",
+      "placeholder": "Seu e-mail",
+      "button": "Inscrever-se",
+      "success": "Obrigado por se inscrever!",
+      "error": "Ocorreu um erro. Tente novamente mais tarde."
+    }
+  },
+  "stories": {
+    "title": "Todas as Estórias",
+    "searchPlaceholder": "Buscar estórias...",
+    "noResults": "Nenhuma estória encontrada.",
+    "readMore": "Ler estória",
+    "backToList": "Voltar para estórias",
+    "relatedStories": "Você também pode gostar",
+    "ageRange": "Idade recomendada",
+    "print": "Imprimir estória",
+    "share": "Compartilhar estória",
+    "copied": "Link copiado para a área de transferência!",
+    "likedStory": "Gostou desta estória?",
+    "exploreMore": "Explore mais estórias encantadoras que ensinam valores importantes."
+  },
+  "categories": {
+    "title": "Categorias",
+    "allStories": "Todas as Estórias",
+    "amor": "Amor",
+    "paz": "Paz",
+    "sabedoria": "Sabedoria",
+    "bondade": "Bondade",
+    "protecao": "Proteção",
+    "natureza": "Natureza",
+    "familia": "Família",
+    "amizade": "Amizade"
+  },
+  "about": {
+    "title": "Sobre o Estrelinha de Luz",
+    "mission": {
+      "title": "Nossa Missão",
+      "content": "Proporcionar às crianças histórias inspiradoras que cultivem valores como amor, paz, sabedoria e bondade, ajudando-as a desenvolver uma consciência espiritual e ética desde cedo."
+    },
+    "values": {
+      "title": "Nossos Valores",
+      "love": "Amor",
+      "peace": "Paz",
+      "wisdom": "Sabedoria",
+      "kindness": "Bondade"
+    },
+    "team": {
+      "title": "Nossa Equipe",
+      "description": "Somos um grupo de educadores, escritores e ilustradores apaixonados por literatura infantil e desenvolvimento espiritual."
+    },
+    "contact": {
+      "title": "Entre em Contato",
+      "email": "contato@estrelinhaluz.com.br"
+    }
+  },
+  "narrator": {
+    "title": "Narrador Infantil",
+    "description": "As crianças podem gravar sua própria narração desta estória e compartilhar com a família!",
+    "record": "Gravar",
+    "stop": "Parar",
+    "play": "Ouvir",
+    "download": "Baixar",
+    "recording": "Gravando...",
+    "permission": "Por favor, permita o acesso ao microfone para gravar.",
+    "error": "Erro ao iniciar a gravação. Verifique se o microfone está conectado."
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados",
+    "navTitle": "Navegação",
+    "contactTitle": "Contato",
+    "socialTitle": "Redes Sociais"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "notFound": "Página não encontrada",
+    "backToHome": "Voltar para o início",
+    "error": "Ocorreu um erro",
+    "tryAgain": "Tentar novamente",
+    "quote": "Cada estória é uma semente de luz que plantamos no coração das crianças."
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "app": {
+    "name": "Little Star of Light",
+    "slogan": "Stories that touch the heart"
+  },
+  "menu": {
+    "home": "Home",
+    "stories": "Stories",
+    "categories": "Categories",
+    "about": "About Us"
+  },
+  "home": {
+    "hero": {
+      "title": "Light Stories for Children",
+      "subtitle": "Sharing values of love, peace, and wisdom",
+      "button": "Explore Stories"
+    },
+    "featured": {
+      "title": "Featured Stories",
+      "viewAll": "View all"
+    },
+    "newest": {
+      "title": "Latest Stories",
+      "viewAll": "View all"
+    },
+    "categories": {
+      "title": "Explore by Category",
+      "viewAll": "View all"
+    },
+    "testimonials": {
+      "title": "What Families Say"
+    },
+    "newsletter": {
+      "title": "Receive New Stories",
+      "subtitle": "Subscribe to get notified when we publish new stories",
+      "placeholder": "Your email",
+      "button": "Subscribe",
+      "success": "Thank you for subscribing!",
+      "error": "An error occurred. Please try again later."
+    }
+  },
+  "stories": {
+    "title": "All Stories",
+    "searchPlaceholder": "Search stories...",
+    "noResults": "No stories found.",
+    "readMore": "Read story",
+    "backToList": "Back to stories",
+    "relatedStories": "You might also like",
+    "ageRange": "Recommended age",
+    "print": "Print story",
+    "share": "Share story",
+    "copied": "Link copied to clipboard!",
+    "likedStory": "Did you like this story?",
+    "exploreMore": "Explore more enchanting stories that teach important values."
+  },
+  "categories": {
+    "title": "Categories",
+    "allStories": "All Stories",
+    "amor": "Love",
+    "paz": "Peace",
+    "sabedoria": "Wisdom",
+    "bondade": "Kindness",
+    "protecao": "Protection",
+    "natureza": "Nature",
+    "familia": "Family",
+    "amizade": "Friendship"
+  },
+  "about": {
+    "title": "About Little Star of Light",
+    "mission": {
+      "title": "Our Mission",
+      "content": "To provide children with inspiring stories that cultivate values such as love, peace, wisdom, and kindness, helping them develop a spiritual and ethical awareness from an early age."
+    },
+    "values": {
+      "title": "Our Values",
+      "love": "Love",
+      "peace": "Peace",
+      "wisdom": "Wisdom",
+      "kindness": "Kindness"
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "We are a group of educators, writers, and illustrators passionate about children's literature and spiritual development."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "email": "contact@littlestarlight.com"
+    }
+  },
+  "narrator": {
+    "title": "Children's Narrator",
+    "description": "Children can record their own narration of this story and share it with their family!",
+    "record": "Record",
+    "stop": "Stop",
+    "play": "Listen",
+    "download": "Download",
+    "recording": "Recording...",
+    "permission": "Please allow microphone access to record.",
+    "error": "Error starting recording. Check if the microphone is connected."
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "socialTitle": "Social Media"
+  },
+  "common": {
+    "loading": "Loading...",
+    "notFound": "Page not found",
+    "backToHome": "Back to home",
+    "error": "An error occurred",
+    "tryAgain": "Try again",
+    "quote": "Each story is a seed of light that we plant in children's hearts."
+  }
+}
