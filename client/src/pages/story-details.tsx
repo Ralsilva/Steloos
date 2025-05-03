@@ -96,9 +96,9 @@ export default function StoryDetails() {
           variant="ghost"
           className="mb-4"
         >
-          <Link href="/historias">
+          <Link href="/estorias">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar para histórias
+            Voltar para estórias
           </Link>
         </Button>
       </div>
@@ -126,7 +126,7 @@ export default function StoryDetails() {
           
           <div className="mt-8 flex justify-between items-center pt-6 border-t border-gray-200">
             <p className="text-gray-600 italic">
-              "Cada história é uma semente de luz que plantamos no coração das crianças."
+              "Cada estória é uma semente de luz que plantamos no coração das crianças."
             </p>
             <div className="flex space-x-2">
               <Button 
@@ -134,7 +134,7 @@ export default function StoryDetails() {
                 size="icon"
                 onClick={() => window.print()}
                 className="rounded-full"
-                title="Imprimir história"
+                title="Imprimir estória"
               >
                 <i className="fas fa-print"></i>
               </Button>
@@ -153,7 +153,7 @@ export default function StoryDetails() {
                   });
                 }}
                 className="rounded-full"
-                title="Compartilhar história"
+                title="Compartilhar estória"
               >
                 <i className="fas fa-share-alt"></i>
               </Button>
@@ -169,7 +169,7 @@ export default function StoryDetails() {
             {relatedStories.map(relatedStory => (
               <Link 
                 key={relatedStory.id}
-                href={`/historia/${relatedStory.id}`}
+                href={`/estoria/${relatedStory.id}`}
                 className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
               >
                 <img 
@@ -191,11 +191,11 @@ export default function StoryDetails() {
       )}
       
       <div className="bg-[#FFE3C8] rounded-xl p-6 text-center">
-        <h3 className="font-heading font-bold text-xl mb-4">Gostou desta história?</h3>
-        <p className="mb-6">Explore mais histórias encantadoras que ensinam valores importantes.</p>
+        <h3 className="font-heading font-bold text-xl mb-4">Gostou desta estória?</h3>
+        <p className="mb-6">Explore mais estórias encantadoras que ensinam valores importantes.</p>
         <Button asChild>
-          <Link href="/historias">
-            Ver mais histórias
+          <Link href="/estorias">
+            Ver mais estórias
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
