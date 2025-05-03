@@ -14,11 +14,14 @@ export default function Categories() {
   });
   
   useEffect(() => {
-    const params = new URLSearchParams(location.split('?')[1]);
+    const params = new URLSearchParams(location.split('?')[1] || '');
     if (params.has('categoria')) {
-      setSelectedCategoryId(params.get('categoria'));
+      const categoriaId = params.get('categoria');
+      setSelectedCategoryId(categoriaId);
+      console.log("Categoria selecionada:", categoriaId);
     } else {
       setSelectedCategoryId(null);
+      console.log("Nenhuma categoria selecionada");
     }
   }, [location]);
   
@@ -75,6 +78,7 @@ export default function Categories() {
             Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
           </h2>
           
+          {console.log("Carregando estórias para categoria:", selectedCategoryId)}
           <div id="category-stories">
             {/* Usando o componente StoryList diretamente em vez de um iframe */}
             <StoryList
