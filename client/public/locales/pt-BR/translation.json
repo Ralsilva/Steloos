@@ -159,6 +159,9 @@
     "download": "Baixar",
     "print": "Imprimir estória",
     "linkCopied": "Link copiado para a área de transferência!",
+    "page": "Página",
+    "previous": "Anterior",
+    "next": "Próximo",
     "notFound": {
       "title": "Página não encontrada",
       "text": "A página que você está procurando não existe ou foi movida."

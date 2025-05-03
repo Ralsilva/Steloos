@@ -77,6 +77,111 @@
   animation: jump 0.6s ease-in-out;
 }
 
+/* Estilos para palavras interativas */
+.interactive-highlight {
+  display: inline-block;
+  position: relative;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.interactive-highlight:hover {
+  transform: scale(1.1);
+}
+
+.star-word {
+  color: #F59E0B;
+  animation: glow 2s ease-in-out infinite;
+}
+
+.magic-word {
+  color: #8B5CF6;
+  background: linear-gradient(90deg, #8B5CF6, #EC4899, #8B5CF6);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: magic-shimmer 3s linear infinite;
+}
+
+.water-word {
+  color: #3B82F6;
+  position: relative;
+}
+
+.water-word:after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #3B82F6;
+  opacity: 0.6;
+  border-radius: 10px;
+}
+
+.wind-word {
+  color: #64748B;
+  font-style: italic;
+  animation: sway 3s ease-in-out infinite;
+}
+
+.animal-word, .bird-word {
+  color: #10B981;
+  position: relative;
+}
+
+.laugh-word {
+  color: #FB923C;
+  font-weight: bold;
+}
+
+/* Estilos para o modo de tela cheia */
+.fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 50;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+/* Transições para os botões no modo interativo */
+.interactive-story button {
+  transition: all 0.2s ease-in-out;
+}
+
+.interactive-story button:hover {
+  transform: translateY(-2px);
+}
+
+.interactive-story button:active {
+  transform: translateY(1px);
+}
+
+/* Estilos para o componente de página no modo interativo */
+.interactive-content-wrapper {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Número de página com estilo de fita */
+.page-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #FFFBEB;
+  border: 1px solid #FEF3C7;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: #92400E;
+}
+
 :root {
   --background: 35 100% 92%; /* #FFEDD8 */
   --foreground: 0 0% 20%; /* #333333 */
