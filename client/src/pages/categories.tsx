@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { categoryInfo } from "@/lib/data";
+import { Category } from "@shared/schema";
 
 export default function Categories() {
   const [location] = useLocation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   
-  const { data: categories, isLoading: loadingCategories } = useQuery({
+  const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
     queryKey: ['/api/categories'],
   });
   
@@ -22,7 +23,7 @@ export default function Categories() {
   
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-3xl md:text-4xl font-bold font-heading mb-6 text-text">Categorias de Histórias</h1>
+      <h1 className="text-3xl md:text-4xl font-bold font-heading mb-6 text-text">Categorias de Estórias</h1>
       
       {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) ? (
         <div className="mb-6">
@@ -70,16 +71,16 @@ export default function Categories() {
       {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) ? (
         <div className="mt-10">
           <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-text">
-            Histórias de {categories.find(c => c.id === selectedCategoryId)?.name}
+            Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6" id="category-stories">
             {/* Stories will be loaded here by StoryList component */}
             {/* This would be better implemented with a StoryList component, but for simplicity I'm using the existing routes */}
             <iframe
-              src={`/historias?categoria=${selectedCategoryId}&embed=true`}
+              src={`/estorias?categoria=${selectedCategoryId}&embed=true`}
               className="w-full h-[800px] border-none"
-              title={`Histórias de ${categories.find(c => c.id === selectedCategoryId)?.name}`}
+              title={`Estórias de ${categories.find(c => c.id === selectedCategoryId)?.name}`}
             />
           </div>
         </div>

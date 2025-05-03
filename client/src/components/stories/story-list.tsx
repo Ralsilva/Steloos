@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import StoryCard from "@/components/stories/story-card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Story } from "@shared/schema";
 
 interface StoryListProps {
   queryKey: string;
@@ -12,12 +13,14 @@ interface StoryListProps {
 export default function StoryList({ 
   queryKey, 
   title, 
-  emptyMessage = "Nenhuma história encontrada.",
+  emptyMessage = "Nenhuma estória encontrada.",
   variant = "large" 
 }: StoryListProps) {
-  const { data: stories, isLoading } = useQuery({
+  const { data: stories, isLoading } = useQuery<Story[]>({
     queryKey: [queryKey],
   });
+  
+  console.log("StoryList queryKey:", queryKey, "stories:", stories?.length || 0);
 
   const columns = variant === "large" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2";
 
