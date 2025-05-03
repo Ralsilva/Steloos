@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getCategoryInfo } from "@/lib/data";
+import StoryNarrator from "@/components/stories/story-narrator";
 
 export default function StoryDetails() {
   const [match, params] = useRoute<{ id: string }>("/estoria/:id");
@@ -122,6 +123,19 @@ export default function StoryDetails() {
             {story.content.split('\n\n').map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
+          </div>
+          
+          {/* Narrador de Estórias */}
+          <div className="my-8 pt-6 border-t border-gray-200">
+            <h3 className="text-xl font-bold font-heading mb-4 flex items-center">
+              <span className="text-primary">✨</span>
+              <span className="mx-2">Narrador Infantil</span>
+              <span className="text-primary">✨</span>
+            </h3>
+            <p className="mb-4 text-gray-600">
+              As crianças podem gravar sua própria narração desta estória e compartilhar com a família!
+            </p>
+            <StoryNarrator storyTitle={story.title} />
           </div>
           
           <div className="mt-8 flex justify-between items-center pt-6 border-t border-gray-200">
