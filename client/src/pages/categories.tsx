@@ -3,6 +3,7 @@ import { useLocation, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { categoryInfo } from "@/lib/data";
 import { Category } from "@shared/schema";
+import StoryList from "@/components/stories/story-list";
 
 export default function Categories() {
   const [location] = useLocation();
@@ -74,13 +75,13 @@ export default function Categories() {
             Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" id="category-stories">
-            {/* Stories will be loaded here by StoryList component */}
-            {/* This would be better implemented with a StoryList component, but for simplicity I'm using the existing routes */}
-            <iframe
-              src={`/estorias?categoria=${selectedCategoryId}&embed=true`}
-              className="w-full h-[800px] border-none"
-              title={`Estórias de ${categories.find(c => c.id === selectedCategoryId)?.name}`}
+          <div id="category-stories">
+            {/* Usando o componente StoryList diretamente em vez de um iframe */}
+            <StoryList
+              queryKey={`/api/stories/by-category/${selectedCategoryId}`}
+              title=""
+              emptyMessage={`Nenhuma estória encontrada para esta categoria.`}
+              variant="large"
             />
           </div>
         </div>
