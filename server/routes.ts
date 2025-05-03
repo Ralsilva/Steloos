@@ -97,6 +97,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/stories/by-category/:categoryId", async (req, res) => {
+    try {
+      const categoryId = req.params.categoryId;
+      if (!categoryId) {
+        return res.status(400).json({ message: "Category ID is required" });
+      }
+      
+      const stories = await storage.getStoriesByCategory(categoryId);
+      res.json(stories);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching stories by category" });
+    }
+  });
+
   app.get("/api/stories/related/:id", async (req, res) => {
     try {
       const id = parseInt(req.params.id);

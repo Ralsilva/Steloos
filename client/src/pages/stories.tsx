@@ -37,7 +37,7 @@ export default function Stories() {
   const queryKey = searchQuery 
     ? `/api/stories/search?q=${searchQuery}` 
     : categoryFilter 
-      ? `/api/stories?categoryId=${categoryFilter}` 
+      ? `/api/stories/by-category/${categoryFilter}` 
       : "/api/stories";
   
   const emptyMessage = searchQuery 

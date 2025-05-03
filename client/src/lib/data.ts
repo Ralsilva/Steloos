@@ -2,26 +2,26 @@ import { Category, Story, Testimonial } from "@shared/schema";
 
 // Stock photo URLs for children reading books
 export const childrenReadingImages = [
-  "https://images.unsplash.com/photo-1602083573998-f227e03de2d6",
-  "https://images.unsplash.com/photo-1546521343-4eb2c9aa8454",
-  "https://images.unsplash.com/photo-1549737221-bef65e2604a6",
-  "https://images.unsplash.com/photo-1551966775-a4ddc8df052b"
+  "https://images.unsplash.com/photo-1602083573998-f227e03de2d6?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1546521343-4eb2c9aa8454?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1549737221-bef65e2604a6?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1551966775-a4ddc8df052b?auto=format&fit=crop&w=800&q=80"
 ];
 
 // Stock photo URLs for colorful peaceful illustrations
 export const peacefulIllustrationImages = [
-  "https://images.unsplash.com/photo-1518933165971-611dbc9c412d",
-  "https://images.unsplash.com/photo-1519682337058-a94d519337bc",
-  "https://images.unsplash.com/photo-1579546929662-711aa81148cf",
-  "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9"
+  "https://images.unsplash.com/photo-1518933165971-611dbc9c412d?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1579546929662-711aa81148cf?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=800&q=80"
 ];
 
 // Stock photo URLs for nature and animals for kids
 export const natureAndAnimalsImages = [
-  "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e",
-  "https://images.unsplash.com/photo-1548681528-6a5c45b66b42",
-  "https://images.unsplash.com/photo-1533738363-b7f9aef128ce",
-  "https://images.unsplash.com/photo-1526336179256-1347bdb255ee"
+  "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1526336179256-1347bdb255ee?auto=format&fit=crop&w=800&q=80"
 ];
 
 // Category information with icons and colors
