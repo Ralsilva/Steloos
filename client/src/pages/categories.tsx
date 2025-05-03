@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { categoryInfo } from "@/lib/data";
 import { Category, Story } from "@shared/schema";
@@ -7,40 +6,35 @@ import StoryCard from "@/components/stories/story-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Categories() {
-  const [location, setLocation] = useLocation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   
+  // Carrega todas as categorias
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
     queryKey: ['/api/categories'],
   });
   
   // Busca estórias para a categoria selecionada
-  const { data: storiesByCategory, isLoading: loadingStories } = useQuery<Story[]>({
-    queryKey: [selectedCategoryId ? `/api/stories/by-category/${selectedCategoryId}` : 'no-category'],
+  const { data: storiesByCategory, isLoading: loadingStories, refetch } = useQuery<Story[]>({
+    queryKey: [`/api/stories/by-category/${selectedCategoryId || 'none'}`],
     enabled: !!selectedCategoryId, // Só executa query se tiver categoria selecionada
   });
   
+  // Refaz a consulta sempre que o ID da categoria muda
   useEffect(() => {
-    // Verifica se a URL tem parâmetros
-    if (location.includes('?')) {
-      const params = new URLSearchParams(location.split('?')[1]);
-      const categoriaId = params.get('categoria');
-      
-      if (categoriaId) {
-        console.log("URL: Categoria selecionada:", categoriaId);
-        setSelectedCategoryId(categoriaId);
-      } else {
-        console.log("URL: Parâmetros presentes, mas sem categoria");
-        setSelectedCategoryId(null);
-      }
-    } else {
-      console.log("URL: Sem parâmetros de categoria");
-      setSelectedCategoryId(null);
+    if (selectedCategoryId) {
+      refetch();
     }
-  }, [location]);
+  }, [selectedCategoryId, refetch]);
   
+  // Para debug
   console.log("Categoria selecionada:", selectedCategoryId);
   console.log("Estórias carregadas:", storiesByCategory?.length || 0);
+  
+  // Função para selecionar uma categoria
+  const handleCategorySelect = (categoryId: string) => {
+    console.log("Clicou na categoria:", categoryId);
+    setSelectedCategoryId(categoryId);
+  };
   
   return (
     <div className="container mx-auto px-4 py-6">
@@ -48,49 +42,53 @@ export default function Categories() {
       
       {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) ? (
         <div className="mb-6">
-          <Link 
-            href="/categorias"
+          <button 
+            onClick={() => setSelectedCategoryId(null)}
             className="text-secondary hover:text-accent font-medium inline-flex items-center"
           >
             <i className="fas fa-arrow-left mr-2"></i> Voltar para todas as categorias
-          </Link>
+          </button>
         </div>
       ) : null}
       
-      {loadingCategories ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-soft animate-pulse h-40"></div>
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {categories?.map((category) => {
-            const { icon, color } = categoryInfo[category.id] || { icon: "star", color: "bg-primary" };
-            
-            return (
-              <Link 
-                key={category.id} 
-                href={`/categorias?categoria=${category.id}`}
-                className={`category-card bg-white rounded-xl shadow-soft overflow-hidden transition-transform hover:transform hover:scale-105 hover:shadow-md ${
-                  selectedCategoryId === category.id ? 'ring-4 ring-primary' : ''
-                }`}
-              >
-                <div className={`h-32 ${color} flex items-center justify-center`}>
-                  <i className={`fas fa-${icon} text-white text-5xl`}></i>
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="font-heading font-bold text-xl mb-1">{category.name}</h3>
-                  <p className="text-gray-600 text-sm">{category.description}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+      {/* Grid de categorias */}
+      {!selectedCategoryId && (
+        <>
+          {loadingCategories ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-soft animate-pulse h-40"></div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {categories?.map((category) => {
+                const { icon, color } = categoryInfo[category.id] || { icon: "star", color: "bg-primary" };
+                
+                return (
+                  <div 
+                    key={category.id}
+                    onClick={() => handleCategorySelect(category.id)}
+                    className="category-card bg-white rounded-xl shadow-soft overflow-hidden transition-transform hover:transform hover:scale-105 hover:shadow-md cursor-pointer"
+                  >
+                    <div className={`h-32 ${color} flex items-center justify-center`}>
+                      <i className={`fas fa-${icon} text-white text-5xl`}></i>
+                    </div>
+                    <div className="p-6 text-center">
+                      <h3 className="font-heading font-bold text-xl mb-1">{category.name}</h3>
+                      <p className="text-gray-600 text-sm">{category.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
       )}
       
-      {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) ? (
-        <div className="mt-10">
+      {/* Exibição de estórias da categoria selecionada */}
+      {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) && (
+        <div className="mt-6">
           <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-text">
             Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
           </h2>
@@ -125,7 +123,7 @@ export default function Categories() {
             )}
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
