@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Star of Light",
+    "name": "Little Star of Light",
     "slogan": "Stories that touch the heart"
   },
   "menu": {
@@ -133,7 +133,7 @@
     "contact": {
       "title": "Contact Us",
       "text": "Have a suggestion or feedback? We would love to hear from you!",
-      "email": "contact@staroflight.com"
+      "email": "contact@littlestaroflight.com"
     }
   },
   "common": {
