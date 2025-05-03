@@ -5,12 +5,14 @@ import { VoiceRecorder } from "@/components/ui/voice-recorder";
 import { Mic, Share2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import StarAnimation from "@/components/ui/star-animation";
+import { useTranslation } from "react-i18next";
 
 interface StoryNarratorProps {
   storyTitle: string;
 }
 
 export default function StoryNarrator({ storyTitle }: StoryNarratorProps) {
+  const { t } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [recordingUrl, setRecordingUrl] = useState<string | null>(null);
   const [recordingBlob, setRecordingBlob] = useState<Blob | null>(null);
@@ -76,18 +78,18 @@ export default function StoryNarrator({ storyTitle }: StoryNarratorProps) {
           className="w-full flex items-center bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 border-dashed"
         >
           <Mic className="h-5 w-5 mr-2" />
-          <span>Narrar esta estória</span>
+          <span>{t('stories.narrator.title')}</span>
           <StarAnimation className="ml-2" size={20} />
         </Button>
       </DialogTrigger>
       
       <DialogContent className="sm:max-w-md rounded-xl">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-heading">Narração de Estória</DialogTitle>
+          <DialogTitle className="text-center text-2xl font-heading">{t('stories.childNarrator.title')}</DialogTitle>
           <DialogDescription className="text-center">
             {recordingUrl 
-              ? "Sua narração foi gravada! Você pode ouvi-la, baixá-la ou compartilhá-la."
-              : "Grave sua voz narrando esta estória e compartilhe com amigos e familiares!"}
+              ? t('stories.narrator.recordingComplete')
+              : t('stories.narrator.instructions')}
           </DialogDescription>
         </DialogHeader>
         

@@ -192,7 +192,7 @@ export default function StoryDetails() {
                 size="icon"
                 onClick={() => window.print()}
                 className="rounded-full"
-                title="Imprimir estória"
+                title={t('common.print')}
               >
                 <i className="fas fa-print"></i>
               </Button>
@@ -207,11 +207,11 @@ export default function StoryDetails() {
                   }).catch(() => {
                     // Fallback if Web Share API is not supported
                     navigator.clipboard.writeText(window.location.href);
-                    alert('Link copiado para a área de transferência!');
+                    alert(t('common.linkCopied'));
                   });
                 }}
                 className="rounded-full"
-                title="Compartilhar estória"
+                title={t('common.share')}
               >
                 <i className="fas fa-share-alt"></i>
               </Button>
