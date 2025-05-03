@@ -4,18 +4,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { getCategoryInfo } from "@/lib/data";
+import { useTranslation } from "react-i18next";
 
 export default function FeaturedStories() {
+  const { t } = useTranslation();
   const { data: stories, isLoading } = useQuery({
     queryKey: ['/api/stories/featured'],
-  });
+  }) as { data: any[], isLoading: boolean };
 
   return (
     <section className="mb-10">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold font-heading text-text">Histórias em Destaque</h2>
-        <Link href="/historias" className="text-primary font-medium hover:underline flex items-center">
-          Ver Todas <ArrowRight className="ml-2 h-4 w-4" />
+        <h2 className="text-2xl md:text-3xl font-bold font-heading text-text">{t('home.featured.title')}</h2>
+        <Link href="/estorias" className="text-primary font-medium hover:underline flex items-center">
+          {t('home.featured.viewAll')} <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </div>
       
@@ -51,7 +53,7 @@ export default function FeaturedStories() {
                     <span className={`inline-block px-3 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full`}>
                       {story.categoryName}
                     </span>
-                    <span className="text-sm text-gray-500">Idade: {story.ageRange}</span>
+                    <span className="text-sm text-gray-500">{t('stories.ageRange')}: {story.ageRange}</span>
                   </div>
                   <h3 className="font-heading font-bold text-xl mb-2">{story.title}</h3>
                   <p className="text-gray-600 mb-4">{story.excerpt}</p>
@@ -60,8 +62,8 @@ export default function FeaturedStories() {
                     variant="link"
                     className="inline-block text-secondary font-bold hover:text-accent transition-colors p-0"
                   >
-                    <Link href={`/historia/${story.id}`}>
-                      Ler história <ArrowRight className="ml-1 h-4 w-4 inline" />
+                    <Link href={`/estoria/${story.id}`}>
+                      {t('common.readMore')} <ArrowRight className="ml-1 h-4 w-4 inline" />
                     </Link>
                   </Button>
                 </div>

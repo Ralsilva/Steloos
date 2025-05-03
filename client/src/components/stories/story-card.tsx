@@ -46,6 +46,7 @@ function formatImageUrl(url: string, variant: "large" | "small"): string {
 }
 
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
+  const { t } = useTranslation();
   const categoryInfo = getCategoryInfo(story.categoryId);
   // Escolher uma imagem, ou usando a URL original formatada, ou uma imagem de fallback
   const imageUrl = story.imageUrl ? formatImageUrl(story.imageUrl, variant) : getFallbackImage(story.id, story.categoryId);
@@ -97,7 +98,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
           <span className={`inline-block px-3 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full`}>
             {story.categoryName}
           </span>
-          <span className="text-sm text-gray-500">Idade: {story.ageRange}</span>
+          <span className="text-sm text-gray-500">{t('stories.ageRange')}: {story.ageRange}</span>
         </div>
         <h3 className="font-heading font-bold text-xl mb-2">{story.title}</h3>
         <p className="text-gray-600 mb-4">{story.excerpt}</p>
@@ -107,7 +108,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
           className="inline-block text-secondary font-bold hover:text-accent transition-colors p-0"
         >
           <Link href={`/estoria/${story.id}`}>
-            Ler estória <ArrowRight className="ml-1 h-4 w-4 inline" />
+            {t('common.readMore')} <ArrowRight className="ml-1 h-4 w-4 inline" />
           </Link>
         </Button>
       </div>
