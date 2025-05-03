@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { categoryInfo } from "@/lib/data";
 import { Category, Story } from "@shared/schema";
 import StoryCard from "@/components/stories/story-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Categories() {
   const [location, setLocation] = useLocation();
@@ -11,6 +12,12 @@ export default function Categories() {
   
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
     queryKey: ['/api/categories'],
+  });
+  
+  // Busca estórias para a categoria selecionada
+  const { data: storiesByCategory, isLoading: loadingStories } = useQuery<Story[]>({
+    queryKey: [selectedCategoryId ? `/api/stories/by-category/${selectedCategoryId}` : 'no-category'],
+    enabled: !!selectedCategoryId, // Só executa query se tiver categoria selecionada
   });
   
   useEffect(() => {
@@ -31,6 +38,9 @@ export default function Categories() {
       setSelectedCategoryId(null);
     }
   }, [location]);
+  
+  console.log("Categoria selecionada:", selectedCategoryId);
+  console.log("Estórias carregadas:", storiesByCategory?.length || 0);
   
   return (
     <div className="container mx-auto px-4 py-6">
@@ -84,14 +94,35 @@ export default function Categories() {
           <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-text">
             Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
           </h2>
-          <div id="category-stories">
-            {/* Usando o componente StoryList diretamente em vez de um iframe */}
-            <StoryList
-              queryKey={`/api/stories/by-category/${selectedCategoryId}`}
-              title=""
-              emptyMessage={`Nenhuma estória encontrada para esta categoria.`}
-              variant="large"
-            />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="category-stories">
+            {loadingStories ? (
+              // Esqueletos durante o carregamento
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-soft overflow-hidden">
+                  <Skeleton className="w-full h-48" />
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <Skeleton className="h-6 w-16" />
+                      <Skeleton className="h-4 w-24" />
+                    </div>
+                    <Skeleton className="h-7 w-full mb-2" />
+                    <Skeleton className="h-20 w-full mb-4" />
+                    <Skeleton className="h-6 w-32" />
+                  </div>
+                </div>
+              ))
+            ) : storiesByCategory && storiesByCategory.length > 0 ? (
+              // Exibir estórias se houver
+              storiesByCategory.map(story => (
+                <StoryCard key={story.id} story={story} variant="large" />
+              ))
+            ) : (
+              // Mensagem se não houver estórias
+              <div className="col-span-3 bg-white rounded-xl p-8 text-center shadow-soft">
+                <p className="text-gray-600">Nenhuma estória encontrada para esta categoria.</p>
+              </div>
+            )}
           </div>
         </div>
       ) : null}
