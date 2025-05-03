@@ -1,27 +1,27 @@
 import { Category, Story, Testimonial } from "@shared/schema";
 
-// Stock photo URLs for children reading books
+// Ilustrações de crianças lendo livros
 export const childrenReadingImages = [
-  "https://images.unsplash.com/photo-1602083573998-f227e03de2d6?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1546521343-4eb2c9aa8454?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1549737221-bef65e2604a6?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1551966775-a4ddc8df052b?auto=format&fit=crop&w=800&q=80"
+  "https://img.freepik.com/free-vector/cartoon-children-reading-books-together-colorful-illustration_74855-14528.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/set-children-reading-books-different-positions_74855-331.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/hand-drawn-children-s-book-day-illustration_23-2149290226.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/cute-boy-sitting-chair-reading-book-cartoon-vector-icon-illustration_138676-2753.jpg?w=800&q=80"
 ];
 
-// Stock photo URLs for colorful peaceful illustrations
+// Ilustrações coloridas e infantis para decoração do site
 export const peacefulIllustrationImages = [
-  "https://images.unsplash.com/photo-1518933165971-611dbc9c412d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1579546929662-711aa81148cf?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=800&q=80"
+  "https://img.freepik.com/free-vector/hand-drawn-children-playing-together_23-2149419843.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/cartoon-children-reading-books-together-colorful-illustration_74855-14528.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/set-children-reading-books-different-positions_74855-331.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/hand-drawn-world-children-s-day-illustration_23-2149342723.jpg?w=800&q=80"
 ];
 
-// Stock photo URLs for nature and animals for kids
+// Ilustrações de natureza e animais para crianças
 export const natureAndAnimalsImages = [
-  "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1526336179256-1347bdb255ee?auto=format&fit=crop&w=800&q=80"
+  "https://img.freepik.com/free-vector/cute-animals-colorful-hand-drawn-style_23-2147821213.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/cute-rabbit-with-butterfly-cartoon-vector-icon-illustration_138676-5215.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/cute-fox-with-flower-cartoon-vector-icon-illustration_138676-5459.jpg?w=800&q=80",
+  "https://img.freepik.com/free-vector/cute-panda-sitting-with-bamboo-cartoon-vector-icon-illustration_138676-2220.jpg?w=800&q=80"
 ];
 
 // Category information with icons and colors
@@ -45,14 +45,14 @@ export const ageRanges = [
   "7-11 anos"
 ];
 
-// Short excerpts for story previews
+// Trechos curtos para previews das estórias
 export const excerpts = [
   "Um pássaro e uma borboleta descobrem o verdadeiro significado da amizade apesar de suas diferenças.",
   "Uma menina descobre um jardim mágico onde as plantas crescem com pensamentos de paz e harmonia.",
   "Uma pequena estrela ajuda um menino a encontrar respostas para suas grandes perguntas sobre a vida.",
   "Um coelhinho aprende sobre o valor de compartilhar.",
   "Como os anjos nos protegem todos os dias.",
-  "Uma história sobre respeitar e amar a natureza."
+  "Uma estória sobre respeitar e amar a natureza."
 ];
 
 // Function to get category info by ID
