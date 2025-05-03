@@ -59,9 +59,19 @@
     }
   },
   "categories": {
+    "amor": "Love",
+    "paz": "Peace",
+    "sabedoria": "Wisdom",
+    "bondade": "Kindness",
+    "protecao": "Protection",
+    "natureza": "Nature", 
+    "familia": "Family",
+    "amizade": "Friendship",
     "title": "Categories",
     "storiesCount": "{{count}} stories",
-    "exploration": "Explore our stories by themes"
+    "exploration": "Explore our stories by themes",
+    "subtitle": "Explore our stories by categories",
+    "empty": "No stories found in this category."
   },
   "about": {
     "title": "About Us",

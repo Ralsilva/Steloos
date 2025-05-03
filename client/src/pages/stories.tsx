@@ -6,8 +6,10 @@ import SearchBar from "@/components/home/search-bar";
 import StoryList from "@/components/stories/story-list";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "react-i18next";
 
 export default function Stories() {
+  const { t } = useTranslation();
   const [location, setLocation] = useLocation();
   const [searchParams, setSearchParams] = useState<URLSearchParams>();
   const [categoryFilter, setCategoryFilter] = useState<string>("");
@@ -29,10 +31,10 @@ export default function Stories() {
   
   const searchQuery = searchParams?.get('q') || "";
   const title = searchQuery 
-    ? `Resultados para "${searchQuery}"` 
+    ? t('stories.searchResults', { query: searchQuery }) 
     : categoryFilter && categories?.find(c => c.id === categoryFilter)
-      ? `Estórias de ${categories.find(c => c.id === categoryFilter)?.name}`
-      : "Todas as Estórias";
+      ? t('stories.categoryResults', { category: categories.find(c => c.id === categoryFilter)?.name })
+      : t('stories.title');
       
   const queryKey = searchQuery 
     ? `/api/stories/search?q=${searchQuery}` 

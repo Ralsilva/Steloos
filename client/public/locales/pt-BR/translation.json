@@ -48,6 +48,11 @@
     "readingTime": "Tempo de Leitura",
     "minutes": "{{count}} minutos",
     "relatedStories": "Estórias Relacionadas",
+    "searchResults": "Resultados para \"{{query}}\"",
+    "categoryResults": "Estórias de {{category}}",
+    "filterByCategory": "Filtrar por categoria",
+    "allCategories": "Todas as categorias",
+    "noStoriesForSearch": "Nenhuma estória encontrada para \"{{query}}\".",
     "narrator": {
       "title": "Narrador de Estórias",
       "instructions": "Clique no botão para narrar esta estória",
@@ -59,9 +64,19 @@
     }
   },
   "categories": {
+    "amor": "Amor",
+    "paz": "Paz",
+    "sabedoria": "Sabedoria",
+    "bondade": "Bondade",
+    "protecao": "Proteção",
+    "natureza": "Natureza", 
+    "familia": "Família",
+    "amizade": "Amizade",
     "title": "Categorias",
     "storiesCount": "{{count}} estórias",
-    "exploration": "Explore nossas estórias por temas"
+    "exploration": "Explore nossas estórias por temas",
+    "subtitle": "Explore nossas estórias por categorias",
+    "empty": "Nenhuma estória encontrada nesta categoria."
   },
   "about": {
     "title": "Sobre Nós",
