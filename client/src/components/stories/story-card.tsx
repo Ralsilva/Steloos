@@ -34,7 +34,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
   if (variant === "small") {
     return (
       <Link 
-        href={`/historia/${story.id}`}
+        href={`/estoria/${story.id}`}
         className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
       >
         <div className="w-24 h-full bg-gray-100">
@@ -86,7 +86,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
           variant="link"
           className="inline-block text-secondary font-bold hover:text-accent transition-colors p-0"
         >
-          <Link href={`/historia/${story.id}`}>
+          <Link href={`/estoria/${story.id}`}>
             Ler estória <ArrowRight className="ml-1 h-4 w-4 inline" />
           </Link>
         </Button>
