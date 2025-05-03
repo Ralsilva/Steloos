@@ -58,7 +58,7 @@ export default function Stories() {
           <Select 
             value={categoryFilter} 
             onValueChange={(value) => {
-              if (value) {
+              if (value && value !== "all") {
                 setLocation(`/historias?categoria=${value}`);
               } else {
                 setLocation('/historias');
@@ -69,7 +69,7 @@ export default function Stories() {
               <SelectValue placeholder="Todas as categorias" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Todas as categorias</SelectItem>
+              <SelectItem value="all">Todas as categorias</SelectItem>
               {categories?.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}
