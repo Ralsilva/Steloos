@@ -45,159 +45,139 @@ export interface IStorage {
   addNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private categories: Map<string, Category>;
-  private stories: Map<number, Story>;
-  private testimonials: Map<number, Testimonial>;
-  private newsletterSubscribers: Map<number, NewsletterSubscriber>;
-  
-  private userCurrentId: number;
-  private storyCurrentId: number;
-  private testimonialCurrentId: number;
-  private newsletterSubscriberCurrentId: number;
+// Importando o cliente de banco de dados
+import { db } from "./db";
+import { eq, like, desc, sql, and, not } from "drizzle-orm";
 
-  constructor() {
-    // Initialize empty maps
-    this.users = new Map();
-    this.categories = new Map();
-    this.stories = new Map();
-    this.testimonials = new Map();
-    this.newsletterSubscribers = new Map();
-    
-    // Initialize IDs
-    this.userCurrentId = 1;
-    this.storyCurrentId = 1;
-    this.testimonialCurrentId = 1;
-    this.newsletterSubscriberCurrentId = 1;
-
-    // Load initial data
-    this.loadInitialData();
-  }
-
-  private loadInitialData() {
-    // Load categories
-    initialCategories.forEach(category => {
-      this.categories.set(category.id, category);
-    });
-
-    // Load stories
-    initialStories.forEach(story => {
-      const storyWithId = { ...story, id: this.storyCurrentId++ };
-      this.stories.set(storyWithId.id, storyWithId);
-    });
-
-    // Load testimonials
-    initialTestimonials.forEach(testimonial => {
-      const testimonialWithId = { ...testimonial, id: this.testimonialCurrentId++ };
-      this.testimonials.set(testimonialWithId.id, testimonialWithId);
-    });
-  }
-
-  // User methods (keeping original)
+// Classe de armazenamento que utiliza o banco de dados
+export class DatabaseStorage implements IStorage {
+  // User methods
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.userCurrentId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
-
+  
   // Category methods
   async getCategories(): Promise<Category[]> {
-    return Array.from(this.categories.values());
+    return await db.select().from(categories);
   }
 
   async getCategoryById(id: string): Promise<Category | undefined> {
-    return this.categories.get(id);
+    const [category] = await db.select().from(categories).where(eq(categories.id, id));
+    return category || undefined;
   }
 
   // Story methods
   async getStories(): Promise<Story[]> {
-    return Array.from(this.stories.values());
+    return await db.select().from(stories);
   }
 
   async getStoriesByCategory(categoryId: string): Promise<Story[]> {
-    return Array.from(this.stories.values()).filter(
-      (story) => story.categoryId === categoryId
-    );
+    return await db.select().from(stories).where(eq(stories.categoryId, categoryId));
   }
 
   async getStoriesFeatured(): Promise<Story[]> {
-    return Array.from(this.stories.values())
-      .filter(story => story.featured)
-      .slice(0, 3);
+    return await db.select().from(stories)
+      .where(eq(stories.featured, true))
+      .limit(3);
   }
 
   async getStoriesNewest(): Promise<Story[]> {
-    return Array.from(this.stories.values())
-      .sort((a, b) => {
-        if (!a.createdAt || !b.createdAt) return 0;
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      })
-      .slice(0, 3);
+    return await db.select().from(stories)
+      .orderBy(desc(stories.createdAt))
+      .limit(3);
   }
 
   async getStoryById(id: number): Promise<Story | undefined> {
-    return this.stories.get(id);
+    const [story] = await db.select().from(stories).where(eq(stories.id, id));
+    return story || undefined;
   }
 
   async searchStories(query: string): Promise<Story[]> {
-    const lowercaseQuery = query.toLowerCase();
-    return Array.from(this.stories.values()).filter(
-      (story) => 
-        story.title.toLowerCase().includes(lowercaseQuery) || 
-        story.excerpt.toLowerCase().includes(lowercaseQuery) ||
-        story.content.toLowerCase().includes(lowercaseQuery) ||
-        story.categoryName.toLowerCase().includes(lowercaseQuery)
+    const lowercaseQuery = `%${query.toLowerCase()}%`;
+    return await db.select().from(stories).where(
+      sql`LOWER(${stories.title}) LIKE ${lowercaseQuery} OR 
+          LOWER(${stories.excerpt}) LIKE ${lowercaseQuery} OR 
+          LOWER(${stories.content}) LIKE ${lowercaseQuery} OR
+          LOWER(${stories.categoryName}) LIKE ${lowercaseQuery}`
     );
   }
 
   async getRelatedStories(storyId: number, limit: number = 3): Promise<Story[]> {
-    const story = this.stories.get(storyId);
+    const [story] = await db.select().from(stories).where(eq(stories.id, storyId));
     if (!story) return [];
-
-    // Get stories from the same category, excluding the current story
-    return Array.from(this.stories.values())
-      .filter(s => s.id !== storyId && s.categoryId === story.categoryId)
-      .slice(0, limit);
+    
+    return await db.select().from(stories)
+      .where(
+        and(
+          not(eq(stories.id, storyId)),
+          eq(stories.categoryId, story.categoryId)
+        )
+      )
+      .limit(limit);
   }
 
   // Testimonial methods
   async getTestimonials(): Promise<Testimonial[]> {
-    return Array.from(this.testimonials.values());
+    return await db.select().from(testimonials);
   }
 
   // Newsletter methods
   async addNewsletterSubscriber(insertSubscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
     // Check if email already exists
-    const existingSubscriber = Array.from(this.newsletterSubscribers.values()).find(
-      subscriber => subscriber.email === insertSubscriber.email
-    );
-
+    const [existingSubscriber] = await db.select().from(newsletterSubscribers)
+      .where(eq(newsletterSubscribers.email, insertSubscriber.email));
+      
     if (existingSubscriber) {
       return existingSubscriber;
     }
-
-    const id = this.newsletterSubscriberCurrentId++;
-    const subscriber: NewsletterSubscriber = { 
-      ...insertSubscriber, 
-      id, 
-      createdAt: new Date() 
-    };
     
-    this.newsletterSubscribers.set(id, subscriber);
+    const [subscriber] = await db
+      .insert(newsletterSubscribers)
+      .values({
+        ...insertSubscriber,
+        createdAt: new Date()
+      })
+      .returning();
+    
     return subscriber;
   }
 }
 
-export const storage = new MemStorage();
+// Initialize with data if table is empty
+export async function initializeDatabase() {
+  // Check if categories exist
+  const existingCategories = await db.select().from(categories);
+  if (existingCategories.length === 0) {
+    // Insert categories
+    await db.insert(categories).values(initialCategories);
+    
+    // Insert testimonials
+    const insertTestimonials = initialTestimonials.map(testimonial => ({
+      ...testimonial,
+      createdAt: new Date()
+    }));
+    await db.insert(testimonials).values(insertTestimonials);
+    
+    // Insert stories 
+    const insertStories = initialStories.map(story => ({
+      ...story,
+      createdAt: new Date()
+    }));
+    await db.insert(stories).values(insertStories);
+    
+    console.log("Database initialized with seed data");
+  }
+}
+
+export const storage = new DatabaseStorage();
