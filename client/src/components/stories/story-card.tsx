@@ -9,8 +9,27 @@ interface StoryCardProps {
   variant?: "large" | "small";
 }
 
+// Função para formatar a URL da imagem com parâmetros de tamanho
+function formatImageUrl(url: string, variant: "large" | "small"): string {
+  if (!url) return "";
+  
+  // Se a URL já contém parâmetros, não modificamos
+  if (url.includes("?")) return url;
+  
+  // Para imagens do Unsplash
+  if (url.includes("unsplash.com")) {
+    // Parâmetros para controlar tamanho e qualidade
+    const size = variant === "large" ? "w=600&h=400" : "w=300&h=200";
+    const quality = "&q=80&fit=crop";
+    return `${url}?${size}${quality}`;
+  }
+  
+  return url;
+}
+
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
   const categoryInfo = getCategoryInfo(story.categoryId);
+  const imageUrl = formatImageUrl(story.imageUrl, variant);
   
   if (variant === "small") {
     return (
@@ -18,11 +37,17 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
         href={`/historia/${story.id}`}
         className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
       >
-        <img 
-          src={story.imageUrl} 
-          alt={story.title} 
-          className="w-24 h-full object-cover"
-        />
+        <div className="w-24 h-full bg-gray-100">
+          <img 
+            src={imageUrl} 
+            alt={story.title} 
+            className="w-24 h-full object-cover"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src = "https://via.placeholder.com/100x150?text=Estrelinha";
+            }}
+          />
+        </div>
         <div className="p-4">
           <span className={`inline-block px-2 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full mb-2`}>
             {story.categoryName}
@@ -36,11 +61,17 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
   
   return (
     <div className="story-card bg-white rounded-xl shadow-soft overflow-hidden hover-bounce">
-      <img 
-        src={story.imageUrl} 
-        alt={story.title} 
-        className="w-full h-48 object-cover"
-      />
+      <div className="w-full h-48 bg-gray-100">
+        <img 
+          src={imageUrl} 
+          alt={story.title} 
+          className="w-full h-48 object-cover"
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = "https://via.placeholder.com/600x400?text=Estrelinha";
+          }}
+        />
+      </div>
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <span className={`inline-block px-3 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full`}>
@@ -56,7 +87,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
           className="inline-block text-secondary font-bold hover:text-accent transition-colors p-0"
         >
           <Link href={`/historia/${story.id}`}>
-            Ler história <ArrowRight className="ml-1 h-4 w-4 inline" />
+            Ler estória <ArrowRight className="ml-1 h-4 w-4 inline" />
           </Link>
         </Button>
       </div>
