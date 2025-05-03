@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getCategoryInfo } from "@/lib/data";
 
 export default function StoryDetails() {
-  const [match, params] = useRoute<{ id: string }>("/historia/:id");
+  const [match, params] = useRoute<{ id: string }>("/estoria/:id");
   
   const { data: story, isLoading } = useQuery({
     queryKey: [`/api/stories/${params?.id}`],
@@ -36,9 +36,9 @@ export default function StoryDetails() {
             variant="ghost"
             className="mb-4"
           >
-            <Link href="/historias">
+            <Link href="/estorias">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar para histórias
+              Voltar para estórias
             </Link>
           </Button>
         </div>
@@ -76,10 +76,10 @@ export default function StoryDetails() {
     return (
       <div className="container mx-auto px-4 py-6">
         <div className="bg-white rounded-2xl shadow-md p-8 text-center">
-          <h1 className="text-3xl font-bold font-heading mb-4 text-text">História não encontrada</h1>
-          <p className="mb-6 text-lg">Desculpe, não conseguimos encontrar esta história.</p>
+          <h1 className="text-3xl font-bold font-heading mb-4 text-text">Estória não encontrada</h1>
+          <p className="mb-6 text-lg">Desculpe, não conseguimos encontrar esta estória.</p>
           <Button asChild>
-            <Link href="/historias">Ver todas as histórias</Link>
+            <Link href="/estorias">Ver todas as estórias</Link>
           </Button>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function SearchBar() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      navigate(`/historias?q=${encodeURIComponent(searchTerm.trim())}`);
+      navigate(`/estorias?q=${encodeURIComponent(searchTerm.trim())}`);
     }
   };
 
@@ -19,7 +19,7 @@ export default function SearchBar() {
       <form onSubmit={handleSearch}>
         <Input
           type="text"
-          placeholder="Procurar histórias..."
+          placeholder="Procurar estórias..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full py-4 pl-12 pr-4 text-lg bg-white border-none rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary h-auto"

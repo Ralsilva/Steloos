@@ -31,8 +31,8 @@ export default function Stories() {
   const title = searchQuery 
     ? `Resultados para "${searchQuery}"` 
     : categoryFilter && categories?.find(c => c.id === categoryFilter)
-      ? `Histórias de ${categories.find(c => c.id === categoryFilter)?.name}`
-      : "Todas as Histórias";
+      ? `Estórias de ${categories.find(c => c.id === categoryFilter)?.name}`
+      : "Todas as Estórias";
       
   const queryKey = searchQuery 
     ? `/api/stories/search?q=${searchQuery}` 
@@ -59,9 +59,9 @@ export default function Stories() {
             value={categoryFilter} 
             onValueChange={(value) => {
               if (value && value !== "all") {
-                setLocation(`/historias?categoria=${value}`);
+                setLocation(`/estorias?categoria=${value}`);
               } else {
-                setLocation('/historias');
+                setLocation('/estorias');
               }
             }}
           >
