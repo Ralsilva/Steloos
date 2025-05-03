@@ -160,7 +160,7 @@ export default function StoryDetails() {
               {story.categoryName}
             </span>
             <h1 className="text-3xl md:text-4xl font-bold font-heading mb-3">{story.title}</h1>
-            <p className="text-gray-600">Idade recomendada: {story.ageRange}</p>
+            <p className="text-gray-600">{t('stories.recommendedAge', { age: story.ageRange })}</p>
           </div>
           
           <div className="prose prose-lg max-w-none">
@@ -173,18 +173,18 @@ export default function StoryDetails() {
           <div className="my-8 pt-6 border-t border-gray-200">
             <h3 className="text-xl font-bold font-heading mb-4 flex items-center">
               <span className="text-primary">✨</span>
-              <span className="mx-2">Narrador Infantil</span>
+              <span className="mx-2">{t('stories.childNarrator.title')}</span>
               <span className="text-primary">✨</span>
             </h3>
             <p className="mb-4 text-gray-600">
-              As crianças podem gravar sua própria narração desta estória e compartilhar com a família!
+              {t('stories.childNarrator.description')}
             </p>
             <StoryNarrator storyTitle={story.title} />
           </div>
           
           <div className="mt-8 flex justify-between items-center pt-6 border-t border-gray-200">
             <p className="text-gray-600 italic">
-              "Cada estória é uma semente de luz que plantamos no coração das crianças."
+              "{t('stories.quote')}"
             </p>
             <div className="flex space-x-2">
               <Button 
@@ -222,7 +222,7 @@ export default function StoryDetails() {
       
       {!loadingRelated && relatedStories && relatedStories.length > 0 && (
         <div className="mb-10">
-          <h2 className="text-2xl font-bold font-heading mb-6">Você também pode gostar</h2>
+          <h2 className="text-2xl font-bold font-heading mb-6">{t('stories.youMayAlsoLike')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedStories.map((relatedStory) => (
               <Link 
@@ -255,11 +255,11 @@ export default function StoryDetails() {
       )}
       
       <div className="bg-[#FFE3C8] rounded-xl p-6 text-center">
-        <h3 className="font-heading font-bold text-xl mb-4">Gostou desta estória?</h3>
-        <p className="mb-6">Explore mais estórias encantadoras que ensinam valores importantes.</p>
+        <h3 className="font-heading font-bold text-xl mb-4">{t('stories.didYouLike')}</h3>
+        <p className="mb-6">{t('stories.exploreMore')}</p>
         <Button asChild>
           <Link href="/estorias">
-            Ver mais estórias
+            {t('stories.viewMoreStories')}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>

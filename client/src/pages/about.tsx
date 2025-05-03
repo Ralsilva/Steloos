@@ -2,15 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { childrenReadingImages, peacefulIllustrationImages } from "@/lib/data";
 import childrenReadingImage from "@assets/children-sitting-together-reading-a-book.png";
+import { useTranslation } from "react-i18next";
 
 export default function About() {
+  const { t } = useTranslation();
+  
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="bg-white rounded-2xl shadow-md overflow-hidden mb-10">
         <div className="bg-gradient-to-r from-secondary to-accent py-12 px-8 text-center text-white">
-          <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4">Sobre Estrelinha de Luz</h1>
+          <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4">{t('about.title')}</h1>
           <p className="text-xl max-w-3xl mx-auto">
-            Um mundo de histórias para iluminar o coração das crianças
+            {t('app.slogan')}
           </p>
         </div>
         
@@ -18,10 +21,9 @@ export default function About() {
           <div className="prose prose-lg max-w-none">
             <div className="flex flex-col md:flex-row gap-8 mb-12 items-center">
               <div className="md:w-1/2">
-                <h2 className="text-3xl font-heading font-bold mb-4">Nossa Missão</h2>
+                <h2 className="text-3xl font-heading font-bold mb-4">{t('about.mission.title')}</h2>
                 <p>
-                  Estrelinha de Luz nasceu com um propósito especial: criar um espaço onde as crianças possam 
-                  explorar valores como amor, paz, sabedoria, bondade e compaixão através de histórias encantadoras.
+                  {t('about.mission.text')}
                 </p>
                 <p>
                   Acreditamos que cada história é uma semente plantada no coração das crianças, que florescerá em 
