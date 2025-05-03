@@ -40,7 +40,7 @@ interface InteractiveStoryProps {
 }
 
 export default function InteractiveStory({ content, title, categoryId }: InteractiveStoryProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isActive, setIsActive] = useState(false);
   const [soundsEnabled, setSoundsEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(true);
@@ -78,20 +78,29 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
         
         // Verificar se o arquivo existe
         audio.addEventListener('error', () => {
-          console.warn(`Música ambiente não encontrada: ${audioPath}`);
+          const errorMsg = i18n.language === 'pt-BR'
+            ? `Música ambiente não encontrada: ${audioPath}`
+            : `Ambient music not found: ${audioPath}`;
+          console.warn(errorMsg);
         });
         
         // Tocar a música
         const playPromise = audio.play();
         if (playPromise !== undefined) {
           playPromise.catch((error) => {
-            console.warn("Reprodução automática bloqueada pelo navegador:", error);
+            const errorMsg = i18n.language === 'pt-BR'
+              ? "Reprodução automática bloqueada pelo navegador:"
+              : "Autoplay blocked by browser:";
+            console.warn(errorMsg, error);
           });
         }
         
         musicRef.current = audio;
       } catch (error) {
-        console.error("Erro ao carregar música ambiente:", error);
+        const errorMsg = i18n.language === 'pt-BR'
+          ? "Erro ao carregar música ambiente:"
+          : "Error loading ambient music:";
+        console.error(errorMsg, error);
       }
     }
     
@@ -108,7 +117,10 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       containerRef.current?.requestFullscreen().catch(err => {
-        console.warn(`Erro ao tentar entrar em tela cheia: ${err.message}`);
+        const errorMsg = i18n.language === 'pt-BR'
+          ? `Erro ao tentar entrar em tela cheia:`
+          : `Error entering fullscreen:`;
+        console.warn(errorMsg, err.message);
       });
     } else {
       document.exitFullscreen();
@@ -133,12 +145,20 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
       try {
         const pageSound = new Audio('/sounds/effects/page-turn.mp3');
         pageSound.volume = 0.5;
-        pageSound.play().catch(err => console.warn("Erro ao tocar som de página:", err));
+        pageSound.play().catch(err => {
+          const errorMsg = i18n.language === 'pt-BR'
+            ? "Erro ao tocar som de página:"
+            : "Error playing page sound:";
+          console.warn(errorMsg, err);
+        });
       } catch (error) {
-        console.warn("Som de virar página não encontrado");
+        const errorMsg = i18n.language === 'pt-BR'
+          ? "Som de virar página não encontrado"
+          : "Page turn sound not found";
+        console.warn(errorMsg);
       }
     }
-  }, [currentPage, isActive, soundsEnabled]);
+  }, [currentPage, isActive, soundsEnabled, i18n.language]);
   
   // Função para reproduzir um efeito sonoro
   const playSound = (soundName: string) => {
@@ -147,9 +167,17 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
     try {
       const audio = new Audio(`/sounds/effects/${soundName}.mp3`);
       audio.volume = 0.6;
-      audio.play().catch(err => console.warn(`Erro ao tocar som ${soundName}:`, err));
+      audio.play().catch(err => {
+        const errorMsg = i18n.language === 'pt-BR' 
+          ? `Erro ao tocar som ${soundName}:` 
+          : `Error playing sound ${soundName}:`;
+        console.warn(errorMsg, err);
+      });
     } catch (error) {
-      console.warn(`Som não encontrado: ${soundName}`);
+      const errorMsg = i18n.language === 'pt-BR' 
+        ? `Som não encontrado: ${soundName}` 
+        : `Sound not found: ${soundName}`;
+      console.warn(errorMsg);
     }
   };
   
@@ -310,9 +338,12 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
                     if (!checked && musicRef.current) {
                       musicRef.current.pause();
                     } else if (checked && musicRef.current) {
-                      musicRef.current.play().catch(err => 
-                        console.warn("Erro ao retomar a música:", err)
-                      );
+                      musicRef.current.play().catch(err => {
+                        const errorMsg = i18n.language === 'pt-BR'
+                          ? "Erro ao retomar a música:"
+                          : "Error resuming music:";
+                        console.warn(errorMsg, err);
+                      });
                     }
                   }}
                 />
