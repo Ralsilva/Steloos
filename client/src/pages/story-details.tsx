@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { getCategoryInfo } from "@/lib/data";
+import { getCategoryInfo, getFallbackImage } from "@/lib/data";
 import StoryNarrator from "@/components/stories/story-narrator";
 import { Story } from "@shared/schema";
 
@@ -121,7 +121,8 @@ export default function StoryDetails() {
   }
   
   const categoryInfo = getCategoryInfo(story.categoryId);
-  const storyImageUrl = formatImageUrl(story.imageUrl, true);
+  // Usar imagem alternativa se a URL original estiver vazia ou for inválida
+  const storyImageUrl = story.imageUrl ? formatImageUrl(story.imageUrl, true) : getFallbackImage(story.id, story.categoryId);
   
   return (
     <div className="container mx-auto px-4 py-6">
@@ -147,7 +148,7 @@ export default function StoryDetails() {
             loading="lazy"
             onError={(e) => {
               console.log("Erro ao carregar imagem principal:", story.imageUrl);
-              e.currentTarget.src = "https://via.placeholder.com/1200x800?text=Estrelinha";
+              e.currentTarget.src = getFallbackImage(story.id);
             }}
           />
         </div>

@@ -65,3 +65,114 @@ export function getRandomImage(collection: string[], seed?: number) {
   const index = seed ? Math.abs(seed) % collection.length : Math.floor(Math.random() * collection.length);
   return collection[index];
 }
+
+// Imagens de fallback organizadas por categoria
+export const fallbackImagesByCategory: Record<string, string[]> = {
+  // Amor - tons quentes, corações, pessoas juntas
+  amor: [
+    "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1518898053858-dcb290e8719b?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Paz - céus, nuvens, água calma
+  paz: [
+    "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1544084944-15258d5d4b18?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Sabedoria - livros, estrelas, lanternas
+  sabedoria: [
+    "https://images.unsplash.com/photo-1513001900722-370f803f498d?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1529704693195-d9d7eec7c039?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Bondade - mãos dadas, presentes, dar
+  bondade: [
+    "https://images.unsplash.com/photo-1469571486292-b5d2ed591f04?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Proteção - abrigos, guarda-chuvas, abraços
+  protecao: [
+    "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1516714819001-8ee7a13215e8?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1509099340172-48f5bbe4ef97?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Natureza - plantas, árvores, florestas
+  natureza: [
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Família - pessoas juntas, lares
+  familia: [
+    "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1509506489701-dfe23b067808?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1601564267560-9956504b2c6c?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1603091763394-aaa22df2f45e?w=600&h=400&q=80&fit=crop",
+  ],
+  
+  // Amizade - crianças brincando, mãos dadas
+  amizade: [
+    "https://images.unsplash.com/photo-1544161513-0179fe746fd5?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&h=400&q=80&fit=crop",
+    "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=400&q=80&fit=crop",
+  ],
+};
+
+// Imagens genéricas para qualquer categoria
+export const genericFallbackImages = [
+  "https://images.unsplash.com/photo-1614531341773-3bff8b7cb3fc?w=600&h=400&q=80&fit=crop",
+  "https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=600&h=400&q=80&fit=crop",
+  "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600&h=400&q=80&fit=crop",
+  "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=600&h=400&q=80&fit=crop",
+];
+
+// Armazena imagens já usadas para evitar repetições
+const usedFallbackImages = new Set<string>();
+// Cache para imagens já selecionadas por ID
+const fallbackImageCache: Record<string, string> = {};
+
+// Retorna uma imagem alternativa para estórias com base no ID e categoria
+export function getFallbackImage(storyId: number | string, categoryId?: string): string {
+  const id = typeof storyId === 'string' ? parseInt(storyId, 10) : storyId;
+  
+  // Verificar se já temos uma imagem em cache para este ID
+  const cacheKey = `story-${id}`;
+  if (fallbackImageCache[cacheKey]) {
+    return fallbackImageCache[cacheKey];
+  }
+  
+  // Selecionar conjunto de imagens baseado na categoria
+  let imageSet = genericFallbackImages;
+  
+  if (categoryId && fallbackImagesByCategory[categoryId]) {
+    imageSet = fallbackImagesByCategory[categoryId];
+  }
+  
+  // Usar uma função de hash simples para determinar o índice baseado no ID
+  // Garantindo que a mesma estória sempre obtenha a mesma imagem
+  const imageIndex = id % imageSet.length;
+  
+  // Adicionar um pequeno deslocamento baseado no ID para evitar repetições 
+  // com estórias próximas em sequência
+  const imageIndexWithOffset = (imageIndex + Math.floor(id / imageSet.length)) % imageSet.length;
+  
+  // Armazenar em cache a URL selecionada
+  fallbackImageCache[cacheKey] = imageSet[imageIndexWithOffset];
+  
+  return fallbackImageCache[cacheKey];
+}
