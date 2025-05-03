@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "Little Star of Light",
-    "slogan": "Stories that touch the heart"
+    "name": "Esteloo",
+    "slogan": "Stories that enchant children's hearts"
   },
   "menu": {
     "home": "Home",
@@ -145,7 +145,7 @@
     "contact": {
       "title": "Contact Us",
       "text": "Have a suggestion or feedback? We would love to hear from you!",
-      "email": "contact@littlestaroflight.com"
+      "email": "contact@esteloo.com"
     }
   },
   "common": {

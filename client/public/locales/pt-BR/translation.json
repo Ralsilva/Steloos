@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "Estrelinha de Luz",
-    "slogan": "Estórias que tocam o coração"
+    "name": "Esteloo",
+    "slogan": "Estórias que encantam o coração infantil"
   },
   "menu": {
     "home": "Início",
@@ -145,7 +145,7 @@
     "contact": {
       "title": "Entre em Contato",
       "text": "Tem alguma sugestão ou feedback? Adoraríamos ouvir de você!",
-      "email": "contato@estrelinhadeluz.com.br"
+      "email": "contato@esteloo.com.br"
     }
   },
   "common": {
