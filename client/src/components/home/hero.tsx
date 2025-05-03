@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
-import childrenReading from "@/assets/children-reading.png";
+import childrenReading from "@/assets/children-reading-new.png";
 
 export default function Hero() {
   const { t } = useTranslation();

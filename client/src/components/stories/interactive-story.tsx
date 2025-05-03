@@ -13,7 +13,7 @@ import { categoryInfo } from "@/lib/data";
 
 // Palavras-chave para efeitos de som e animações
 const INTERACTIVE_KEYWORDS = {
-  star: ["estrela", "estrelas", "estrelinha", "brilho", "luz", "luzes", "brilhante", "star", "stars", "light", "shine"],
+  star: ["estrela", "estrelas", "esteloo", "brilho", "luz", "luzes", "brilhante", "star", "stars", "light", "shine"],
   magic: ["magia", "mágico", "mágica", "encanto", "encantado", "milagre", "feitiço", "magic", "magical", "spell", "enchanted", "miracle"],
   animals: ["animal", "animais", "cachorro", "gato", "pássaro", "borboleta", "animals", "dog", "cat", "bird", "butterfly"],
   water: ["água", "rio", "mar", "lago", "oceano", "chuva", "water", "river", "sea", "lake", "ocean", "rain"],

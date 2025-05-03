@@ -42,7 +42,7 @@ export default function About() {
               <div className="md:w-1/2">
                 <h2 className="text-3xl font-heading font-bold mb-4">{t('about.values.title')}</h2>
                 <p>
-                  Cada estória em nossa biblioteca é cuidadosamente criada para trazer mensagens positivas 
+                  Cada estória no Esteloo é cuidadosamente criada para trazer mensagens positivas 
                   e ensinamentos valiosos de forma lúdica e acessível.
                 </p>
                 <p>
