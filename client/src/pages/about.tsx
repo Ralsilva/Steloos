@@ -26,14 +26,13 @@ export default function About() {
                   {t('about.mission.text')}
                 </p>
                 <p>
-                  Acreditamos que cada história é uma semente plantada no coração das crianças, que florescerá em 
-                  forma de valores e princípios que as acompanharão por toda vida.
+                  {t('stories.quote')}
                 </p>
               </div>
               <div className="md:w-1/2">
                 <img 
                   src={childrenReadingImage} 
-                  alt="Crianças lendo juntas" 
+                  alt={t('categories.amor')} 
                   className="rounded-xl shadow-md w-full h-auto"
                 />
               </div>
@@ -41,39 +40,38 @@ export default function About() {
             
             <div className="flex flex-col md:flex-row-reverse gap-8 mb-12 items-center">
               <div className="md:w-1/2">
-                <h2 className="text-3xl font-heading font-bold mb-4">Nossas Histórias</h2>
+                <h2 className="text-3xl font-heading font-bold mb-4">{t('about.values.title')}</h2>
                 <p>
-                  Cada história em nossa biblioteca é cuidadosamente criada para trazer mensagens positivas 
+                  Cada estória em nossa biblioteca é cuidadosamente criada para trazer mensagens positivas 
                   e ensinamentos valiosos de forma lúdica e acessível.
                 </p>
                 <p>
                   Abordamos temas como:
                 </p>
                 <ul>
-                  <li>Amor ao próximo e respeito às diferenças</li>
-                  <li>Paz interior e harmonia com o mundo</li>
-                  <li>Sabedoria para fazer escolhas positivas</li>
-                  <li>Bondade e generosidade em pequenas ações</li>
-                  <li>Compaixão e empatia com todos os seres</li>
+                  <li>{t('about.values.items.0.description')}</li>
+                  <li>{t('about.values.items.2.description')}</li>
+                  <li>{t('about.values.items.1.description')}</li>
+                  <li>{t('categories.bondade')}</li>
+                  <li>{t('categories.amizade')}</li>
                 </ul>
               </div>
               <div className="md:w-1/2">
                 <img 
                   src={peacefulIllustrationImages[2]} 
-                  alt="Ilustração colorida e pacífica" 
+                  alt={t('categories.paz')} 
                   className="rounded-xl shadow-md w-full h-auto"
                 />
               </div>
             </div>
             
             <div className="bg-[#FFE3C8] p-8 rounded-xl mb-12">
-              <h2 className="text-3xl font-heading font-bold mb-4 text-center">Para Pais e Educadores</h2>
+              <h2 className="text-3xl font-heading font-bold mb-4 text-center">{t('about.contact.title')}</h2>
               <p>
-                Estrelinha de Luz é um recurso valioso para pais e educadores que desejam transmitir valores 
-                espirituais e morais de forma natural e atraente.
+                {t('about.contact.text')}
               </p>
               <p>
-                Nossas histórias podem ser utilizadas como:
+                {t('app.name')}: {t('about.contact.email')}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div className="bg-white p-6 rounded-lg shadow-sm text-center">
@@ -101,17 +99,16 @@ export default function About() {
             </div>
             
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-heading font-bold mb-4">Junte-se a Nós</h2>
+              <h2 className="text-3xl font-heading font-bold mb-4">{t('home.categories.title')}</h2>
               <p className="max-w-3xl mx-auto mb-6">
-                Convidamos você a explorar nossas histórias e compartilhar momentos especiais de aprendizado e conexão 
-                com as crianças em sua vida.
+                {t('categories.exploration')}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg" className="rounded-xl px-8">
-                  <Link href="/historias">Explorar Histórias</Link>
+                  <Link href="/estorias">{t('home.featured.viewAll')}</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-xl px-8">
-                  <Link href="/#newsletter">Receber Novidades</Link>
+                  <Link href="/#newsletter">{t('home.newsletter.title')}</Link>
                 </Button>
               </div>
             </div>
