@@ -6,15 +6,48 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getCategoryInfo } from "@/lib/data";
 import StoryNarrator from "@/components/stories/story-narrator";
+import { Story } from "@shared/schema";
+
+// Função para formatar a URL da imagem
+function formatImageUrl(url: string | undefined, large = true): string {
+  if (!url) return "https://via.placeholder.com/1200x800?text=Estrelinha";
+  
+  // Fallback padrão para imagens
+  const fallbackUrl = large
+    ? "https://via.placeholder.com/1200x800?text=Estrelinha" 
+    : "https://via.placeholder.com/300x200?text=Estrelinha";
+  
+  try {
+    // Verifica se a URL é válida
+    new URL(url);
+    
+    // Para imagens do Unsplash
+    if (url.includes("unsplash.com")) {
+      // Remove qualquer parâmetro existente
+      const baseUrl = url.split('?')[0];
+      
+      // Parâmetros para controlar tamanho e qualidade
+      const size = large ? "w=1200&h=800" : "w=300&h=200";
+      const quality = "&q=85&fit=crop&auto=format";
+      
+      return `${baseUrl}?${size}${quality}`;
+    }
+    
+    return url;
+  } catch (error) {
+    console.error("URL de imagem inválida:", url);
+    return fallbackUrl;
+  }
+}
 
 export default function StoryDetails() {
   const [match, params] = useRoute<{ id: string }>("/estoria/:id");
   
-  const { data: story, isLoading } = useQuery({
+  const { data: story, isLoading } = useQuery<Story>({
     queryKey: [`/api/stories/${params?.id}`],
   });
   
-  const { data: relatedStories, isLoading: loadingRelated } = useQuery({
+  const { data: relatedStories, isLoading: loadingRelated } = useQuery<Story[]>({
     queryKey: [`/api/stories/related/${params?.id}`],
     enabled: !!story,
   });
@@ -88,6 +121,7 @@ export default function StoryDetails() {
   }
   
   const categoryInfo = getCategoryInfo(story.categoryId);
+  const storyImageUrl = formatImageUrl(story.imageUrl, true);
   
   return (
     <div className="container mx-auto px-4 py-6">
@@ -105,11 +139,18 @@ export default function StoryDetails() {
       </div>
       
       <div className="bg-white rounded-2xl shadow-md overflow-hidden mb-10">
-        <img 
-          src={story.imageUrl}
-          alt={story.title}
-          className="w-full h-80 object-cover"
-        />
+        <div className="w-full h-80 bg-gray-100 relative">
+          <img 
+            src={storyImageUrl}
+            alt={story.title}
+            className="w-full h-80 object-cover absolute inset-0"
+            loading="lazy"
+            onError={(e) => {
+              console.log("Erro ao carregar imagem principal:", story.imageUrl);
+              e.currentTarget.src = "https://via.placeholder.com/1200x800?text=Estrelinha";
+            }}
+          />
+        </div>
         <div className="p-8">
           <div className="mb-8">
             <span className={`inline-block px-3 py-1 text-sm font-medium ${categoryInfo.color} text-white rounded-full mb-2`}>
@@ -120,8 +161,8 @@ export default function StoryDetails() {
           </div>
           
           <div className="prose prose-lg max-w-none">
-            {story.content.split('\n\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
+            {story.content.split('\n\n').map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
             ))}
           </div>
           
@@ -180,17 +221,23 @@ export default function StoryDetails() {
         <div className="mb-10">
           <h2 className="text-2xl font-bold font-heading mb-6">Você também pode gostar</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedStories.map(relatedStory => (
+            {relatedStories.map((relatedStory) => (
               <Link 
                 key={relatedStory.id}
                 href={`/estoria/${relatedStory.id}`}
                 className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
               >
-                <img 
-                  src={relatedStory.imageUrl} 
-                  alt={relatedStory.title} 
-                  className="w-24 h-full object-cover"
-                />
+                <div className="w-24 h-full bg-gray-100 relative">
+                  <img 
+                    src={formatImageUrl(relatedStory.imageUrl, false)}
+                    alt={relatedStory.title} 
+                    className="w-24 h-full object-cover absolute inset-0"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.src = "https://via.placeholder.com/300x200?text=Estrelinha";
+                    }}
+                  />
+                </div>
                 <div className="p-4">
                   <span className={`inline-block px-2 py-1 text-xs font-medium ${getCategoryInfo(relatedStory.categoryId).color} text-white rounded-full mb-2`}>
                     {relatedStory.categoryName}
