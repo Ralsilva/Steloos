@@ -17,6 +17,7 @@ import {
 } from "@shared/schema";
 
 import { initialCategories, initialStories, initialTestimonials } from "./data/initialData";
+import { importAdditionalStories } from "./data/importAdditionalStories";
 
 // Interface for our storage methods
 export interface IStorage {
@@ -177,6 +178,28 @@ export async function initializeDatabase() {
     await db.insert(stories).values(insertStories);
     
     console.log("Database initialized with seed data");
+    
+    // Import additional stories
+    try {
+      const storiesAdded = await importAdditionalStories();
+      console.log(`Adicionadas ${storiesAdded} estórias complementares`);
+    } catch (error) {
+      console.error("Erro ao importar estórias adicionais:", error);
+    }
+  } else {
+    // Verificar se as estórias adicionais já foram importadas
+    const storiesCount = await db.select({ count: sql`count(*)` }).from(stories);
+    const count = Number(storiesCount[0]?.count || 0);
+    
+    // Se temos apenas as estórias iniciais (normalmente 8), importamos as adicionais
+    if (count <= initialStories.length) {
+      try {
+        const storiesAdded = await importAdditionalStories();
+        console.log(`Adicionadas ${storiesAdded} estórias complementares`);
+      } catch (error) {
+        console.error("Erro ao importar estórias adicionais:", error);
+      }
+    }
   }
 }
 

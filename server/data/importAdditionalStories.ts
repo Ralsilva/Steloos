@@ -29,8 +29,10 @@ export async function importAdditionalStories() {
   }
 }
 
-// Execute a função se este arquivo for chamado diretamente
-if (require.main === module) {
+// Este código não é mais necessário, a importação será feita pelo storage.ts
+// Código abaixo foi removido devido à compatibilidade com ES modules
+/*
+if (import.meta.url === `file://${process.argv[1]}`) {
   (async () => {
     try {
       await importAdditionalStories();
@@ -41,3 +43,4 @@ if (require.main === module) {
     }
   })();
 }
+*/

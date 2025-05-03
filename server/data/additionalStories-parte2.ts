@@ -591,4 +591,4 @@ E assim, a Receita da Bondade da Vovó Beatriz foi passada adiante, provando que
     featured: false,
     createdAt: new Date("2024-03-20")
   }
-];`
+];

@@ -684,4 +684,4 @@ E em cada primavera, quando os ipês florescem pela cidade, os moradores se lemb
     featured: false,
     createdAt: new Date("2024-06-05")
   }
-];`
+];
