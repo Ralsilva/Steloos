@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { 
-  Volume2, VolumeX, Music, MusicOff, 
+  Volume2, VolumeX, Music, 
   Maximize, Minimize, Star, Sparkles
 } from "lucide-react";
 import StarAnimation from "@/components/ui/star-animation";
@@ -52,7 +52,7 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
   
   // Dividir o conteúdo em parágrafos
   const paragraphs = content.split('\n\n');
-  const pages = [];
+  const pages: string[] = [];
   let currentPageContent: string[] = [];
   
   // Criar páginas com no máximo 3 parágrafos cada
@@ -213,7 +213,7 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
     if (!isActive) return null;
     
     const currentContent = pages[currentPage];
-    const paragraphs = currentContent.split('\n\n');
+    const paragraphsToDisplay = currentContent.split('\n\n');
     
     return (
       <div className="interactive-content-wrapper p-6 rounded-lg border border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-inner">
@@ -225,7 +225,7 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
         </div>
         
         <div className="prose prose-amber max-w-none my-4">
-          {paragraphs.map((paragraph, idx) => (
+          {paragraphsToDisplay.map((paragraph: string, idx: number) => (
             <p 
               key={idx} 
               className="relative" 
@@ -324,7 +324,7 @@ export default function InteractiveStory({ content, title, categoryId }: Interac
                     </>
                   ) : (
                     <>
-                      <Music2Off className="h-4 w-4 mr-1" />
+                      <Music className="h-4 w-4 mr-1 opacity-50" />
                       {t('stories.interactive.musicOff')}
                     </>
                   )}

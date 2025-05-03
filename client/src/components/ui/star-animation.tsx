@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface StarAnimationProps {
   size?: number;
@@ -6,37 +6,58 @@ interface StarAnimationProps {
 }
 
 export default function StarAnimation({ size = 40, className = "" }: StarAnimationProps) {
-  const [rotationAngle, setRotationAngle] = useState(0);
+  const starRef = useRef<SVGSVGElement>(null);
   
+  // Efeito para animação de brilho aleatório
   useEffect(() => {
+    if (!starRef.current) return;
+    
+    // Deixa a animação com tempo aleatório para cada estrela
+    const randomDelay = Math.random() * 2;
+    const randomDuration = 2 + Math.random() * 3;
+    
+    starRef.current.style.animationDelay = `${randomDelay}s`;
+    starRef.current.style.animationDuration = `${randomDuration}s`;
+    
+    // Cria um pequeno movimento aleatório
     const interval = setInterval(() => {
-      setRotationAngle(prevAngle => (prevAngle + 0.5) % 360);
-    }, 50);
+      if (starRef.current) {
+        const smallRandomMove = Math.random() * 3 - 1.5;
+        starRef.current.style.transform = `translateY(${smallRandomMove}px)`;
+      }
+    }, 100);
     
     return () => clearInterval(interval);
   }, []);
-
+  
   return (
-    <div 
-      className={`rainbow-animation ${className}`}
-      style={{ width: size, height: size }}
+    <svg
+      ref={starRef}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`animate-glow ${className}`}
     >
-      <svg 
-        width={size} 
-        height={size} 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ transform: `rotate(${rotationAngle}deg)` }}
-      >
-        <path
-          d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-          fill="#FFD700"
-          stroke="#FF9D5C"
-          strokeWidth="1"
-        />
-        <circle cx="12" cy="12" r="4" fill="#FFFFFF" />
-      </svg>
-    </div>
+      <path
+        d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        strokeOpacity="0.3"
+        className="animate-pulse"
+      />
+    </svg>
   );
 }
