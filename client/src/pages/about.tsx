@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { childrenReadingImages, peacefulIllustrationImages } from "@/lib/data";
+import childrenReadingImage from "@assets/children-sitting-together-reading-a-book.png";
 
 export default function About() {
   return (
@@ -29,7 +30,7 @@ export default function About() {
               </div>
               <div className="md:w-1/2">
                 <img 
-                  src={childrenReadingImages[1]} 
+                  src={childrenReadingImage} 
                   alt="Crianças lendo juntas" 
                   className="rounded-xl shadow-md w-full h-auto"
                 />
