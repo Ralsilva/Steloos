@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useLocation, Link } from "wouter";
+import { useState } from "react";
+import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { categoryInfo } from "@/lib/data";
-import { Category } from "@shared/schema";
-import StoryList from "@/components/stories/story-list";
+import { Category, Story } from "@shared/schema";
+import StoryCard from "@/components/stories/story-card";
 
 export default function Categories() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
@@ -14,14 +14,21 @@ export default function Categories() {
   });
   
   useEffect(() => {
-    const params = new URLSearchParams(location.split('?')[1] || '');
-    if (params.has('categoria')) {
+    // Verifica se a URL tem parâmetros
+    if (location.includes('?')) {
+      const params = new URLSearchParams(location.split('?')[1]);
       const categoriaId = params.get('categoria');
-      setSelectedCategoryId(categoriaId);
-      console.log("Categoria selecionada:", categoriaId);
+      
+      if (categoriaId) {
+        console.log("URL: Categoria selecionada:", categoriaId);
+        setSelectedCategoryId(categoriaId);
+      } else {
+        console.log("URL: Parâmetros presentes, mas sem categoria");
+        setSelectedCategoryId(null);
+      }
     } else {
+      console.log("URL: Sem parâmetros de categoria");
       setSelectedCategoryId(null);
-      console.log("Nenhuma categoria selecionada");
     }
   }, [location]);
   
@@ -77,8 +84,6 @@ export default function Categories() {
           <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-text">
             Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
           </h2>
-          
-          {console.log("Carregando estórias para categoria:", selectedCategoryId)}
           <div id="category-stories">
             {/* Usando o componente StoryList diretamente em vez de um iframe */}
             <StoryList
