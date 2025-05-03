@@ -53,6 +53,16 @@
     "filterByCategory": "Filter by category",
     "allCategories": "All categories",
     "noStoriesForSearch": "No stories found for \"{{query}}\".",
+    "viewAll": "View all stories",
+    "youMayAlsoLike": "You may also like",
+    "didYouLike": "Did you like this story?",
+    "exploreMore": "Explore more enchanting stories that teach important values.",
+    "viewMoreStories": "View more stories",
+    "recommendedAge": "Recommended age: {{age}}",
+    "notFound": {
+      "title": "Story not found",
+      "text": "Sorry, we couldn't find this story."
+    },
     "narrator": {
       "title": "Story Narrator",
       "instructions": "Click the button to narrate this story",
@@ -61,7 +71,12 @@
       "listen": "Listen to Narration",
       "shareStory": "Share Story",
       "recordingComplete": "Narration complete!"
-    }
+    },
+    "childNarrator": {
+      "title": "Child Narrator",
+      "description": "Children can record their own narration of this story and share it with family!"
+    },
+    "quote": "Each story is a seed of light that we plant in children's hearts."
   },
   "categories": {
     "amor": "Love",
@@ -118,6 +133,7 @@
     "error": "An error occurred. Please try again.",
     "success": "Success!",
     "backToHome": "Back to Home",
+    "backToStories": "Back to stories",
     "readMore": "Read More",
     "share": "Share",
     "notFound": {

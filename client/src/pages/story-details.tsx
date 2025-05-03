@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getCategoryInfo, getFallbackImage } from "@/lib/data";
 import StoryNarrator from "@/components/stories/story-narrator";
 import { Story } from "@shared/schema";
+import { useTranslation } from "react-i18next";
 
 // Função para formatar a URL da imagem
 function formatImageUrl(url: string | undefined, large = true): string {
@@ -41,6 +42,7 @@ function formatImageUrl(url: string | undefined, large = true): string {
 }
 
 export default function StoryDetails() {
+  const { t } = useTranslation();
   const [match, params] = useRoute<{ id: string }>("/estoria/:id");
   
   const { data: story, isLoading } = useQuery<Story>({
@@ -72,7 +74,7 @@ export default function StoryDetails() {
           >
             <Link href="/estorias">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar para estórias
+              {t('common.backToStories')}
             </Link>
           </Button>
         </div>
@@ -110,10 +112,10 @@ export default function StoryDetails() {
     return (
       <div className="container mx-auto px-4 py-6">
         <div className="bg-white rounded-2xl shadow-md p-8 text-center">
-          <h1 className="text-3xl font-bold font-heading mb-4 text-text">Estória não encontrada</h1>
-          <p className="mb-6 text-lg">Desculpe, não conseguimos encontrar esta estória.</p>
+          <h1 className="text-3xl font-bold font-heading mb-4 text-text">{t('stories.notFound.title')}</h1>
+          <p className="mb-6 text-lg">{t('stories.notFound.text')}</p>
           <Button asChild>
-            <Link href="/estorias">Ver todas as estórias</Link>
+            <Link href="/estorias">{t('stories.viewAll')}</Link>
           </Button>
         </div>
       </div>
@@ -134,7 +136,7 @@ export default function StoryDetails() {
         >
           <Link href="/estorias">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar para estórias
+            {t('common.backToStories')}
           </Link>
         </Button>
       </div>

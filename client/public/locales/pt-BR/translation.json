@@ -53,6 +53,16 @@
     "filterByCategory": "Filtrar por categoria",
     "allCategories": "Todas as categorias",
     "noStoriesForSearch": "Nenhuma estória encontrada para \"{{query}}\".",
+    "viewAll": "Ver todas as estórias",
+    "youMayAlsoLike": "Você também pode gostar",
+    "didYouLike": "Gostou desta estória?",
+    "exploreMore": "Explore mais estórias encantadoras que ensinam valores importantes.",
+    "viewMoreStories": "Ver mais estórias",
+    "recommendedAge": "Idade recomendada: {{age}}",
+    "notFound": {
+      "title": "Estória não encontrada",
+      "text": "Desculpe, não conseguimos encontrar esta estória."
+    },
     "narrator": {
       "title": "Narrador de Estórias",
       "instructions": "Clique no botão para narrar esta estória",
@@ -61,7 +71,12 @@
       "listen": "Ouvir Narração",
       "shareStory": "Compartilhar Estória",
       "recordingComplete": "Narração concluída!"
-    }
+    },
+    "childNarrator": {
+      "title": "Narrador Infantil",
+      "description": "As crianças podem gravar sua própria narração desta estória e compartilhar com a família!"
+    },
+    "quote": "Cada estória é uma semente de luz que plantamos no coração das crianças."
   },
   "categories": {
     "amor": "Amor",
@@ -118,6 +133,7 @@
     "error": "Ocorreu um erro. Por favor, tente novamente.",
     "success": "Sucesso!",
     "backToHome": "Voltar ao Início",
+    "backToStories": "Voltar para estórias",
     "readMore": "Ler Mais",
     "share": "Compartilhar",
     "notFound": {
