@@ -3,18 +3,20 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowRight } from "lucide-react";
 import { getCategoryInfo } from "@/lib/data";
+import { useTranslation } from "react-i18next";
 
 export default function NewestStories() {
+  const { t } = useTranslation();
   const { data: stories, isLoading } = useQuery({
     queryKey: ['/api/stories/newest'],
-  });
+  }) as { data: any[], isLoading: boolean };
 
   return (
     <section className="mb-10">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold font-heading text-text">Histórias Recentes</h2>
-        <Link href="/historias" className="text-primary font-medium hover:underline flex items-center">
-          Ver Todas <ArrowRight className="ml-2 h-4 w-4" />
+        <h2 className="text-2xl md:text-3xl font-bold font-heading text-text">{t('home.newest.title')}</h2>
+        <Link href="/estorias" className="text-primary font-medium hover:underline flex items-center">
+          {t('home.newest.viewAll')} <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </div>
       
@@ -37,7 +39,7 @@ export default function NewestStories() {
             return (
               <Link 
                 key={story.id}
-                href={`/historia/${story.id}`}
+                href={`/estoria/${story.id}`}
                 className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
               >
                 <img 
