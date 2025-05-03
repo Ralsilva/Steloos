@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Testimonials() {
+  const { t } = useTranslation();
   const { data: testimonials, isLoading } = useQuery({
     queryKey: ['/api/testimonials'],
   });
@@ -9,7 +12,7 @@ export default function Testimonials() {
   return (
     <section className="mb-10">
       <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-center text-text">
-        O Que Os Pais Dizem
+        {t('home.testimonials.title')}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isLoading ? (
