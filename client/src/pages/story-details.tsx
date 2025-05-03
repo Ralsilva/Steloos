@@ -148,7 +148,7 @@ export default function StoryDetails() {
             loading="lazy"
             onError={(e) => {
               console.log("Erro ao carregar imagem principal:", story.imageUrl);
-              e.currentTarget.src = getFallbackImage(story.id);
+              e.currentTarget.src = getFallbackImage(story.id, story.categoryId);
             }}
           />
         </div>
@@ -230,12 +230,12 @@ export default function StoryDetails() {
               >
                 <div className="w-24 h-full bg-gray-100 relative">
                   <img 
-                    src={formatImageUrl(relatedStory.imageUrl, false)}
+                    src={relatedStory.imageUrl ? formatImageUrl(relatedStory.imageUrl, false) : getFallbackImage(relatedStory.id, relatedStory.categoryId)}
                     alt={relatedStory.title} 
                     className="w-24 h-full object-cover absolute inset-0"
                     loading="lazy"
                     onError={(e) => {
-                      e.currentTarget.src = "https://via.placeholder.com/300x200?text=Estrelinha";
+                      e.currentTarget.src = getFallbackImage(relatedStory.id, relatedStory.categoryId);
                     }}
                   />
                 </div>

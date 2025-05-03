@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Story } from "@shared/schema";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getCategoryInfo } from "@/lib/data";
+import { getCategoryInfo, getFallbackImage } from "@/lib/data";
 
 interface StoryCardProps {
   story: Story;
@@ -46,7 +46,8 @@ function formatImageUrl(url: string, variant: "large" | "small"): string {
 
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
   const categoryInfo = getCategoryInfo(story.categoryId);
-  const imageUrl = formatImageUrl(story.imageUrl, variant);
+  // Escolher uma imagem, ou usando a URL original formatada, ou uma imagem de fallback
+  const imageUrl = story.imageUrl ? formatImageUrl(story.imageUrl, variant) : getFallbackImage(story.id, story.categoryId);
   
   if (variant === "small") {
     return (
@@ -61,7 +62,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
             className="w-24 h-full object-cover"
             loading="lazy"
             onError={(e) => {
-              e.currentTarget.src = "https://via.placeholder.com/100x150?text=Estrelinha";
+              e.currentTarget.src = getFallbackImage(story.id, story.categoryId);
             }}
           />
         </div>
@@ -86,7 +87,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
           loading="lazy"
           onError={(e) => {
             console.log("Erro ao carregar imagem:", story.imageUrl);
-            e.currentTarget.src = "https://via.placeholder.com/600x400?text=Estrelinha";
+            e.currentTarget.src = getFallbackImage(story.id, story.categoryId);
           }}
         />
       </div>
