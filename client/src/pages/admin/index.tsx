@@ -432,17 +432,244 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="settings">
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t('admin.settings')}</CardTitle>
-                  <CardDescription>Configurações do sistema</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-500">
-                    Página de configurações em desenvolvimento.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Configurações do Site */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Configurações do Site</CardTitle>
+                    <CardDescription>Ajuste as configurações gerais do site</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Nome do Site</label>
+                        <input 
+                          type="text" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          defaultValue="STELOOS"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Slogan</label>
+                        <input 
+                          type="text" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          defaultValue="Estórias que encantam o coração infantil"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Email de Contato</label>
+                        <input 
+                          type="email" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          defaultValue="contact@steloos.com"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Estórias por Página</label>
+                        <select className="w-full p-2 border border-gray-300 rounded-md">
+                          <option value="8">8</option>
+                          <option value="12" selected>12</option>
+                          <option value="16">16</option>
+                          <option value="24">24</option>
+                        </select>
+                      </div>
+                      
+                      <Button className="w-full">Salvar Configurações</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+                
+                {/* Configurações de SEO */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Configurações de SEO</CardTitle>
+                    <CardDescription>Otimize o site para mecanismos de busca</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Meta Título</label>
+                        <input 
+                          type="text" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          defaultValue="STELOOS - Estórias para Crianças"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Meta Descrição</label>
+                        <textarea 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          rows={3}
+                          defaultValue="Estórias infantis que transmitem valores de amor, paz, sabedoria e bondade de forma lúdica e educativa."
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Palavras-chave</label>
+                        <input 
+                          type="text" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          defaultValue="estórias infantis, contos para crianças, valores, educação infantil"
+                        />
+                      </div>
+                      
+                      <div className="flex items-center space-x-2 pt-2">
+                        <input 
+                          type="checkbox" 
+                          id="robots" 
+                          className="h-4 w-4 border-gray-300 rounded"
+                          defaultChecked
+                        />
+                        <label htmlFor="robots" className="text-sm">Permitir indexação por buscadores</label>
+                      </div>
+                      
+                      <Button className="w-full">Salvar Configurações SEO</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+                
+                {/* Integração com Redes Sociais */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Redes Sociais</CardTitle>
+                    <CardDescription>Configure a integração com redes sociais</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">URL do Facebook</label>
+                        <input 
+                          type="url" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          placeholder="https://facebook.com/steloos"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">URL do Instagram</label>
+                        <input 
+                          type="url" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          placeholder="https://instagram.com/steloos"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">URL do YouTube</label>
+                        <input 
+                          type="url" 
+                          className="w-full p-2 border border-gray-300 rounded-md" 
+                          placeholder="https://youtube.com/@steloos"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Botões de Compartilhamento</label>
+                        <div className="flex flex-wrap gap-2">
+                          <div className="flex items-center space-x-2">
+                            <input type="checkbox" id="share-fb" className="h-4 w-4" defaultChecked />
+                            <label htmlFor="share-fb" className="text-sm">Facebook</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input type="checkbox" id="share-tw" className="h-4 w-4" defaultChecked />
+                            <label htmlFor="share-tw" className="text-sm">Twitter</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input type="checkbox" id="share-wa" className="h-4 w-4" defaultChecked />
+                            <label htmlFor="share-wa" className="text-sm">WhatsApp</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input type="checkbox" id="share-tg" className="h-4 w-4" />
+                            <label htmlFor="share-tg" className="text-sm">Telegram</label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <Button className="w-full">Salvar Configurações Sociais</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+                
+                {/* Configurações de Idioma */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Configurações de Idioma</CardTitle>
+                    <CardDescription>Gerencie as opções de idioma do site</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Idioma Padrão</label>
+                        <select className="w-full p-2 border border-gray-300 rounded-md">
+                          <option value="pt-BR" selected>Português (Brasil)</option>
+                          <option value="en">Inglês</option>
+                        </select>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Idiomas Disponíveis</label>
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <input 
+                              type="checkbox" 
+                              id="lang-pt" 
+                              className="h-4 w-4"
+                              defaultChecked
+                              disabled
+                            />
+                            <label htmlFor="lang-pt" className="text-sm">Português (Brasil)</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input 
+                              type="checkbox" 
+                              id="lang-en" 
+                              className="h-4 w-4"
+                              defaultChecked
+                            />
+                            <label htmlFor="lang-en" className="text-sm">Inglês</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input 
+                              type="checkbox" 
+                              id="lang-es" 
+                              className="h-4 w-4"
+                            />
+                            <label htmlFor="lang-es" className="text-sm">Espanhol</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input 
+                              type="checkbox" 
+                              id="lang-fr" 
+                              className="h-4 w-4"
+                            />
+                            <label htmlFor="lang-fr" className="text-sm">Francês</label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Detecção Automática de Idioma</label>
+                        <div className="flex items-center space-x-2">
+                          <input 
+                            type="checkbox" 
+                            id="auto-detect" 
+                            className="h-4 w-4"
+                            defaultChecked
+                          />
+                          <label htmlFor="auto-detect" className="text-sm">Ativar detecção automática baseada no navegador</label>
+                        </div>
+                      </div>
+                      
+                      <Button className="w-full">Salvar Configurações de Idioma</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
           </Tabs>
         </main>

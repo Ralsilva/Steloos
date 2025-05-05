@@ -160,6 +160,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Endpoint para listar assinantes da newsletter (para o painel administrativo)
+  app.get("/api/newsletter/subscribers", async (req, res) => {
+    try {
+      const subscribers = await storage.getNewsletterSubscribers();
+      res.json(subscribers);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching newsletter subscribers" });
+    }
+  });
+
   // Cache management endpoints - restricted to development environment
   if (process.env.NODE_ENV === 'development') {
     // Import dynamically since these are dev-only endpoints
