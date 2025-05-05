@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 
 // Função para formatar a URL da imagem
 function formatImageUrl(url: string | undefined, large = true): string {
-  if (!url) return "https://via.placeholder.com/1200x800?text=Esteloo";
+  if (!url) return "https://via.placeholder.com/1200x800?text=Steloos";
   
   // Fallback padrão para imagens
   const fallbackUrl = large

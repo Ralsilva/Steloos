@@ -12,7 +12,7 @@ export default function FeaturedIllustration() {
             Estórias que Alimentam a Imaginação
           </h2>
           <p className="text-lg mb-6 text-gray-700">
-            Em Esteloo, cada estória é uma aventura que ensina valores importantes de forma divertida e cativante.
+            Em Steloos, cada estória é uma aventura que ensina valores importantes de forma divertida e cativante.
           </p>
           <ul className="space-y-3 mb-6">
             <li className="flex items-start">
