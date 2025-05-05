@@ -5,6 +5,47 @@ import { z } from "zod";
 import { insertNewsletterSubscriberSchema } from "@shared/schema";
 import { cacheMiddleware } from "./cache";
 
+// Função para traduzir títulos em português para inglês
+function translateTitle(title: string): string {
+  return title === "As Asas da Amizade" ? "The Wings of Friendship" : 
+         title === "O Jardim da Paz" ? "The Garden of Peace" :
+         title === "A Estrela Sábia" ? "The Wise Star" :
+         title === "O Coelho Generoso" ? "The Generous Rabbit" :
+         title === "Anjos da Guarda" ? "Guardian Angels" :
+         title === "A Jornada da Alma" ? "The Journey of the Soul" :
+         title === "O Milagre do Perdão" ? "The Miracle of Forgiveness" :
+         title === "O Presente do Coração" ? "The Gift from the Heart" :
+         title;
+}
+
+// Função para traduzir resumos, incluindo nomes comuns
+function translateExcerpt(excerpt: string): string {
+  // Traduz termos específicos
+  let translatedExcerpt = excerpt
+    .replace(/estória/g, "story")
+    .replace(/estórias/g, "stories");
+    
+  // Traduz nomes próprios comuns
+  translatedExcerpt = translatedExcerpt
+    .replace(/\bMaria\b/g, "Mary")
+    .replace(/\bJoão\b/g, "John")
+    .replace(/\bJosé\b/g, "Joseph")
+    .replace(/\bPedro\b/g, "Peter")
+    .replace(/\bLuísa\b/g, "Louise")
+    .replace(/\bAntônio\b/g, "Anthony")
+    .replace(/\bSofia\b/g, "Sophie")
+    .replace(/\bCarlos\b/g, "Charles")
+    .replace(/\bPaulo\b/g, "Paul")
+    .replace(/\bAna\b/g, "Anne")
+    .replace(/\bBeatriz\b/g, "Beatrice")
+    .replace(/\bRoberto\b/g, "Robert")
+    .replace(/\bLucas\b/g, "Luke")
+    .replace(/\bMateus\b/g, "Matthew")
+    .replace(/\bMariana\b/g, "Marianne");
+    
+  return translatedExcerpt;
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Cache middleware for GET requests
   app.use('/api', cacheMiddleware(300)); // Cache API responses for 5 minutes
