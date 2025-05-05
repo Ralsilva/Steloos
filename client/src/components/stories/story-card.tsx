@@ -12,12 +12,12 @@ interface StoryCardProps {
 
 // Função para formatar a URL da imagem
 function formatImageUrl(url: string, variant: "large" | "small"): string {
-  if (!url) return "https://via.placeholder.com/600x400?text=Esteloo";
+  if (!url) return "https://via.placeholder.com/600x400?text=STELOOS";
   
   // Fallback padrão para imagens
   const fallbackUrl = variant === "large" 
-    ? "https://via.placeholder.com/600x400?text=Esteloo" 
-    : "https://via.placeholder.com/300x200?text=Esteloo";
+    ? "https://via.placeholder.com/600x400?text=STELOOS" 
+    : "https://via.placeholder.com/300x200?text=STELOOS";
   
   try {
     // Verifica se a URL é válida
