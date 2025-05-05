@@ -135,7 +135,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/testimonials", async (req, res) => {
     try {
       const testimonials = await storage.getTestimonials();
-      res.json(testimonials);
+      
+      // Corrige qualquer referência a "Estrelinha de Luz" para "STELOOS"
+      // e também "histórias" para "estórias"
+      const correctedTestimonials = testimonials.map(t => {
+        return {
+          ...t,
+          content: t.content
+            .replace(/Estrelinha de Luz/g, "STELOOS")
+            .replace(/histórias/g, "estórias")
+        };
+      });
+      
+      // Verifica se o idioma está definido no cabeçalho
+      const lang = req.headers['accept-language']?.toLowerCase().includes('en') ? 'en' : 'pt-BR';
+      
+      // Se o idioma for inglês, adapta os nomes e traduções
+      if (lang === 'en') {
+        const translatedTestimonials = correctedTestimonials.map(t => {
+          if (t.name === "Ana Paula") {
+            return {
+              ...t,
+              name: "Anne Paula",
+              relation: "Mother of Mariana, 6 years old",
+              content: "My daughter loves the stories from STELOOS! They teach important values in a way she understands and enjoys."
+            };
+          } else if (t.name === "Roberto") {
+            return {
+              ...t,
+              name: "Robert",
+              relation: "Father of Peter, 5 years old",
+              content: "The stories are perfect for bedtime. My son always asks for one more! I love how they convey positive messages."
+            };
+          } else if (t.name === "Juliana") {
+            return {
+              ...t,
+              name: "Julie",
+              relation: "Teacher and mother",
+              content: "As an educator, I recommend STELOOS to all families. The stories are educational and the illustrations are beautiful!"
+            };
+          } else {
+            // Para outros testemunhos que possam ser adicionados no futuro
+            return t;
+          }
+        });
+        
+        return res.json(translatedTestimonials);
+      }
+      
+      // Retorna a versão em português por padrão (já corrigida)
+      res.json(correctedTestimonials);
     } catch (error) {
       res.status(500).json({ message: "Error fetching testimonials" });
     }
