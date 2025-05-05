@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Story } from "@shared/schema";
 import { ArrowRight } from "lucide-react";
@@ -47,6 +48,8 @@ function formatImageUrl(url: string, variant: "large" | "small"): string {
 
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
   const { t, i18n } = useTranslation();
+  const [translatedTitle, setTranslatedTitle] = useState<string>(story.title);
+  const [translatedExcerpt, setTranslatedExcerpt] = useState<string>(story.excerpt);
   
   // Determinar o caminho correto da estória com base no idioma
   const getStoryPath = (storyId: number) => {
@@ -54,6 +57,42 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
       ? `/estoria/${storyId}` 
       : `/story/${storyId}`;
   };
+  
+  // Carrega traduções para o card da estória
+  useEffect(() => {
+    const loadTranslations = async () => {
+      try {
+        // Carregar arquivo de traduções das estórias
+        const response = await fetch(`/locales/${i18n.language}/stories.json`);
+        if (!response.ok) {
+          throw new Error(`Falha ao carregar traduções para ${i18n.language}`);
+        }
+        
+        const translations = await response.json();
+        const storyTranslations = translations[story.id];
+        
+        if (storyTranslations) {
+          if (storyTranslations.title) {
+            setTranslatedTitle(storyTranslations.title);
+          }
+          if (storyTranslations.excerpt) {
+            setTranslatedExcerpt(storyTranslations.excerpt);
+          }
+        } else {
+          // Se não houver tradução, usar os valores originais
+          setTranslatedTitle(story.title);
+          setTranslatedExcerpt(story.excerpt);
+        }
+      } catch (error) {
+        console.warn(`Não foi possível carregar traduções para estória ${story.id}:`, error);
+        setTranslatedTitle(story.title);
+        setTranslatedExcerpt(story.excerpt);
+      }
+    };
+    
+    loadTranslations();
+  }, [story.id, i18n.language, story.title, story.excerpt]);
+  
   const categoryInfo = getCategoryInfo(story.categoryId);
   // Escolher uma imagem, ou usando a URL original formatada, ou uma imagem de fallback
   const imageUrl = story.imageUrl ? formatImageUrl(story.imageUrl, variant) : getFallbackImage(story.id, story.categoryId);
@@ -79,8 +118,8 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
           <span className={`inline-block px-2 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full mb-2`}>
             {story.categoryName}
           </span>
-          <h3 className="font-heading font-bold text-lg mb-1">{story.title}</h3>
-          <p className="text-gray-600 text-sm">{story.excerpt}</p>
+          <h3 className="font-heading font-bold text-lg mb-1">{translatedTitle}</h3>
+          <p className="text-gray-600 text-sm">{translatedExcerpt}</p>
         </div>
       </Link>
     );
