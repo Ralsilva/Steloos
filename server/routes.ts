@@ -494,8 +494,24 @@ The Garden of Peace became a special place in the town, where people of all ages
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Cache middleware for GET requests
-  app.use('/api', cacheMiddleware(300)); // Cache API responses for 5 minutes
+  // Cache middleware para rotas estáticas, mas não aquelas afetadas pelo idioma
+  // Não aplicamos cache nas rotas que variam por idioma, para garantir respostas corretas
+  const nonCacheRoutes = [
+    '/api/categories',
+    '/api/stories/featured',
+    '/api/stories/newest',
+    '/api/testimonials',
+    '/api/stories/related',
+  ];
+  
+  app.use('/api', (req, res, next) => {
+    // Se a rota estiver na lista de exclusão ou tiver parâmetro lang, não aplicamos o cache
+    if (nonCacheRoutes.some(route => req.path.startsWith(route)) || req.query.lang) {
+      return next();
+    } 
+    // Caso contrário, aplicamos o cache
+    cacheMiddleware(300)(req, res, next);
+  });
   
   // API routes
   
