@@ -442,47 +442,52 @@ export default function AdminDashboard() {
               <div className="grid gap-6 md:grid-cols-2">
                 {/* Configurações do Site */}
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Configurações do Site</CardTitle>
+                  <CardHeader className="bg-green-50 border-b border-green-100">
+                    <CardTitle className="flex items-center">
+                      <Settings className="mr-2 h-5 w-5" /> Configurações do Site
+                    </CardTitle>
                     <CardDescription>Ajuste as configurações gerais do site</CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-6">
                     <form className="space-y-4">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Nome do Site</label>
-                        <input 
-                          type="text" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
+                        <Label htmlFor="site-name">Nome do Site</Label>
+                        <Input 
+                          id="site-name"
                           defaultValue="STELOOS"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Slogan</label>
-                        <input 
-                          type="text" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
+                        <Label htmlFor="site-slogan">Slogan</Label>
+                        <Input 
+                          id="site-slogan"
                           defaultValue="Estórias que encantam o coração infantil"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Email de Contato</label>
-                        <input 
-                          type="email" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
+                        <Label htmlFor="contact-email">Email de Contato</Label>
+                        <Input 
+                          id="contact-email"
+                          type="email"
                           defaultValue="contact@steloos.com"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Estórias por Página</label>
-                        <select className="w-full p-2 border border-gray-300 rounded-md">
-                          <option value="8">8</option>
-                          <option value="12" selected>12</option>
-                          <option value="16">16</option>
-                          <option value="24">24</option>
-                        </select>
+                        <Label htmlFor="stories-per-page">Estórias por Página</Label>
+                        <Select defaultValue="12">
+                          <SelectTrigger id="stories-per-page">
+                            <SelectValue placeholder="Selecione a quantidade" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="8">8 estórias</SelectItem>
+                            <SelectItem value="12">12 estórias</SelectItem>
+                            <SelectItem value="16">16 estórias</SelectItem>
+                            <SelectItem value="24">24 estórias</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       
                       <Button className="w-full">Salvar Configurações</Button>
@@ -490,109 +495,159 @@ export default function AdminDashboard() {
                   </CardContent>
                 </Card>
                 
-                {/* Configurações de SEO */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Configurações de SEO</CardTitle>
-                    <CardDescription>Otimize o site para mecanismos de busca</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form className="space-y-4">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Meta Título</label>
-                        <input 
-                          type="text" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
-                          defaultValue="STELOOS - Estórias para Crianças"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Meta Descrição</label>
-                        <textarea 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
-                          rows={3}
-                          defaultValue="Estórias infantis que transmitem valores de amor, paz, sabedoria e bondade de forma lúdica e educativa."
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Palavras-chave</label>
-                        <input 
-                          type="text" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
-                          defaultValue="estórias infantis, contos para crianças, valores, educação infantil"
-                        />
-                      </div>
-                      
-                      <div className="flex items-center space-x-2 pt-2">
-                        <input 
-                          type="checkbox" 
-                          id="robots" 
-                          className="h-4 w-4 border-gray-300 rounded"
-                          defaultChecked
-                        />
-                        <label htmlFor="robots" className="text-sm">Permitir indexação por buscadores</label>
-                      </div>
-                      
-                      <Button className="w-full">Salvar Configurações SEO</Button>
-                    </form>
-                  </CardContent>
-                </Card>
+                {/* Configurações de SEO (Português e Inglês) */}
+                <div className="grid gap-6 md:grid-cols-2">
+                  {/* SEO Português */}
+                  <Card>
+                    <CardHeader className="bg-blue-50 border-b border-blue-100">
+                      <CardTitle className="flex items-center">
+                        <span className="mr-2">🇧🇷</span> Configurações de SEO (Português)
+                      </CardTitle>
+                      <CardDescription>Otimize o site para mecanismos de busca (versão em português)</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <form className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="pt-meta-title">Meta Título</Label>
+                          <Input 
+                            id="pt-meta-title"
+                            defaultValue="STELOOS - Estórias para Crianças" 
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="pt-meta-description">Meta Descrição</Label>
+                          <Textarea 
+                            id="pt-meta-description"
+                            rows={3}
+                            defaultValue="Estórias infantis que transmitem valores de amor, paz, sabedoria e bondade de forma lúdica e educativa."
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="pt-keywords">Palavras-chave</Label>
+                          <Input 
+                            id="pt-keywords"
+                            defaultValue="estórias infantis, contos para crianças, valores, educação infantil"
+                          />
+                        </div>
+                        
+                        <div className="flex items-center space-x-2 pt-2">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox id="pt-robots" defaultChecked />
+                            <Label htmlFor="pt-robots" className="text-sm">Permitir indexação por buscadores</Label>
+                          </div>
+                        </div>
+                        
+                        <Button className="w-full">Salvar SEO em Português</Button>
+                      </form>
+                    </CardContent>
+                  </Card>
+
+                  {/* SEO Inglês */}
+                  <Card>
+                    <CardHeader className="bg-red-50 border-b border-red-100">
+                      <CardTitle className="flex items-center">
+                        <span className="mr-2">🇺🇸</span> SEO Settings (English)
+                      </CardTitle>
+                      <CardDescription>Optimize the site for search engines (English version)</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <form className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="en-meta-title">Meta Title</Label>
+                          <Input 
+                            id="en-meta-title"
+                            defaultValue="STELOOS - Stories for Children" 
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="en-meta-description">Meta Description</Label>
+                          <Textarea 
+                            id="en-meta-description"
+                            rows={3}
+                            defaultValue="Children's stories that convey values of love, peace, wisdom and kindness in a playful and educational way."
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="en-keywords">Keywords</Label>
+                          <Input 
+                            id="en-keywords"
+                            defaultValue="children's stories, stories for kids, values, children's education"
+                          />
+                        </div>
+                        
+                        <div className="flex items-center space-x-2 pt-2">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox id="en-robots" defaultChecked />
+                            <Label htmlFor="en-robots" className="text-sm">Allow indexing by search engines</Label>
+                          </div>
+                        </div>
+                        
+                        <Button className="w-full">Save English SEO</Button>
+                      </form>
+                    </CardContent>
+                  </Card>
+                </div>
                 
                 {/* Integração com Redes Sociais */}
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Redes Sociais</CardTitle>
+                  <CardHeader className="bg-purple-50 border-b border-purple-100">
+                    <CardTitle className="flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                      Redes Sociais
+                    </CardTitle>
                     <CardDescription>Configure a integração com redes sociais</CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-6">
                     <form className="space-y-4">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">URL do Facebook</label>
-                        <input 
+                        <Label htmlFor="facebook-url">URL do Facebook</Label>
+                        <Input 
+                          id="facebook-url"
                           type="url" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
                           placeholder="https://facebook.com/steloos"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">URL do Instagram</label>
-                        <input 
+                        <Label htmlFor="instagram-url">URL do Instagram</Label>
+                        <Input 
+                          id="instagram-url"
                           type="url" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
                           placeholder="https://instagram.com/steloos"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">URL do YouTube</label>
-                        <input 
+                        <Label htmlFor="youtube-url">URL do YouTube</Label>
+                        <Input 
+                          id="youtube-url"
                           type="url" 
-                          className="w-full p-2 border border-gray-300 rounded-md" 
                           placeholder="https://youtube.com/@steloos"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Botões de Compartilhamento</label>
-                        <div className="flex flex-wrap gap-2">
+                        <Label>Botões de Compartilhamento</Label>
+                        <div className="flex flex-wrap gap-4">
                           <div className="flex items-center space-x-2">
-                            <input type="checkbox" id="share-fb" className="h-4 w-4" defaultChecked />
-                            <label htmlFor="share-fb" className="text-sm">Facebook</label>
+                            <Checkbox id="share-fb" defaultChecked />
+                            <Label htmlFor="share-fb" className="text-sm">Facebook</Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <input type="checkbox" id="share-tw" className="h-4 w-4" defaultChecked />
-                            <label htmlFor="share-tw" className="text-sm">Twitter</label>
+                            <Checkbox id="share-tw" defaultChecked />
+                            <Label htmlFor="share-tw" className="text-sm">Twitter</Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <input type="checkbox" id="share-wa" className="h-4 w-4" defaultChecked />
-                            <label htmlFor="share-wa" className="text-sm">WhatsApp</label>
+                            <Checkbox id="share-wa" defaultChecked />
+                            <Label htmlFor="share-wa" className="text-sm">WhatsApp</Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <input type="checkbox" id="share-tg" className="h-4 w-4" />
-                            <label htmlFor="share-tg" className="text-sm">Telegram</label>
+                            <Checkbox id="share-tg" />
+                            <Label htmlFor="share-tg" className="text-sm">Telegram</Label>
                           </div>
                         </div>
                       </div>
@@ -604,71 +659,62 @@ export default function AdminDashboard() {
                 
                 {/* Configurações de Idioma */}
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Configurações de Idioma</CardTitle>
+                  <CardHeader className="bg-yellow-50 border-b border-yellow-100">
+                    <CardTitle className="flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+                      Configurações de Idioma
+                    </CardTitle>
                     <CardDescription>Gerencie as opções de idioma do site</CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-6">
                     <form className="space-y-4">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Idioma Padrão</label>
-                        <select className="w-full p-2 border border-gray-300 rounded-md">
-                          <option value="pt-BR" selected>Português (Brasil)</option>
-                          <option value="en">Inglês</option>
-                        </select>
+                        <Label htmlFor="default-language">Idioma Padrão</Label>
+                        <Select defaultValue="pt-BR">
+                          <SelectTrigger id="default-language">
+                            <SelectValue placeholder="Selecione o idioma padrão" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pt-BR">Português (Brasil)</SelectItem>
+                            <SelectItem value="en">Inglês</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Idiomas Disponíveis</label>
-                        <div className="space-y-2">
+                      <div className="space-y-3">
+                        <Label>Idiomas Disponíveis</Label>
+                        <div className="space-y-3">
                           <div className="flex items-center space-x-2">
-                            <input 
-                              type="checkbox" 
-                              id="lang-pt" 
-                              className="h-4 w-4"
-                              defaultChecked
-                              disabled
-                            />
-                            <label htmlFor="lang-pt" className="text-sm">Português (Brasil)</label>
+                            <Checkbox id="lang-pt" defaultChecked disabled />
+                            <Label htmlFor="lang-pt" className="text-sm">
+                              <span className="mr-2">🇧🇷</span>Português (Brasil)
+                            </Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <input 
-                              type="checkbox" 
-                              id="lang-en" 
-                              className="h-4 w-4"
-                              defaultChecked
-                            />
-                            <label htmlFor="lang-en" className="text-sm">Inglês</label>
+                            <Checkbox id="lang-en" defaultChecked />
+                            <Label htmlFor="lang-en" className="text-sm">
+                              <span className="mr-2">🇺🇸</span>Inglês
+                            </Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <input 
-                              type="checkbox" 
-                              id="lang-es" 
-                              className="h-4 w-4"
-                            />
-                            <label htmlFor="lang-es" className="text-sm">Espanhol</label>
+                            <Checkbox id="lang-es" />
+                            <Label htmlFor="lang-es" className="text-sm">
+                              <span className="mr-2">🇪🇸</span>Espanhol
+                            </Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <input 
-                              type="checkbox" 
-                              id="lang-fr" 
-                              className="h-4 w-4"
-                            />
-                            <label htmlFor="lang-fr" className="text-sm">Francês</label>
+                            <Checkbox id="lang-fr" />
+                            <Label htmlFor="lang-fr" className="text-sm">
+                              <span className="mr-2">🇫🇷</span>Francês
+                            </Label>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Detecção Automática de Idioma</label>
-                        <div className="flex items-center space-x-2">
-                          <input 
-                            type="checkbox" 
-                            id="auto-detect" 
-                            className="h-4 w-4"
-                            defaultChecked
-                          />
-                          <label htmlFor="auto-detect" className="text-sm">Ativar detecção automática baseada no navegador</label>
+                      <div className="flex items-center space-x-2 pt-2">
+                        <div className="flex flex-row items-center space-x-3">
+                          <Switch id="auto-detect" defaultChecked />
+                          <Label htmlFor="auto-detect">Ativar detecção automática de idioma</Label>
                         </div>
                       </div>
                       
