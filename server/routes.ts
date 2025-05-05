@@ -57,10 +57,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Adiciona logs para depuração
       console.log('GET /api/stories/featured - Query params:', req.query);
-      console.log('Headers:', req.headers['accept-language']);
+      console.log('Headers accept-language:', req.headers['accept-language']);
       
       // Verifica se o idioma está definido no parâmetro de consulta
-      const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      // Convertemos para string para garantir que a comparação seja correta
+      const langParam = String(req.query.lang || '');
+      const lang = langParam.toLowerCase() === 'en' ? 'en' : 'pt-BR';
       console.log('Language determined:', lang);
       
       // Se o idioma for inglês, traduz os títulos e resumos das estórias
@@ -104,10 +106,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Adiciona logs para depuração
       console.log('GET /api/stories/newest - Query params:', req.query);
-      console.log('Headers:', req.headers['accept-language']);
+      console.log('Headers accept-language:', req.headers['accept-language']);
       
       // Verifica se o idioma está definido no parâmetro de consulta
-      const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      // Convertemos para string para garantir que a comparação seja correta
+      const langParam = String(req.query.lang || '');
+      const lang = langParam.toLowerCase() === 'en' ? 'en' : 'pt-BR';
       console.log('Language determined:', lang);
       
       // Se o idioma for inglês, traduz os títulos e resumos das estórias
@@ -212,6 +216,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const testimonials = await storage.getTestimonials();
       
+      // Adiciona logs para depuração
+      console.log('GET /api/testimonials - Query params:', req.query);
+      console.log('Headers accept-language:', req.headers['accept-language']);
+      
       // Corrige qualquer referência a "Estrelinha de Luz" para "STELOOS"
       // e também "histórias" para "estórias"
       const correctedTestimonials = testimonials.map(t => {
@@ -224,8 +232,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       // Verifica se o idioma está definido no parâmetro de consulta
-      // Nota: Adicionamos um parâmetro de consulta para evitar problemas com cache
-      const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      // Convertemos para string para garantir que a comparação seja correta
+      const langParam = String(req.query.lang || '');
+      const lang = langParam.toLowerCase() === 'en' ? 'en' : 'pt-BR';
+      console.log('Language determined for testimonials:', lang);
       
       // Se o idioma for inglês, adapta os nomes e traduções
       if (lang === 'en') {
@@ -257,12 +267,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
         });
         
+        console.log('Sending translated testimonials');
         return res.json(translatedTestimonials);
       }
       
+      console.log('Sending original testimonials');
       // Retorna a versão em português por padrão (já corrigida)
       res.json(correctedTestimonials);
     } catch (error) {
+      console.error('Error in /api/testimonials:', error);
       res.status(500).json({ message: "Error fetching testimonials" });
     }
   });
