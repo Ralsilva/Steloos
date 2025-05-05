@@ -21,7 +21,7 @@ export default function FeaturedStories() {
     <section className="mb-10">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl md:text-3xl font-bold font-heading text-text">{t('home.featured.title')}</h2>
-        <Link href="/estorias" className="text-primary font-medium hover:underline flex items-center">
+        <Link href={i18n.language === 'en' ? "/stories" : "/estorias"} className="text-primary font-medium hover:underline flex items-center">
           {t('home.featured.viewAll')} <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </div>
@@ -67,7 +67,7 @@ export default function FeaturedStories() {
                     variant="link"
                     className="inline-block text-secondary font-bold hover:text-accent transition-colors p-0"
                   >
-                    <Link href={`/estoria/${story.id}`}>
+                    <Link href={i18n.language === 'en' ? `/story/${story.id}` : `/estoria/${story.id}`}>
                       {t('common.readMore')} <ArrowRight className="ml-1 h-4 w-4 inline" />
                     </Link>
                   </Button>

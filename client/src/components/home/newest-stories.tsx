@@ -20,7 +20,7 @@ export default function NewestStories() {
     <section className="mb-10">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl md:text-3xl font-bold font-heading text-text">{t('home.newest.title')}</h2>
-        <Link href="/estorias" className="text-primary font-medium hover:underline flex items-center">
+        <Link href={i18n.language === 'en' ? "/stories" : "/estorias"} className="text-primary font-medium hover:underline flex items-center">
           {t('home.newest.viewAll')} <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </div>
@@ -44,7 +44,7 @@ export default function NewestStories() {
             return (
               <Link 
                 key={story.id}
-                href={`/estoria/${story.id}`}
+                href={i18n.language === 'en' ? `/story/${story.id}` : `/estoria/${story.id}`}
                 className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
               >
                 <img 
