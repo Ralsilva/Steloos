@@ -45,6 +45,12 @@ export default function Categories() {
   const handleCategorySelect = (categoryId: string) => {
     console.log("Clicou na categoria:", categoryId);
     setSelectedCategoryId(categoryId);
+    
+    // Atualizar a URL com o parâmetro de categoria no idioma correto
+    const paramName = i18n.language === 'pt-BR' ? 'categoria' : 'category';
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set(paramName, categoryId);
+    window.history.pushState({}, '', newUrl.toString());
   };
   
   return (
@@ -54,7 +60,13 @@ export default function Categories() {
       {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) ? (
         <div className="mb-6">
           <button 
-            onClick={() => setSelectedCategoryId(null)}
+            onClick={() => {
+              setSelectedCategoryId(null);
+              // Remover parâmetros da URL
+              const newUrl = new URL(window.location.href);
+              newUrl.search = '';
+              window.history.pushState({}, '', newUrl.toString());
+            }}
             className="text-secondary hover:text-accent font-medium inline-flex items-center"
           >
             <i className="fas fa-arrow-left mr-2"></i> {t('categories.backToAll')}

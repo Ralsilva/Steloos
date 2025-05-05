@@ -10,14 +10,19 @@ import childrenReading from "@/assets/children-reading-new.png";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
-  const navigation = useMemo(() => [
-    { name: t('menu.home'), href: "/" },
-    { name: t('menu.stories'), href: "/estorias" },
-    { name: t('menu.categories'), href: "/categorias" },
-    { name: t('menu.about'), href: "/sobre" },
-  ], [t]);
+  const navigation = useMemo(() => {
+    // Definir URLs com base no idioma atual
+    const isPortuguese = i18n.language === 'pt-BR';
+    
+    return [
+      { name: t('menu.home'), href: "/" },
+      { name: t('menu.stories'), href: isPortuguese ? "/estorias" : "/stories" },
+      { name: t('menu.categories'), href: isPortuguese ? "/categorias" : "/categories" },
+      { name: t('menu.about'), href: isPortuguese ? "/sobre" : "/about" },
+    ];
+  }, [t, i18n.language]);
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
