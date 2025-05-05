@@ -44,7 +44,13 @@ function formatImageUrl(url: string | undefined, large = true): string {
 
 export default function StoryDetails() {
   const { t, i18n } = useTranslation(['translation', 'stories']);
-  const [match, params] = useRoute<{ id: string }>("/estoria/:id");
+  // Verifica correspondência para ambas as rotas (português e inglês)
+  const [matchPt, paramsPt] = useRoute<{ id: string }>("/estoria/:id");
+  const [matchEn, paramsEn] = useRoute<{ id: string }>("/story/:id");
+  
+  // Usa os parâmetros da rota que corresponder
+  const match = matchPt || matchEn;
+  const params = paramsPt || paramsEn;
   const [translatedStory, setTranslatedStory] = useState<{
     title?: string;
     excerpt?: string;
@@ -287,7 +293,7 @@ export default function StoryDetails() {
             {relatedStories.map((relatedStory) => (
               <Link 
                 key={relatedStory.id}
-                href={`/estoria/${relatedStory.id}`}
+                href={i18n.language === 'en' ? `/story/${relatedStory.id}` : `/estoria/${relatedStory.id}`}
                 className="story-card bg-white rounded-xl shadow-soft overflow-hidden flex hover-bounce"
               >
                 <div className="w-24 h-full bg-gray-100 relative">
