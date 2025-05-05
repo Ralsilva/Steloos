@@ -92,8 +92,76 @@ function translateExcerpt(excerpt: string): string {
 function translateContent(text: string): string {
   if (!text) return '';
   
-  // Mapeamento direto para os parágrafos iniciais do Jardim da Paz (ID 2)
-  if (text.startsWith('No centro de uma pequena cidade, havia um terreno abandonado')) {
+  // Mapeamento direto para conteúdo completo das estórias
+  
+  // Tradução completa para "As Asas da Amizade" (ID 1)
+  if (text.startsWith('Era uma vez um pequeno pássaro chamado Piu')) {
+    return `Once upon a time, there was a small bird named Pip who lived in a large tree in the middle of the forest. Pip was very curious and loved to observe all the other animals in the forest.
+
+One day, while flying among the flowers, Pip found a beautiful butterfly named Lila. Her wings were colored with shades of purple and blue that shimmered in the sun.
+
+"Hello!" said Pip, landing on a nearby flower. "I've never seen wings as beautiful as yours!"
+
+Lila was a bit shy, but she smiled. "Thank you! Your feathers are very beautiful too."
+
+From that day on, Pip and Lila began to meet every day. Although they were very different - a bird and a butterfly - they discovered that they had many things in common. Both loved flying among the flowers, feeling the wind on their wings, and watching the sunset.
+
+One day, a strong storm hit the forest. Lila, with her delicate wings, couldn't fly against the strong wind. She took shelter under a leaf, but the rain was getting stronger and stronger.
+
+Pip, worried about his friend, flew bravely against the wind and rain. When he found Lila, he used his wings to protect her from the rain.
+
+"Why did you risk your wings to save me?" asked Lila, surprised.
+
+Pip responded simply: "Because you are my friend, and friends take care of each other, no matter how different we are."
+
+Lila felt her heart fill with gratitude and love. She understood that true friendship goes beyond differences and is present in small gestures of care and affection.
+
+When the storm passed, Pip and Lila flew together again, more united than ever. They shared their story with all the animals of the forest, teaching everyone that true friendship doesn't see differences, only the love that exists in each one's heart.
+
+And so, with their wings - one of feathers and the other colorful - Pip and Lila spread the message that love and friendship can unite even the most different beings.`;
+  }
+  
+  // Tradução completa para "A Estrela Sábia" (ID 3)
+  else if (text.startsWith('Todas as noites, antes de dormir, Pedro')) {
+    return `Every night, before going to sleep, Peter would look out his bedroom window and talk to the stars. He was only 8 years old, but his head was full of questions about life, the universe, and the why of everything.
+
+Among all the stars in the sky, there was one that shone brighter when Peter spoke. It was a small star, but its glow was intense and comforting. Peter didn't know it, but that was the Wise Star, a very special star that had lived for millions of years and held all the wisdom of the universe.
+
+One night, as Peter was looking at the sky, he asked a question that had been in his heart for a long time:
+
+"Why are there sad things in the world? Why do people suffer?"
+
+At that moment, the Wise Star shone so brightly that it illuminated Peter's entire room. And then, to his surprise, he heard a gentle voice:
+
+"Hello, Peter. I am the Wise Star, and I've been listening to your questions for a long time."
+
+Peter's eyes widened in amazement. "You can talk?" he asked, astonished.
+
+"To those who truly want to listen, yes," replied the star. "And you, Peter, have a heart that seeks to understand."
+
+"So, can you tell me why there are sad things in the world?" Peter asked again.
+
+The Wise Star shone gently as it answered:
+
+"The world, Peter, is like a big school. Every sad moment, every challenge, is like a lesson that helps us grow. Without rain, flowers wouldn't grow. Without challenges, our hearts wouldn't learn compassion and love."
+
+Peter thought for a moment. "But why do some people suffer more than others? It doesn't seem fair."
+
+"Each soul has its own path," the star explained. "Some choose harder lessons because their spirits want to grow more. But remember, Peter, no one suffers alone. There are always invisible hands of love supporting us, even in the darkest moments."
+
+Over the following nights, Peter continued his conversations with the Wise Star. He learned about the importance of kindness, about how every action affects the whole universe, and about how love is the most powerful force that exists.
+
+One night, Peter asked, "How can I make the world better?"
+
+The Wise Star twinkled with joy. "By being who you are, Peter. By caring, by asking questions, by treating everyone with kindness. Each small gesture of love creates ripples that spread across the world."
+
+As Peter grew older, he never forgot the lessons from the Wise Star. He became a man who looked at the world with compassion, who sought to understand before judging, and who believed in the power of love to transform even the saddest moments.
+
+And sometimes, on special nights, he still looked up at the sky and saw the Wise Star shining brightly, reminding him that wisdom isn't just about having answers, but about keeping a heart open to wonder and love.`;
+  }
+  
+  // Tradução completa para "O Jardim da Paz" (ID 2)
+  else if (text.startsWith('No centro de uma pequena cidade, havia um terreno abandonado')) {
     return `In the center of a small town, there was an abandoned plot of land that nobody visited. People hurried by, always too busy to notice that sad, empty space.
 
 Sophie, a 7-year-old girl, had eyes that saw beyond what adults could see. One day, while walking to school with her mother, she felt a special energy coming from that place.
