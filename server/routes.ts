@@ -55,8 +55,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const stories = await storage.getStoriesFeatured();
       
+      // Adiciona logs para depuração
+      console.log('GET /api/stories/featured - Query params:', req.query);
+      console.log('Headers:', req.headers['accept-language']);
+      
       // Verifica se o idioma está definido no parâmetro de consulta
       const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      console.log('Language determined:', lang);
       
       // Se o idioma for inglês, traduz os títulos e resumos das estórias
       if (lang === 'en') {
@@ -81,11 +86,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           };
         });
         
+        console.log('Sending translated stories');
         return res.json(translatedStories);
       }
       
+      console.log('Sending original stories');
       res.json(stories);
     } catch (error) {
+      console.error('Error in /api/stories/featured:', error);
       res.status(500).json({ message: "Error fetching featured stories" });
     }
   });
@@ -94,8 +102,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const stories = await storage.getStoriesNewest();
       
+      // Adiciona logs para depuração
+      console.log('GET /api/stories/newest - Query params:', req.query);
+      console.log('Headers:', req.headers['accept-language']);
+      
       // Verifica se o idioma está definido no parâmetro de consulta
       const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      console.log('Language determined:', lang);
       
       // Se o idioma for inglês, traduz os títulos e resumos das estórias
       if (lang === 'en') {
@@ -120,11 +133,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           };
         });
         
+        console.log('Sending translated newest stories');
         return res.json(translatedStories);
       }
       
+      console.log('Sending original newest stories');
       res.json(stories);
     } catch (error) {
+      console.error('Error in /api/stories/newest:', error);
       res.status(500).json({ message: "Error fetching newest stories" });
     }
   });
