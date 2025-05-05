@@ -105,7 +105,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
         <div className="w-24 h-full bg-gray-100">
           <img 
             src={imageUrl} 
-            alt={story.title} 
+            alt={translatedTitle} 
             className="w-24 h-full object-cover"
             loading="lazy"
             onError={(e) => {
@@ -115,7 +115,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
         </div>
         <div className="p-4">
           <span className={`inline-block px-2 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full mb-2`}>
-            {story.categoryName}
+            {t(`categories.${story.categoryId}`)}
           </span>
           <h3 className="font-heading font-bold text-lg mb-1">{translatedTitle}</h3>
           <p className="text-gray-600 text-sm">{translatedExcerpt}</p>
@@ -129,7 +129,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
       <div className="w-full h-48 bg-gray-100 relative">
         <img 
           src={imageUrl} 
-          alt={story.title} 
+          alt={translatedTitle} 
           className="w-full h-48 object-cover absolute inset-0"
           loading="lazy"
           onError={(e) => {
@@ -141,12 +141,12 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <span className={`inline-block px-3 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full`}>
-            {story.categoryName}
+            {t(`categories.${story.categoryId}`)}
           </span>
           <span className="text-sm text-gray-500">{t('stories.ageRange')}: {story.ageRange}</span>
         </div>
-        <h3 className="font-heading font-bold text-xl mb-2">{story.title}</h3>
-        <p className="text-gray-600 mb-4">{story.excerpt}</p>
+        <h3 className="font-heading font-bold text-xl mb-2">{translatedTitle}</h3>
+        <p className="text-gray-600 mb-4">{translatedExcerpt}</p>
         <Button
           asChild
           variant="link"

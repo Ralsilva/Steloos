@@ -25,9 +25,18 @@ export default function Categories() {
   // Detectar categoria da URL e converter para ID interno (sempre em português)
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const categoryFromUrl = searchParams.get('categoria') || searchParams.get('category');
+    
+    // Se estamos na versão em inglês, esperamos o parâmetro 'category'
+    // Se estamos na versão em português, esperamos o parâmetro 'categoria'
+    const categoryParam = i18n.language === 'pt-BR' ? 'categoria' : 'category';
+    
+    // Tentamos obter o valor do parâmetro correto primeiro, depois tentamos o outro como fallback
+    const categoryFromUrl = searchParams.get(categoryParam) || 
+                        searchParams.get(i18n.language === 'pt-BR' ? 'category' : 'categoria');
     
     if (categoryFromUrl) {
+      console.log(`Parâmetro detectado: ${categoryParam}=${categoryFromUrl}`);
+      
       // Converter ID inglês para português se necessário (IDs internos são em português)
       const internalCategoryId = Object.keys(categoryTranslationsReverse).includes(categoryFromUrl)
         ? categoryTranslationsReverse[categoryFromUrl]
@@ -37,7 +46,7 @@ export default function Categories() {
       console.log("Categoria detectada na URL:", categoryFromUrl);
       console.log("ID interno da categoria:", internalCategoryId);
     }
-  }, []);
+  }, [i18n.language]);
   
   // Carrega todas as categorias
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
@@ -89,10 +98,11 @@ export default function Categories() {
     // Atualizar a URL com o parâmetro de categoria no idioma correto
     const paramName = i18n.language === 'pt-BR' ? 'categoria' : 'category';
     
-    // Traduzir o ID da categoria se necessário (para inglês)
+    // Quando estamos na versão em inglês, usamos o ID em inglês
+    // Quando estamos na versão em português, usamos o ID em português
     const categoryIdForUrl = i18n.language === 'en' 
-      ? getCategoryIdForLanguage(categoryId, 'en') 
-      : categoryId;
+      ? getCategoryIdForLanguage(categoryId, 'en') // ID em inglês (ex: "love")
+      : categoryId; // ID em português (ex: "amor")
     
     const newUrl = new URL(window.location.href);
     newUrl.searchParams.set(paramName, categoryIdForUrl);
