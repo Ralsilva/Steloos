@@ -33,7 +33,7 @@ async function updateTranslations() {
     console.log('Título e resumo da estória 39 atualizados com sucesso.');
 
     // Atualizando conteúdo da estória 38
-    const content38 = `At Lincoln Elementary School, at the back of the yard, there was a small treehouse that no one had used for years. It was a bit worn by time, with some loose boards and a creaking ladder, but it was still a great hiding place – at least that is what Tommy thought when he was looking for a place to read his comics in peace, away from the teasing of the older boys.
+    const content38 = `At Monteiro Lobato Municipal School, at the back of the yard, there was a small treehouse that no one had used for years. It was a bit worn by time, with some loose boards and a creaking ladder, but it was still a great hiding place – at least that is what Tommy thought when he was looking for a place to read his comics in peace, away from the teasing of the older boys.
 
 Tommy was 10 years old, wore glasses with red frames, was skinny and shy, and loved superhero stories more than anything else in the world. The problem was that, in real life, he felt the opposite of a hero. He was the last to be chosen for physical education teams, stuttered when he had to speak in public, and regularly lost his lunch to the sixth-grade bullies.
 
@@ -69,7 +69,7 @@ That is how what they would later call the "Club of Unlikely Heroes" was born �
     console.log('Conteúdo (parte 1) da estória 38 atualizado com sucesso.');
 
     // Continuação do conteúdo da estória 38
-    const content38Part2 = `In the following weeks, they met regularly in the treehouse. Nina fixed the loose boards and ladder steps. Lucas brought old pillows from his house to make the place more comfortable. Theo hung some of his superhero posters on the walls, and Maia decorated the place with plants and colorful origami that she made herself.
+    const content38Part2 = `In the following weeks, they met regularly in the treehouse. Emily fixed the loose boards and ladder steps. Jake brought old pillows from his house to make the place more comfortable. Tommy hung some of his superhero posters on the walls, and Lily decorated the place with plants and colorful origami that she made herself.
 
 Gradually, between shared snacks and conversations ranging from comics to stars, from crazy inventions to farm stories, they began to realize something extraordinary: each of them had special skills.
 
