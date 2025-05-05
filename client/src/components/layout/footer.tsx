@@ -33,6 +33,7 @@ export default function Footer() {
               <li><Link href="/estorias" className="hover:text-primary">{t('menu.stories')}</Link></li>
               <li><Link href="/categorias" className="hover:text-primary">{t('menu.categories')}</Link></li>
               <li><Link href="/sobre" className="hover:text-primary">{t('menu.about')}</Link></li>
+              <li><Link href="/admin" className="hover:text-primary">Administração</Link></li>
             </ul>
           </div>
           
