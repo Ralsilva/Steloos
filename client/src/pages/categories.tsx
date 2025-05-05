@@ -37,16 +37,34 @@ export default function Categories() {
     if (categoryFromUrl) {
       console.log(`Parâmetro detectado: ${categoryParam}=${categoryFromUrl}`);
       
-      // Converter ID inglês para português se necessário (IDs internos são em português)
-      const internalCategoryId = Object.keys(categoryTranslationsReverse).includes(categoryFromUrl)
-        ? categoryTranslationsReverse[categoryFromUrl]
-        : categoryFromUrl;
+      let internalCategoryId = categoryFromUrl;
+      
+      // Converter ID inglês para português se estamos em português e o valor é em inglês
+      if (i18n.language === 'pt-BR' && Object.keys(categoryTranslationsReverse).includes(categoryFromUrl)) {
+        internalCategoryId = categoryTranslationsReverse[categoryFromUrl];
+        
+        // Atualizar URL com o ID em português
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('categoria', internalCategoryId);
+        window.history.pushState({}, '', newUrl.toString());
+      } 
+      // Converter ID português para inglês se estamos em inglês e o valor é em português
+      else if (i18n.language === 'en' && Object.keys(categoryTranslations).includes(categoryFromUrl)) {
+        // O ID interno ainda é em português
+        internalCategoryId = categoryFromUrl;
+        
+        // Mas a URL deve ter o ID em inglês
+        const englishId = categoryTranslations[categoryFromUrl];
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('category', englishId);
+        window.history.pushState({}, '', newUrl.toString());
+      }
         
       setSelectedCategoryId(internalCategoryId);
       console.log("Categoria detectada na URL:", categoryFromUrl);
       console.log("ID interno da categoria:", internalCategoryId);
     }
-  }, [i18n.language]);
+  }, [i18n.language, categoryTranslations, categoryTranslationsReverse]);
   
   // Carrega todas as categorias
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
