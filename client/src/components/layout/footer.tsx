@@ -4,7 +4,7 @@ import estrelinhaLogo from "@/assets/estrelinha-logo.png";
 import { Facebook, Instagram, Youtube, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <footer className="bg-secondary text-white py-10">
       <div className="container mx-auto px-4">
@@ -33,7 +33,10 @@ export default function Footer() {
               <li><Link href="/estorias" className="hover:text-primary">{t('menu.stories')}</Link></li>
               <li><Link href="/categorias" className="hover:text-primary">{t('menu.categories')}</Link></li>
               <li><Link href="/sobre" className="hover:text-primary">{t('menu.about')}</Link></li>
-              <li><Link href="/admin" className="hover:text-primary">Administração</Link></li>
+              {/* Link de administração apenas em português */}
+              {i18n.language === 'pt-BR' && (
+                <li><Link href="/admin" className="hover:text-primary">Administração</Link></li>
+              )}
             </ul>
           </div>
           
