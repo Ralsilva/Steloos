@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
-import estrelinhaLogo from "@/assets/estrelinha-logo.png";
+import steloosLogo from "@/assets/steloos-logo.png";
 import { Facebook, Instagram, Youtube, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center mb-4">
               <img 
-                src={estrelinhaLogo} 
+                src={steloosLogo} 
                 alt={t('app.name')} 
                 className="h-10 w-10 mr-2 hover-bounce"
               />

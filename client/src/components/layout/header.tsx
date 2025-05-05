@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/ui/language-switcher";
-import esteloLogo from "@/assets/steloos-logo.png"; 
+import steloosLogo from "@/assets/steloos-logo.png"; 
 import childrenReading from "@/assets/children-reading-new.png";
 
 export default function Header() {
@@ -35,7 +35,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
             <img 
-              src={esteloLogo} 
+              src={steloosLogo} 
               alt={t('app.name')} 
               className="h-12 w-12 mr-3 hover-bounce"
             />
