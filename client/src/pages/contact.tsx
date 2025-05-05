@@ -80,7 +80,7 @@ export default function Contact() {
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="h-5 w-5 text-primary mr-3" />
-                <span className="text-primary">contact@steloos.cm</span>
+                <span className="text-primary">contact@steloos.com</span>
               </div>
               
               <Separator className="my-4" />

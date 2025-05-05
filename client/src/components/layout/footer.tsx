@@ -59,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center">
                 <Mail className="mr-2 h-4 w-4" /> 
-                <a href="mailto:contact@steloos.cm" className="hover:text-primary">contact@steloos.cm</a>
+                <span className="text-primary">contact@steloos.com</span>
               </li>
               <li className="mt-3">
                 <Link href="/contato" className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
