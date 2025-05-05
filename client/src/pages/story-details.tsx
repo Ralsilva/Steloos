@@ -58,11 +58,21 @@ export default function StoryDetails() {
   }>({});
   
   const { data: story, isLoading } = useQuery<Story>({
-    queryKey: [`/api/stories/${params?.id}`],
+    queryKey: [`/api/stories/${params?.id}`, i18n.language],
+    queryFn: async () => {
+      const language = i18n.language === 'en' ? 'en' : 'pt-BR';
+      const response = await fetch(`/api/stories/${params?.id}?lang=${language}`);
+      return response.json();
+    }
   });
   
   const { data: relatedStories, isLoading: loadingRelated } = useQuery<Story[]>({
-    queryKey: [`/api/stories/related/${params?.id}`],
+    queryKey: [`/api/stories/related/${params?.id}`, i18n.language],
+    queryFn: async () => {
+      const language = i18n.language === 'en' ? 'en' : 'pt-BR';
+      const response = await fetch(`/api/stories/related/${params?.id}?lang=${language}`);
+      return response.json();
+    },
     enabled: !!story,
   });
   

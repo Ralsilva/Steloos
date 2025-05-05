@@ -216,6 +216,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Story not found" });
       }
       
+      // Verifica se o idioma está definido no parâmetro de consulta
+      const langParam = String(req.query.lang || '');
+      const acceptLanguage = req.headers['accept-language'] || '';
+      const lang = langParam.toLowerCase() === 'en' || acceptLanguage.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
+      
+      if (lang === 'en') {
+        // Traduz o conteúdo da estória para inglês
+        const translatedStory = {
+          ...story,
+          title: translateTitle(story.title),
+          excerpt: translateExcerpt(story.excerpt),
+          content: story.content
+            .replace(/estória/g, "story")
+            .replace(/estórias/g, "stories")
+            .replace(/Estória/g, "Story")
+            .replace(/Estórias/g, "Stories")
+        };
+        return res.json(translatedStory);
+      }
+      
       res.json(story);
     } catch (error) {
       res.status(500).json({ message: "Error fetching story" });
@@ -245,6 +265,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 3;
       const stories = await storage.getRelatedStories(id, limit);
+      
+      // Verifica se o idioma está definido no parâmetro de consulta
+      const langParam = String(req.query.lang || '');
+      const acceptLanguage = req.headers['accept-language'] || '';
+      const lang = langParam.toLowerCase() === 'en' || acceptLanguage.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
+      
+      if (lang === 'en') {
+        // Traduz as estórias relacionadas para inglês
+        const translatedStories = stories.map(story => ({
+          ...story,
+          title: translateTitle(story.title),
+          excerpt: translateExcerpt(story.excerpt),
+          categoryName: story.categoryName === 'Amor' ? 'Love' :
+                       story.categoryName === 'Paz' ? 'Peace' :
+                       story.categoryName === 'Sabedoria' ? 'Wisdom' :
+                       story.categoryName === 'Natureza' ? 'Nature' :
+                       story.categoryName === 'Família' ? 'Family' :
+                       story.categoryName === 'Amizade' ? 'Friendship' :
+                       story.categoryName === 'Proteção' ? 'Protection' :
+                       story.categoryName
+        }));
+        return res.json(translatedStories);
+      }
       
       res.json(stories);
     } catch (error) {
