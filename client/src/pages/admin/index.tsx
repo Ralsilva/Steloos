@@ -16,10 +16,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useQuery } from '@tanstack/react-query';
 import { getQueryFn } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { Story, Category } from '@shared/schema';
+import { Story, Category, NewsletterSubscriber } from '@shared/schema';
 
 export default function AdminDashboard() {
   const { t } = useTranslation();
@@ -45,10 +51,11 @@ export default function AdminDashboard() {
     queryFn: getQueryFn({ on401: 'throw' })
   });
   
-  // Criar endpoint para subscribers é opcional neste momento
-  // Estamos usando um array vazio como fallback
-  const [subscribersData, setSubscribersData] = useState<SubscriberType[]>([]);
-  const subscribers = subscribersData;
+  // Buscar assinantes da newsletter
+  const { data: subscribers = [] } = useQuery<SubscriberType[]>({ 
+    queryKey: ['/api/newsletter/subscribers'],
+    queryFn: getQueryFn({ on401: 'throw' })
+  });
 
   // Handle tab change
   const handleTabChange = (value: string) => {

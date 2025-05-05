@@ -44,6 +44,7 @@ export interface IStorage {
 
   // Newsletter methods
   addNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
+  getNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
 }
 
 // Importando o cliente de banco de dados
@@ -152,6 +153,10 @@ export class DatabaseStorage implements IStorage {
       .returning();
     
     return subscriber;
+  }
+
+  async getNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    return await db.select().from(newsletterSubscribers).orderBy(desc(newsletterSubscribers.createdAt));
   }
 }
 
