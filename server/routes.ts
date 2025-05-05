@@ -503,6 +503,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/categories", async (req, res) => {
     try {
       const categories = await storage.getCategories();
+      
+      // Verifica se o idioma está definido no parâmetro de consulta
+      const langParam = String(req.query.lang || '');
+      const acceptLanguage = req.headers['accept-language'] || '';
+      const lang = langParam.toLowerCase() === 'en' || acceptLanguage.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
+      
+      if (lang === 'en') {
+        // Usa as traduções do banco de dados para as categorias
+        const translatedCategories = categories.map(category => ({
+          ...category,
+          name: category.nameEn || category.name,
+          description: category.descriptionEn || category.description
+        }));
+        return res.json(translatedCategories);
+      }
+      
       res.json(categories);
     } catch (error) {
       res.status(500).json({ message: "Error fetching categories" });

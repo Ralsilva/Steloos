@@ -71,11 +71,13 @@ export class DatabaseStorage implements IStorage {
   
   // Category methods
   async getCategories(): Promise<any[]> {
-    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    // Agora incluindo as colunas de tradução
     return await db.select({
       id: categories.id,
       name: categories.name,
-      description: categories.description
+      description: categories.description,
+      nameEn: categories.nameEn,
+      descriptionEn: categories.descriptionEn
     }).from(categories);
   }
 
