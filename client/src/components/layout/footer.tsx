@@ -16,7 +16,7 @@ export default function Footer() {
                 alt={t('app.name')} 
                 className="h-10 w-10 mr-2 hover-bounce"
               />
-              <span className="text-2xl font-bold text-white font-heading">Estrelinha</span>
+              <span className="text-2xl font-bold text-white font-heading">STELOOS</span>
             </Link>
             <p className="mb-4">{t('app.slogan')}</p>
             <div className="flex space-x-4">

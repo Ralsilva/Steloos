@@ -255,7 +255,7 @@ Um dia, Vovô João encontrou Miguel abraçado ao tronco da árvore, com o ouvid
 
 "O que você está fazendo, Miguel?", perguntou o Vovô, curioso.
 
-"Estou ouvindo a árvore, Vovô", respondeu Miguel com os olhos brilhando. "Ela conta histórias."
+"Estou ouvindo a árvore, Vovô", respondeu Miguel com os olhos brilhando. "Ela conta estórias."
 
 Vovô João sorriu. Ele também costumava ouvir a árvore quando era criança. Sentou-se ao lado do neto e começou a contar a história da Árvore Amiga.
 
@@ -312,7 +312,7 @@ Dona Clara percebeu o medo no olhar de Pedro e teve uma ideia. "Vamos fazer uma 
 
 Seu Francisco sorriu. "A cabana que vemos é feita de lençóis, sim. Mas a verdadeira cabana, aquela que realmente nos protege, é feita de amor, respeito e cuidado um pelo outro. É invisível aos olhos, mas muito forte."
 
-Enquanto a tempestade rugia lá fora, dentro da cabana, a Família dos Corações Unidos se sentia segura e quente. Eles contaram histórias, riram juntos e até Luna parecia sorrir, ronronando baixinho no colo de Pedro.
+Enquanto a tempestade rugia lá fora, dentro da cabana, a Família dos Corações Unidos se sentia segura e quente. Eles contaram estórias, riram juntos e até Luna parecia sorrir, ronronando baixinho no colo de Pedro.
 
 Quando a tempestade finalmente passou e as luzes voltaram, eles saíram da cabana e olharam pela janela. Um lindo arco-íris se estendia no céu, como uma ponte colorida entre as nuvens.
 
@@ -359,7 +359,7 @@ No dia do aniversário, Bruno acordou cedo, antes de sua mãe. Preparou um café
 
 "Mãe, não pude comprar um presente caro, mas fiz algo especial para você", disse Bruno, um pouco nervoso.
 
-Ele levou sua mãe até a sala, onde havia montado um pequeno 'livro' feito de folhas grandes, costuradas com fibras de plantas. Em cada página, Bruno havia desenhado uma memória especial que eles compartilharam: o dia em que aprendeu a pescar, a vez em que ficou doente e ela cuidou dele a noite toda, as histórias que ela contava antes de dormir, os abraços calorosos quando ele estava triste.
+Ele levou sua mãe até a sala, onde havia montado um pequeno 'livro' feito de folhas grandes, costuradas com fibras de plantas. Em cada página, Bruno havia desenhado uma memória especial que eles compartilharam: o dia em que aprendeu a pescar, a vez em que ficou doente e ela cuidou dele a noite toda, as estórias que ela contava antes de dormir, os abraços calorosos quando ele estava triste.
 
 Na última página, Bruno havia escrito com sua letra infantil: "Obrigado, mamãe, por todo o seu amor. Eu te amo até a lua e de volta!"
 
@@ -389,7 +389,7 @@ export const initialTestimonials: Omit<Testimonial, "id">[] = [
   {
     name: "Roberto",
     relation: "Pai do Pedro, 5 anos",
-    content: "As histórias são perfeitas para a hora de dormir. Meu filho sempre pede por mais uma! Adoro como elas passam mensagens positivas."
+    content: "As estórias são perfeitas para a hora de dormir. Meu filho sempre pede por mais uma! Adoro como elas passam mensagens positivas."
   },
   {
     name: "Juliana",
