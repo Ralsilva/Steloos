@@ -384,7 +384,7 @@ export const initialTestimonials: Omit<Testimonial, "id">[] = [
   {
     name: "Ana Paula",
     relation: "Mãe da Mariana, 6 anos",
-    content: "Minha filha adora as histórias do Estrelinha de Luz! Elas ensinam valores importantes de uma forma que ela entende e gosta."
+    content: "Minha filha adora as estórias do STELOOS! Elas ensinam valores importantes de uma forma que ela entende e gosta."
   },
   {
     name: "Roberto",
@@ -394,6 +394,6 @@ export const initialTestimonials: Omit<Testimonial, "id">[] = [
   {
     name: "Juliana",
     relation: "Professora e mãe",
-    content: "Como educadora, recomendo Estrelinha de Luz para todas as famílias. As histórias são educativas e as ilustrações são lindas!"
+    content: "Como educadora, recomendo STELOOS para todas as famílias. As estórias são educativas e as ilustrações são lindas!"
   }
 ];
