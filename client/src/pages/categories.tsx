@@ -6,21 +6,41 @@ import StoryCard from "@/components/stories/story-card-new";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 
+// Mapa de tradução para IDs de categorias (português para inglês)
+const PT_TO_EN: Record<string, string> = {
+  'amor': 'love',
+  'paz': 'peace',
+  'sabedoria': 'wisdom',
+  'bondade': 'kindness',
+  'natureza': 'nature',
+  'protecao': 'protection',
+  'familia': 'family',
+  'amizade': 'friendship'
+};
+
+// Mapa inverso de tradução (inglês para português)
+const EN_TO_PT: Record<string, string> = {
+  'love': 'amor',
+  'peace': 'paz',
+  'wisdom': 'sabedoria',
+  'kindness': 'bondade',
+  'nature': 'natureza', 
+  'protection': 'protecao',
+  'family': 'familia',
+  'friendship': 'amizade'
+};
+
+// Função para traduzir o ID da categoria com base no idioma
+const getCategoryIdForLanguage = (categoryId: string, lang: string): string => {
+  if (lang === 'en' && Object.keys(PT_TO_EN).includes(categoryId)) {
+    return PT_TO_EN[categoryId];
+  }
+  return categoryId;
+};
+
 export default function Categories() {
   const { t, i18n } = useTranslation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
-  
-  // Mapa inverso de tradução (inglês para português)
-  const categoryTranslationsReverse: Record<string, string> = {
-    'love': 'amor',
-    'peace': 'paz',
-    'wisdom': 'sabedoria',
-    'kindness': 'bondade',
-    'nature': 'natureza', 
-    'protection': 'protecao',
-    'family': 'familia',
-    'friendship': 'amizade'
-  };
   
   // Detectar categoria da URL e converter para ID interno (sempre em português)
   useEffect(() => {
@@ -40,8 +60,8 @@ export default function Categories() {
       let internalCategoryId = categoryFromUrl;
       
       // Converter ID inglês para português se estamos em português e o valor é em inglês
-      if (i18n.language === 'pt-BR' && Object.keys(categoryTranslationsReverse).includes(categoryFromUrl)) {
-        internalCategoryId = categoryTranslationsReverse[categoryFromUrl];
+      if (i18n.language === 'pt-BR' && Object.keys(EN_TO_PT).includes(categoryFromUrl)) {
+        internalCategoryId = EN_TO_PT[categoryFromUrl];
         
         // Atualizar URL com o ID em português
         const newUrl = new URL(window.location.href);
@@ -49,12 +69,12 @@ export default function Categories() {
         window.history.pushState({}, '', newUrl.toString());
       } 
       // Converter ID português para inglês se estamos em inglês e o valor é em português
-      else if (i18n.language === 'en' && Object.keys(categoryTranslations).includes(categoryFromUrl)) {
+      else if (i18n.language === 'en' && Object.keys(PT_TO_EN).includes(categoryFromUrl)) {
         // O ID interno ainda é em português
         internalCategoryId = categoryFromUrl;
         
         // Mas a URL deve ter o ID em inglês
-        const englishId = categoryTranslations[categoryFromUrl];
+        const englishId = PT_TO_EN[categoryFromUrl];
         const newUrl = new URL(window.location.href);
         newUrl.searchParams.set('category', englishId);
         window.history.pushState({}, '', newUrl.toString());
@@ -64,7 +84,7 @@ export default function Categories() {
       console.log("Categoria detectada na URL:", categoryFromUrl);
       console.log("ID interno da categoria:", internalCategoryId);
     }
-  }, [i18n.language, categoryTranslations, categoryTranslationsReverse]);
+  }, [i18n.language]);
   
   // Carrega todas as categorias
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({
@@ -87,26 +107,6 @@ export default function Categories() {
   // Para debug
   console.log("Categoria selecionada:", selectedCategoryId);
   console.log("Estórias carregadas:", storiesByCategory?.length || 0);
-  
-  // Mapa de tradução para IDs de categorias
-  const categoryTranslations: Record<string, string> = {
-    'amor': 'love',
-    'paz': 'peace',
-    'sabedoria': 'wisdom',
-    'bondade': 'kindness',
-    'natureza': 'nature',
-    'protecao': 'protection',
-    'familia': 'family',
-    'amizade': 'friendship'
-  };
-  
-  // Função para traduzir o ID da categoria com base no idioma
-  const getCategoryIdForLanguage = (categoryId: string, lang: string): string => {
-    if (lang === 'en' && Object.keys(categoryTranslations).includes(categoryId)) {
-      return categoryTranslations[categoryId];
-    }
-    return categoryId;
-  };
   
   // Função para selecionar uma categoria
   const handleCategorySelect = (categoryId: string) => {
