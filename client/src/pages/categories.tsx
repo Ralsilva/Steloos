@@ -77,7 +77,7 @@ export default function Categories() {
                       <i className={`fas fa-${icon} text-white text-5xl`}></i>
                     </div>
                     <div className="p-6 text-center">
-                      <h3 className="font-heading font-bold text-xl mb-1">{category.name}</h3>
+                      <h3 className="font-heading font-bold text-xl mb-1">{t(`categories.${category.id}`)}</h3>
                       <p className="text-gray-600 text-sm">{category.description}</p>
                     </div>
                   </div>
@@ -92,7 +92,7 @@ export default function Categories() {
       {selectedCategoryId && categories?.find(c => c.id === selectedCategoryId) && (
         <div className="mt-6">
           <h2 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-text">
-            Estórias de {categories.find(c => c.id === selectedCategoryId)?.name}
+            {t('categories.storiesOf', { category: t(`categories.${selectedCategoryId}`) })}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="category-stories">
@@ -120,7 +120,7 @@ export default function Categories() {
             ) : (
               // Mensagem se não houver estórias
               <div className="col-span-3 bg-white rounded-xl p-8 text-center shadow-soft">
-                <p className="text-gray-600">Nenhuma estória encontrada para esta categoria.</p>
+                <p className="text-gray-600">{t('categories.empty')}</p>
               </div>
             )}
           </div>

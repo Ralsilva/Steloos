@@ -45,7 +45,7 @@ export default function CategorySelector() {
                 <i className={`fas fa-${icon} text-white text-4xl`}></i>
               </div>
               <div className="p-4 text-center">
-                <h3 className="font-heading font-bold text-lg">{category.name}</h3>
+                <h3 className="font-heading font-bold text-lg">{t(`categories.${category.id}`)}</h3>
               </div>
             </Link>
           );
