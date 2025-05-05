@@ -10,12 +10,32 @@ export default function Categories() {
   const { t, i18n } = useTranslation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   
-  // Detectar categoria da URL
+  // Mapa inverso de tradução (inglês para português)
+  const categoryTranslationsReverse: Record<string, string> = {
+    'love': 'amor',
+    'peace': 'paz',
+    'wisdom': 'sabedoria',
+    'kindness': 'bondade',
+    'nature': 'natureza', 
+    'protection': 'protecao',
+    'family': 'familia',
+    'friendship': 'amizade'
+  };
+  
+  // Detectar categoria da URL e converter para ID interno (sempre em português)
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const categoryFromUrl = searchParams.get('categoria') || searchParams.get('category');
+    
     if (categoryFromUrl) {
-      setSelectedCategoryId(categoryFromUrl);
+      // Converter ID inglês para português se necessário (IDs internos são em português)
+      const internalCategoryId = Object.keys(categoryTranslationsReverse).includes(categoryFromUrl)
+        ? categoryTranslationsReverse[categoryFromUrl]
+        : categoryFromUrl;
+        
+      setSelectedCategoryId(internalCategoryId);
+      console.log("Categoria detectada na URL:", categoryFromUrl);
+      console.log("ID interno da categoria:", internalCategoryId);
     }
   }, []);
   
@@ -41,6 +61,26 @@ export default function Categories() {
   console.log("Categoria selecionada:", selectedCategoryId);
   console.log("Estórias carregadas:", storiesByCategory?.length || 0);
   
+  // Mapa de tradução para IDs de categorias
+  const categoryTranslations: Record<string, string> = {
+    'amor': 'love',
+    'paz': 'peace',
+    'sabedoria': 'wisdom',
+    'bondade': 'kindness',
+    'natureza': 'nature',
+    'protecao': 'protection',
+    'familia': 'family',
+    'amizade': 'friendship'
+  };
+  
+  // Função para traduzir o ID da categoria com base no idioma
+  const getCategoryIdForLanguage = (categoryId: string, lang: string): string => {
+    if (lang === 'en' && Object.keys(categoryTranslations).includes(categoryId)) {
+      return categoryTranslations[categoryId];
+    }
+    return categoryId;
+  };
+  
   // Função para selecionar uma categoria
   const handleCategorySelect = (categoryId: string) => {
     console.log("Clicou na categoria:", categoryId);
@@ -48,8 +88,14 @@ export default function Categories() {
     
     // Atualizar a URL com o parâmetro de categoria no idioma correto
     const paramName = i18n.language === 'pt-BR' ? 'categoria' : 'category';
+    
+    // Traduzir o ID da categoria se necessário (para inglês)
+    const categoryIdForUrl = i18n.language === 'en' 
+      ? getCategoryIdForLanguage(categoryId, 'en') 
+      : categoryId;
+    
     const newUrl = new URL(window.location.href);
-    newUrl.searchParams.set(paramName, categoryId);
+    newUrl.searchParams.set(paramName, categoryIdForUrl);
     window.history.pushState({}, '', newUrl.toString());
   };
   
