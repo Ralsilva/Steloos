@@ -94,16 +94,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getStoriesFeatured(): Promise<any[]> {
-    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    // Agora incluindo as colunas de tradução
     return await db.select({
       id: stories.id,
       title: stories.title,
       excerpt: stories.excerpt,
       content: stories.content,
+      titleEn: stories.titleEn,
+      excerptEn: stories.excerptEn,
+      contentEn: stories.contentEn,
       imageUrl: stories.imageUrl,
       categoryId: stories.categoryId,
       categoryName: stories.categoryName,
       ageRange: stories.ageRange,
+      ageRangeEn: stories.ageRangeEn,
       featured: stories.featured,
       createdAt: stories.createdAt
     })
@@ -113,16 +117,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getStoriesNewest(): Promise<any[]> {
-    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    // Agora incluindo as colunas de tradução
     return await db.select({
       id: stories.id,
       title: stories.title,
       excerpt: stories.excerpt,
       content: stories.content,
+      titleEn: stories.titleEn,
+      excerptEn: stories.excerptEn,
+      contentEn: stories.contentEn,
       imageUrl: stories.imageUrl,
       categoryId: stories.categoryId,
       categoryName: stories.categoryName,
       ageRange: stories.ageRange,
+      ageRangeEn: stories.ageRangeEn,
       featured: stories.featured,
       createdAt: stories.createdAt
     })
@@ -162,12 +170,15 @@ export class DatabaseStorage implements IStorage {
 
   // Testimonial methods
   async getTestimonials(): Promise<any[]> {
-    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    // Agora incluindo as colunas de tradução
     return await db.select({
       id: testimonials.id,
       name: testimonials.name,
       relation: testimonials.relation,
       content: testimonials.content,
+      nameEn: testimonials.nameEn,
+      relationEn: testimonials.relationEn,
+      contentEn: testimonials.contentEn
     }).from(testimonials);
   }
 

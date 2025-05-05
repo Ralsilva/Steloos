@@ -553,18 +553,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const lang = langParam.toLowerCase() === 'en' ? 'en' : 'pt-BR';
       console.log('Language determined:', lang);
       
-      // Se o idioma for inglês, traduz os títulos e resumos das estórias
+      // Se o idioma for inglês, usa as traduções do banco de dados
       if (lang === 'en') {
         const translatedStories = stories.map(story => {
-          // Usa nossas funções de tradução
           return {
             ...story,
-            title: translateTitle(story.title),
-            excerpt: translateExcerpt(story.excerpt)
+            // Usa os campos traduzidos se existirem, caso contrário mantém os originais
+            title: story.titleEn || story.title,
+            excerpt: story.excerptEn || story.excerpt,
+            content: story.contentEn || story.content,
+            ageRange: story.ageRangeEn || story.ageRange
           };
         });
         
-        console.log('Sending translated stories');
+        console.log('Sending translated stories from database');
         return res.json(translatedStories);
       }
       
@@ -590,18 +592,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const lang = langParam.toLowerCase() === 'en' ? 'en' : 'pt-BR';
       console.log('Language determined:', lang);
       
-      // Se o idioma for inglês, traduz os títulos e resumos das estórias
+      // Se o idioma for inglês, usa as traduções do banco de dados
       if (lang === 'en') {
         const translatedStories = stories.map(story => {
-          // Usa nossas funções de tradução
           return {
             ...story,
-            title: translateTitle(story.title),
-            excerpt: translateExcerpt(story.excerpt)
+            // Usa os campos traduzidos se existirem, caso contrário mantém os originais
+            title: story.titleEn || story.title,
+            excerpt: story.excerptEn || story.excerpt,
+            content: story.contentEn || story.content,
+            ageRange: story.ageRangeEn || story.ageRange
           };
         });
         
-        console.log('Sending translated newest stories');
+        console.log('Sending translated newest stories from database');
         return res.json(translatedStories);
       }
       
@@ -645,13 +649,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const lang = langParam.toLowerCase() === 'en' || acceptLanguage.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
       
       if (lang === 'en') {
-        // Traduz o conteúdo da estória para inglês
+        // Usa as traduções do banco de dados
         const translatedStory = {
           ...story,
-          title: translateTitle(story.title),
-          excerpt: translateExcerpt(story.excerpt),
-          content: translateContent(story.content),
-          ageRange: story.ageRange.replace(/anos/g, "years old")
+          // Usa os campos traduzidos se existirem, caso contrário usa traduções dinâmicas
+          title: story.titleEn || translateTitle(story.title),
+          excerpt: story.excerptEn || translateExcerpt(story.excerpt),
+          content: story.contentEn || translateContent(story.content),
+          ageRange: story.ageRangeEn || story.ageRange.replace(/anos/g, "years old")
         };
         return res.json(translatedStory);
       }
@@ -692,20 +697,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const lang = langParam.toLowerCase() === 'en' || acceptLanguage.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
       
       if (lang === 'en') {
-        // Traduz as estórias relacionadas para inglês
+        // Usa as traduções do banco de dados
         const translatedStories = stories.map(story => ({
           ...story,
-          title: translateTitle(story.title),
-          excerpt: translateExcerpt(story.excerpt),
-          content: translateContent(story.content),
-          ageRange: story.ageRange.replace(/anos/g, "years old"),
-          categoryName: story.categoryName === 'Amor' ? 'Love' :
-                       story.categoryName === 'Paz' ? 'Peace' :
-                       story.categoryName === 'Sabedoria' ? 'Wisdom' :
-                       story.categoryName === 'Natureza' ? 'Nature' :
-                       story.categoryName === 'Família' ? 'Family' :
-                       story.categoryName === 'Amizade' ? 'Friendship' :
-                       story.categoryName === 'Proteção' ? 'Protection' :
+          // Usa os campos traduzidos se existirem, caso contrário usa traduções dinâmicas
+          title: story.titleEn || translateTitle(story.title),
+          excerpt: story.excerptEn || translateExcerpt(story.excerpt),
+          content: story.contentEn || translateContent(story.content),
+          ageRange: story.ageRangeEn || story.ageRange.replace(/anos/g, "years old"),
+          // Traduzir nome da categoria
+          categoryName: (story.categoryId === 'amor' && 'Love') ||
+                       (story.categoryId === 'paz' && 'Peace') ||
+                       (story.categoryId === 'sabedoria' && 'Wisdom') ||
+                       (story.categoryId === 'natureza' && 'Nature') ||
+                       (story.categoryId === 'familia' && 'Family') ||
+                       (story.categoryId === 'amizade' && 'Friendship') ||
+                       (story.categoryId === 'bondade' && 'Kindness') ||
+                       (story.categoryId === 'protecao' && 'Protection') ||
                        story.categoryName
         }));
         return res.json(translatedStories);
@@ -743,37 +751,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const lang = langParam.toLowerCase() === 'en' ? 'en' : 'pt-BR';
       console.log('Language determined for testimonials:', lang);
       
-      // Se o idioma for inglês, adapta os nomes e traduções
+      // Se o idioma for inglês, usa os campos traduzidos do banco de dados
       if (lang === 'en') {
         const translatedTestimonials = correctedTestimonials.map(t => {
-          if (t.name === "Ana Paula") {
-            return {
-              ...t,
-              name: "Anne Paula",
-              relation: "Mother of Mariana, 6 years old",
-              content: "My daughter loves the stories from STELOOS! They teach important values in a way she understands and enjoys."
-            };
-          } else if (t.name === "Roberto") {
-            return {
-              ...t,
-              name: "Robert",
-              relation: "Father of Peter, 5 years old",
-              content: "The stories are perfect for bedtime. My son always asks for one more! I love how they convey positive messages."
-            };
-          } else if (t.name === "Juliana") {
-            return {
-              ...t,
-              name: "Julie",
-              relation: "Teacher and mother",
-              content: "As an educator, I recommend STELOOS to all families. The stories are educational and the illustrations are beautiful!"
-            };
-          } else {
-            // Para outros testemunhos que possam ser adicionados no futuro
-            return t;
-          }
+          return {
+            ...t,
+            // Usa os campos traduzidos se existirem, caso contrário usa traduções estáticas
+            name: t.nameEn || t.name,
+            relation: t.relationEn || t.relation,
+            content: t.contentEn || t.content,
+          };
         });
         
-        console.log('Sending translated testimonials');
+        console.log('Sending translated testimonials from database');
         return res.json(translatedTestimonials);
       }
       
