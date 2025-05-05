@@ -20,13 +20,7 @@ export default function Footer() {
             </Link>
             <p className="mb-4">{t('app.slogan')}</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-primary">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="text-white hover:text-primary">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="text-white hover:text-primary">
+              <a href="https://youtube.com/@Steloos" className="text-white hover:text-primary" target="_blank" rel="noopener noreferrer">
                 <Youtube size={18} />
               </a>
             </div>
