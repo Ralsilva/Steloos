@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -12,8 +12,20 @@ import Categories from "@/pages/categories";
 import StoryDetails from "@/pages/story-details";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import AdminDashboard from "@/pages/admin";
 
 function Router() {
+  const [location] = useLocation();
+  const isAdminRoute = location.startsWith('/admin');
+
+  if (isAdminRoute) {
+    return (
+      <Switch>
+        <Route path="/admin/:rest*" component={AdminDashboard} />
+      </Switch>
+    );
+  }
+
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -36,15 +48,18 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  const isAdminRoute = location.startsWith('/admin');
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow">
+          {!isAdminRoute && <Header />}
+          <main className={`flex-grow ${isAdminRoute ? 'min-h-screen' : ''}`}>
             <Router />
           </main>
-          <Footer />
+          {!isAdminRoute && <Footer />}
         </div>
         <Toaster />
       </TooltipProvider>

@@ -210,5 +210,97 @@
   },
   "errors": {
     "shareError": "Erro ao compartilhar:"
+  },
+  "admin": {
+    "title": "Painel de Administração",
+    "welcome": "Bem-vindo ao Painel de Administração do STELOOS",
+    "overview": "Visão Geral",
+    "navigation": "Navegação",
+    "dashboard": "Painel Principal",
+    "stories": "Gerenciar Estórias",
+    "categories": "Gerenciar Categorias",
+    "subscribers": "Assinantes da Newsletter",
+    "settings": "Configurações",
+    "logout": "Sair",
+    "stats": {
+      "totalStories": "Total de Estórias",
+      "totalCategories": "Total de Categorias",
+      "totalSubscribers": "Total de Assinantes",
+      "recentActivity": "Atividade Recente"
+    },
+    "storiesManager": {
+      "title": "Gerenciamento de Estórias",
+      "createNew": "Criar Nova Estória",
+      "edit": "Editar Estória",
+      "delete": "Excluir Estória",
+      "id": "ID",
+      "title": "Título",
+      "category": "Categoria",
+      "excerpt": "Resumo",
+      "content": "Conteúdo",
+      "imageUrl": "URL da Imagem",
+      "featured": "Destaque",
+      "createdAt": "Criado em",
+      "updatedAt": "Atualizado em",
+      "actions": "Ações",
+      "confirmDelete": "Tem certeza que deseja excluir esta estória?",
+      "saveSuccess": "Estória salva com sucesso!",
+      "deleteSuccess": "Estória excluída com sucesso!",
+      "form": {
+        "title": "Título da Estória",
+        "titlePlaceholder": "Digite o título da estória",
+        "category": "Categoria da Estória",
+        "categoryPlaceholder": "Selecione uma categoria",
+        "excerpt": "Resumo da Estória",
+        "excerptPlaceholder": "Digite um breve resumo",
+        "content": "Conteúdo da Estória",
+        "contentPlaceholder": "Digite o conteúdo completo da estória",
+        "imageUrl": "URL da Imagem",
+        "imageUrlPlaceholder": "Digite a URL da imagem",
+        "featured": "Destaque na Página Inicial",
+        "submit": "Salvar Estória",
+        "cancel": "Cancelar"
+      }
+    },
+    "categoriesManager": {
+      "title": "Gerenciamento de Categorias",
+      "createNew": "Criar Nova Categoria",
+      "edit": "Editar Categoria",
+      "delete": "Excluir Categoria",
+      "id": "ID",
+      "name": "Nome",
+      "description": "Descrição",
+      "icon": "Ícone",
+      "color": "Cor",
+      "storiesCount": "Total de Estórias",
+      "actions": "Ações",
+      "confirmDelete": "Tem certeza que deseja excluir esta categoria?",
+      "saveSuccess": "Categoria salva com sucesso!",
+      "deleteSuccess": "Categoria excluída com sucesso!",
+      "form": {
+        "name": "Nome da Categoria",
+        "namePlaceholder": "Digite o nome da categoria",
+        "description": "Descrição da Categoria",
+        "descriptionPlaceholder": "Digite uma breve descrição",
+        "icon": "Ícone da Categoria",
+        "iconPlaceholder": "Digite o nome do ícone",
+        "color": "Cor da Categoria",
+        "colorPlaceholder": "Selecione uma cor",
+        "submit": "Salvar Categoria",
+        "cancel": "Cancelar"
+      }
+    },
+    "subscribersManager": {
+      "title": "Gerenciamento de Assinantes",
+      "email": "E-mail",
+      "subscribedAt": "Data de Inscrição",
+      "actions": "Ações",
+      "delete": "Remover",
+      "confirmDelete": "Tem certeza que deseja remover este assinante?",
+      "deleteSuccess": "Assinante removido com sucesso!",
+      "exportCsv": "Exportar para CSV",
+      "search": "Buscar assinante",
+      "noSubscribers": "Nenhum assinante encontrado"
+    }
   }
 }
