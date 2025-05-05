@@ -6,9 +6,14 @@ import { getCategoryInfo } from "@/lib/data";
 import { useTranslation } from "react-i18next";
 
 export default function NewestStories() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: stories, isLoading } = useQuery({
-    queryKey: ['/api/stories/newest'],
+    queryKey: ['/api/stories/newest', i18n.language],
+    queryFn: async () => {
+      const language = i18n.language === 'en' ? 'en' : 'pt-BR';
+      const response = await fetch(`/api/stories/newest?lang=${language}`);
+      return response.json();
+    }
   }) as { data: any[], isLoading: boolean };
 
   return (

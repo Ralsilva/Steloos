@@ -54,6 +54,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/stories/featured", async (req, res) => {
     try {
       const stories = await storage.getStoriesFeatured();
+      
+      // Verifica se o idioma está definido no parâmetro de consulta
+      const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      
+      // Se o idioma for inglês, traduz os títulos e resumos das estórias
+      if (lang === 'en') {
+        const translatedStories = stories.map(story => {
+          // Usa as traduções do arquivo de localização para traduzir os títulos e resumos
+          const englishTitle = story.title === "As Asas da Amizade" ? "The Wings of Friendship" : 
+                               story.title === "O Jardim da Paz" ? "The Garden of Peace" :
+                               story.title === "A Estrela Sábia" ? "The Wise Star" :
+                               story.title === "O Coelho Generoso" ? "The Generous Rabbit" :
+                               story.title === "Anjos da Guarda" ? "Guardian Angels" :
+                               story.title === "A Jornada da Alma" ? "The Journey of the Soul" :
+                               story.title === "O Milagre do Perdão" ? "The Miracle of Forgiveness" :
+                               story.title === "O Presente do Coração" ? "The Gift from the Heart" :
+                               story.title;
+                               
+          const englishExcerpt = story.excerpt.replace(/estória/g, "story").replace(/estórias/g, "stories");
+          
+          return {
+            ...story,
+            title: englishTitle,
+            excerpt: englishExcerpt
+          };
+        });
+        
+        return res.json(translatedStories);
+      }
+      
       res.json(stories);
     } catch (error) {
       res.status(500).json({ message: "Error fetching featured stories" });
@@ -63,6 +93,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/stories/newest", async (req, res) => {
     try {
       const stories = await storage.getStoriesNewest();
+      
+      // Verifica se o idioma está definido no parâmetro de consulta
+      const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
+      
+      // Se o idioma for inglês, traduz os títulos e resumos das estórias
+      if (lang === 'en') {
+        const translatedStories = stories.map(story => {
+          // Usa as traduções do arquivo de localização para traduzir os títulos e resumos
+          const englishTitle = story.title === "As Asas da Amizade" ? "The Wings of Friendship" : 
+                               story.title === "O Jardim da Paz" ? "The Garden of Peace" :
+                               story.title === "A Estrela Sábia" ? "The Wise Star" :
+                               story.title === "O Coelho Generoso" ? "The Generous Rabbit" :
+                               story.title === "Anjos da Guarda" ? "Guardian Angels" :
+                               story.title === "A Jornada da Alma" ? "The Journey of the Soul" :
+                               story.title === "O Milagre do Perdão" ? "The Miracle of Forgiveness" :
+                               story.title === "O Presente do Coração" ? "The Gift from the Heart" :
+                               story.title;
+                               
+          const englishExcerpt = story.excerpt.replace(/estória/g, "story").replace(/estórias/g, "stories");
+          
+          return {
+            ...story,
+            title: englishTitle,
+            excerpt: englishExcerpt
+          };
+        });
+        
+        return res.json(translatedStories);
+      }
+      
       res.json(stories);
     } catch (error) {
       res.status(500).json({ message: "Error fetching newest stories" });
