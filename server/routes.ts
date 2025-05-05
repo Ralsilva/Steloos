@@ -55,7 +55,28 @@ function translateExcerpt(excerpt: string): string {
       "A story about how guardian angels protect and guide children.",
       
     "Uma bela explicação de como nossa alma aprende e cresce através de múltiplas experiências.": 
-      "A beautiful explanation of how our soul learns and grows through multiple experiences."
+      "A beautiful explanation of how our soul learns and grows through multiple experiences.",
+      
+    "Uma bela estória sobre as asas mágicas que a verdadeira amizade pode proporcionar em nossa jornada de vida.":
+      "A beautiful story about the magical wings that true friendship can provide in our life journey.",
+      
+    "Um pássaro e uma borboleta descobrem o verdadeiro significado da amizade apesar de suas diferenças.":
+      "A bird and a butterfly discover the true meaning of friendship despite their differences.",
+      
+    "Uma pequena estrela ajuda um menino a encontrar respostas para suas grandes perguntas sobre a vida.":
+      "A small star helps a boy find answers to his big questions about life.",
+      
+    "Um coelhinho aprende sobre o valor de compartilhar.":
+      "A little rabbit learns about the value of sharing.",
+      
+    "Como os anjos nos protegem todos os dias.":
+      "How angels protect us every day.",
+      
+    "O poder transformador de perdoar os outros e a nós mesmos.":
+      "The transformative power of forgiving others and ourselves.",
+      
+    "Uma mensagem do coração pode ser o presente mais valioso.":
+      "A message from the heart can be the most valuable gift."
   };
   
   // Verifica se o resumo está no mapeamento
