@@ -12,12 +12,12 @@ interface StoryCardProps {
 
 // Função para formatar a URL da imagem
 function formatImageUrl(url: string, variant: "large" | "small"): string {
-  if (!url) return "https://via.placeholder.com/600x400?text=Estrelinha";
+  if (!url) return "https://via.placeholder.com/600x400?text=Esteloo";
   
   // Fallback padrão para imagens
   const fallbackUrl = variant === "large" 
-    ? "https://via.placeholder.com/600x400?text=Estrelinha" 
-    : "https://via.placeholder.com/300x200?text=Estrelinha";
+    ? "https://via.placeholder.com/600x400?text=Esteloo" 
+    : "https://via.placeholder.com/300x200?text=Esteloo";
   
   try {
     // Verifica se a URL é válida
@@ -46,7 +46,14 @@ function formatImageUrl(url: string, variant: "large" | "small"): string {
 }
 
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  
+  // Determinar o caminho correto da estória com base no idioma
+  const getStoryPath = (storyId: number) => {
+    return i18n.language === 'pt-BR' 
+      ? `/estoria/${storyId}` 
+      : `/story/${storyId}`;
+  };
   const categoryInfo = getCategoryInfo(story.categoryId);
   // Escolher uma imagem, ou usando a URL original formatada, ou uma imagem de fallback
   const imageUrl = story.imageUrl ? formatImageUrl(story.imageUrl, variant) : getFallbackImage(story.id, story.categoryId);

@@ -7,8 +7,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 
 export default function Categories() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  
+  // Detectar categoria da URL
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const categoryFromUrl = searchParams.get('categoria') || searchParams.get('category');
+    if (categoryFromUrl) {
+      setSelectedCategoryId(categoryFromUrl);
+    }
+  }, []);
   
   // Carrega todas as categorias
   const { data: categories, isLoading: loadingCategories } = useQuery<Category[]>({

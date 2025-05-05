@@ -16,10 +16,17 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      {/* Rotas em português */}
       <Route path="/estorias" component={Stories} />
       <Route path="/categorias" component={Categories} />
       <Route path="/estoria/:id" component={StoryDetails} />
       <Route path="/sobre" component={About} />
+      
+      {/* Rotas em inglês */}
+      <Route path="/stories" component={Stories} />
+      <Route path="/categories" component={Categories} />
+      <Route path="/story/:id" component={StoryDetails} />
+      <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
   );

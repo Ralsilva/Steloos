@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 
 export default function CategorySelector() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: categories, isLoading } = useQuery({
     queryKey: ['/api/categories'],
   }) as { data: any[], isLoading: boolean };
@@ -38,7 +38,7 @@ export default function CategorySelector() {
           return (
             <Link 
               key={category.id} 
-              href={`/categorias?categoria=${category.id}`}
+              href={i18n.language === 'pt-BR' ? `/categorias?categoria=${category.id}` : `/categories?category=${category.id}`}
               className="category-card bg-white rounded-xl shadow-soft overflow-hidden transition-transform hover:transform hover:scale-105 hover:shadow-md"
             >
               <div className={`h-24 ${color} flex items-center justify-center`}>
