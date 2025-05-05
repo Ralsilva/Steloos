@@ -27,20 +27,20 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
 
   // Category methods
-  getCategories(): Promise<Category[]>;
+  getCategories(): Promise<any[]>;
   getCategoryById(id: string): Promise<Category | undefined>;
 
   // Story methods
   getStories(): Promise<Story[]>;
   getStoriesByCategory(categoryId: string): Promise<Story[]>;
-  getStoriesFeatured(): Promise<Story[]>;
-  getStoriesNewest(): Promise<Story[]>;
+  getStoriesFeatured(): Promise<any[]>;
+  getStoriesNewest(): Promise<any[]>;
   getStoryById(id: number): Promise<Story | undefined>;
   searchStories(query: string): Promise<Story[]>;
   getRelatedStories(storyId: number, limit?: number): Promise<Story[]>;
 
   // Testimonial methods
-  getTestimonials(): Promise<Testimonial[]>;
+  getTestimonials(): Promise<any[]>;
 
   // Newsletter methods
   addNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
@@ -70,8 +70,13 @@ export class DatabaseStorage implements IStorage {
   }
   
   // Category methods
-  async getCategories(): Promise<Category[]> {
-    return await db.select().from(categories);
+  async getCategories(): Promise<any[]> {
+    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    return await db.select({
+      id: categories.id,
+      name: categories.name,
+      description: categories.description
+    }).from(categories);
   }
 
   async getCategoryById(id: string): Promise<Category | undefined> {
@@ -88,16 +93,42 @@ export class DatabaseStorage implements IStorage {
     return await db.select().from(stories).where(eq(stories.categoryId, categoryId));
   }
 
-  async getStoriesFeatured(): Promise<Story[]> {
-    return await db.select().from(stories)
-      .where(eq(stories.featured, true))
-      .limit(3);
+  async getStoriesFeatured(): Promise<any[]> {
+    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    return await db.select({
+      id: stories.id,
+      title: stories.title,
+      excerpt: stories.excerpt,
+      content: stories.content,
+      imageUrl: stories.imageUrl,
+      categoryId: stories.categoryId,
+      categoryName: stories.categoryName,
+      ageRange: stories.ageRange,
+      featured: stories.featured,
+      createdAt: stories.createdAt
+    })
+    .from(stories)
+    .where(eq(stories.featured, true))
+    .limit(3);
   }
 
-  async getStoriesNewest(): Promise<Story[]> {
-    return await db.select().from(stories)
-      .orderBy(desc(stories.createdAt))
-      .limit(3);
+  async getStoriesNewest(): Promise<any[]> {
+    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    return await db.select({
+      id: stories.id,
+      title: stories.title,
+      excerpt: stories.excerpt,
+      content: stories.content,
+      imageUrl: stories.imageUrl,
+      categoryId: stories.categoryId,
+      categoryName: stories.categoryName,
+      ageRange: stories.ageRange,
+      featured: stories.featured,
+      createdAt: stories.createdAt
+    })
+    .from(stories)
+    .orderBy(desc(stories.createdAt))
+    .limit(3);
   }
 
   async getStoryById(id: number): Promise<Story | undefined> {
@@ -130,8 +161,14 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Testimonial methods
-  async getTestimonials(): Promise<Testimonial[]> {
-    return await db.select().from(testimonials);
+  async getTestimonials(): Promise<any[]> {
+    // Seleção básica para evitar erro com colunas traduzidas que podem não existir ainda
+    return await db.select({
+      id: testimonials.id,
+      name: testimonials.name,
+      relation: testimonials.relation,
+      content: testimonials.content,
+    }).from(testimonials);
   }
 
   // Newsletter methods
@@ -160,8 +197,45 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
+// Função para adicionar colunas de tradução se não existirem
+async function addTranslationColumns() {
+  try {
+    // Adicionar colunas para tabela de estórias
+    await db.execute(sql`
+      ALTER TABLE stories 
+      ADD COLUMN IF NOT EXISTS title_en TEXT,
+      ADD COLUMN IF NOT EXISTS excerpt_en TEXT,
+      ADD COLUMN IF NOT EXISTS content_en TEXT,
+      ADD COLUMN IF NOT EXISTS age_range_en TEXT
+    `);
+    console.log("Colunas adicionadas à tabela 'stories'");
+
+    // Adicionar colunas para tabela de categorias
+    await db.execute(sql`
+      ALTER TABLE categories 
+      ADD COLUMN IF NOT EXISTS name_en TEXT,
+      ADD COLUMN IF NOT EXISTS description_en TEXT
+    `);
+    console.log("Colunas adicionadas à tabela 'categories'");
+
+    // Adicionar colunas para tabela de testemunhos
+    await db.execute(sql`
+      ALTER TABLE testimonials 
+      ADD COLUMN IF NOT EXISTS name_en TEXT,
+      ADD COLUMN IF NOT EXISTS relation_en TEXT,
+      ADD COLUMN IF NOT EXISTS content_en TEXT
+    `);
+    console.log("Colunas adicionadas à tabela 'testimonials'");
+  } catch (error) {
+    console.error("Erro ao adicionar colunas de tradução:", error);
+  }
+}
+
 // Initialize with data if table is empty
 export async function initializeDatabase() {
+  // Adicionar colunas de tradução
+  await addTranslationColumns();
+  
   // Check if categories exist
   const existingCategories = await db.select().from(categories);
   if (existingCategories.length === 0) {

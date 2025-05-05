@@ -22,6 +22,9 @@ export const categories = pgTable("categories", {
   id: text("id").primaryKey(), // slug-like ID (e.g., "amor", "paz")
   name: text("name").notNull(),
   description: text("description"),
+  // Campos traduzidos para inglês
+  nameEn: text("name_en"),
+  descriptionEn: text("description_en"),
 });
 
 export const insertCategorySchema = createInsertSchema(categories);
@@ -34,6 +37,12 @@ export const stories = pgTable("stories", {
   title: text("title").notNull(),
   excerpt: text("excerpt").notNull(),
   content: text("content").notNull(),
+  // Campos traduzidos para inglês
+  titleEn: text("title_en"),
+  excerptEn: text("excerpt_en"),
+  contentEn: text("content_en"),
+  ageRangeEn: text("age_range_en"),
+  // Outros campos
   imageUrl: text("image_url").notNull(),
   categoryId: text("category_id").notNull().references(() => categories.id),
   categoryName: text("category_name").notNull(),
@@ -56,6 +65,10 @@ export const testimonials = pgTable("testimonials", {
   name: text("name").notNull(),
   relation: text("relation").notNull(), // e.g., "Mãe da Mariana, 6 anos"
   content: text("content").notNull(),
+  // Campos traduzidos para inglês
+  nameEn: text("name_en"),
+  relationEn: text("relation_en"),
+  contentEn: text("content_en"),
 });
 
 export const insertTestimonialSchema = createInsertSchema(testimonials).omit({
