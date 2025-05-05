@@ -147,8 +147,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
       });
       
-      // Verifica se o idioma está definido no cabeçalho
-      const lang = req.headers['accept-language']?.toLowerCase().includes('en') ? 'en' : 'pt-BR';
+      // Verifica se o idioma está definido no parâmetro de consulta
+      // Nota: Adicionamos um parâmetro de consulta para evitar problemas com cache
+      const lang = req.query.lang === 'en' ? 'en' : 'pt-BR';
       
       // Se o idioma for inglês, adapta os nomes e traduções
       if (lang === 'en') {

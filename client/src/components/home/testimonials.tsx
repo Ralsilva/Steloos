@@ -4,9 +4,14 @@ import { Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function Testimonials() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: testimonials, isLoading } = useQuery({
-    queryKey: ['/api/testimonials'],
+    queryKey: ['/api/testimonials', i18n.language],
+    queryFn: async () => {
+      const language = i18n.language === 'en' ? 'en' : 'pt-BR';
+      const response = await fetch(`/api/testimonials?lang=${language}`);
+      return response.json();
+    }
   }) as { data: any[], isLoading: boolean };
 
   return (
