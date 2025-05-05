@@ -20,13 +20,70 @@ function translateTitle(title: string): string {
 
 // Função para traduzir resumos, incluindo nomes comuns
 function translateExcerpt(excerpt: string): string {
+  return translateContent(excerpt);
+}
+
+// Função para traduzir qualquer conteúdo, incluindo substituições de palavras comuns e nomes
+function translateContent(text: string): string {
+  if (!text) return '';
+  
   // Traduz termos específicos
-  let translatedExcerpt = excerpt
+  let translated = text
     .replace(/estória/g, "story")
-    .replace(/estórias/g, "stories");
+    .replace(/estórias/g, "stories")
+    .replace(/Estória/g, "Story")
+    .replace(/Estórias/g, "Stories")
+    .replace(/criança/g, "child")
+    .replace(/crianças/g, "children")
+    .replace(/Criança/g, "Child")
+    .replace(/Crianças/g, "Children")
+    .replace(/amigo/g, "friend")
+    .replace(/amigos/g, "friends")
+    .replace(/Amigo/g, "Friend")
+    .replace(/Amigos/g, "Friends")
+    .replace(/escola/g, "school")
+    .replace(/Escola/g, "School")
+    .replace(/professor/g, "teacher")
+    .replace(/professora/g, "teacher")
+    .replace(/professores/g, "teachers")
+    .replace(/Professor/g, "Teacher")
+    .replace(/Professora/g, "Teacher")
+    .replace(/Professores/g, "Teachers")
+    .replace(/jardim/g, "garden")
+    .replace(/Jardim/g, "Garden")
+    .replace(/floresta/g, "forest")
+    .replace(/Floresta/g, "Forest")
+    .replace(/estrela/g, "star")
+    .replace(/estrelas/g, "stars")
+    .replace(/Estrela/g, "Star")
+    .replace(/Estrelas/g, "Stars")
+    .replace(/menino/g, "boy")
+    .replace(/menina/g, "girl")
+    .replace(/meninos/g, "boys")
+    .replace(/meninas/g, "girls")
+    .replace(/Menino/g, "Boy")
+    .replace(/Menina/g, "Girl")
+    .replace(/Meninos/g, "Boys")
+    .replace(/Meninas/g, "Girls")
+    .replace(/céu/g, "sky")
+    .replace(/Céu/g, "Sky")
+    .replace(/coração/g, "heart")
+    .replace(/Coração/g, "Heart")
+    .replace(/amor/g, "love")
+    .replace(/Amor/g, "Love")
+    .replace(/paz/g, "peace")
+    .replace(/Paz/g, "Peace")
+    .replace(/sabedoria/g, "wisdom")
+    .replace(/Sabedoria/g, "Wisdom")
+    .replace(/natureza/g, "nature")
+    .replace(/Natureza/g, "Nature")
+    .replace(/família/g, "family")
+    .replace(/Família/g, "Family")
+    .replace(/amizade/g, "friendship")
+    .replace(/Amizade/g, "Friendship");
     
   // Traduz nomes próprios comuns
-  translatedExcerpt = translatedExcerpt
+  translated = translated
     .replace(/\bMaria\b/g, "Mary")
     .replace(/\bJoão\b/g, "John")
     .replace(/\bJosé\b/g, "Joseph")
@@ -41,9 +98,11 @@ function translateExcerpt(excerpt: string): string {
     .replace(/\bRoberto\b/g, "Robert")
     .replace(/\bLucas\b/g, "Luke")
     .replace(/\bMateus\b/g, "Matthew")
-    .replace(/\bMariana\b/g, "Marianne");
+    .replace(/\bMariana\b/g, "Marianne")
+    .replace(/\bDeus\b/g, "God")
+    .replace(/\bJesus\b/g, "Jesus");
     
-  return translatedExcerpt;
+  return translated;
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -109,23 +168,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Se o idioma for inglês, traduz os títulos e resumos das estórias
       if (lang === 'en') {
         const translatedStories = stories.map(story => {
-          // Usa as traduções do arquivo de localização para traduzir os títulos e resumos
-          const englishTitle = story.title === "As Asas da Amizade" ? "The Wings of Friendship" : 
-                               story.title === "O Jardim da Paz" ? "The Garden of Peace" :
-                               story.title === "A Estrela Sábia" ? "The Wise Star" :
-                               story.title === "O Coelho Generoso" ? "The Generous Rabbit" :
-                               story.title === "Anjos da Guarda" ? "Guardian Angels" :
-                               story.title === "A Jornada da Alma" ? "The Journey of the Soul" :
-                               story.title === "O Milagre do Perdão" ? "The Miracle of Forgiveness" :
-                               story.title === "O Presente do Coração" ? "The Gift from the Heart" :
-                               story.title;
-                               
-          const englishExcerpt = story.excerpt.replace(/estória/g, "story").replace(/estórias/g, "stories");
-          
+          // Usa nossas funções de tradução
           return {
             ...story,
-            title: englishTitle,
-            excerpt: englishExcerpt
+            title: translateTitle(story.title),
+            excerpt: translateExcerpt(story.excerpt)
           };
         });
         
@@ -158,23 +205,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Se o idioma for inglês, traduz os títulos e resumos das estórias
       if (lang === 'en') {
         const translatedStories = stories.map(story => {
-          // Usa as traduções do arquivo de localização para traduzir os títulos e resumos
-          const englishTitle = story.title === "As Asas da Amizade" ? "The Wings of Friendship" : 
-                               story.title === "O Jardim da Paz" ? "The Garden of Peace" :
-                               story.title === "A Estrela Sábia" ? "The Wise Star" :
-                               story.title === "O Coelho Generoso" ? "The Generous Rabbit" :
-                               story.title === "Anjos da Guarda" ? "Guardian Angels" :
-                               story.title === "A Jornada da Alma" ? "The Journey of the Soul" :
-                               story.title === "O Milagre do Perdão" ? "The Miracle of Forgiveness" :
-                               story.title === "O Presente do Coração" ? "The Gift from the Heart" :
-                               story.title;
-                               
-          const englishExcerpt = story.excerpt.replace(/estória/g, "story").replace(/estórias/g, "stories");
-          
+          // Usa nossas funções de tradução
           return {
             ...story,
-            title: englishTitle,
-            excerpt: englishExcerpt
+            title: translateTitle(story.title),
+            excerpt: translateExcerpt(story.excerpt)
           };
         });
         
@@ -227,11 +262,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           ...story,
           title: translateTitle(story.title),
           excerpt: translateExcerpt(story.excerpt),
-          content: story.content
-            .replace(/estória/g, "story")
-            .replace(/estórias/g, "stories")
-            .replace(/Estória/g, "Story")
-            .replace(/Estórias/g, "Stories")
+          content: translateContent(story.content)
         };
         return res.json(translatedStory);
       }
