@@ -9,6 +9,7 @@ import {
   LayoutDashboard, 
   LogOut, 
   MailCheck, 
+  Search,
   Settings, 
   Users, 
 } from 'lucide-react';
@@ -77,6 +78,8 @@ export default function AdminDashboard() {
       setActiveTab('categories');
     } else if (location === '/admin/subscribers') {
       setActiveTab('subscribers');
+    } else if (location === '/admin/keywords') {
+      setActiveTab('keywords');
     } else if (location === '/admin/settings') {
       setActiveTab('settings');
     }
@@ -134,6 +137,15 @@ export default function AdminDashboard() {
             </Button>
             
             <Button 
+              variant={activeTab === 'keywords' ? 'default' : 'ghost'} 
+              className="w-full justify-start mb-1" 
+              onClick={() => handleTabChange('keywords')}
+            >
+              <Search className="h-4 w-4 mr-2" />
+              Palavras-chave
+            </Button>
+            
+            <Button 
               variant={activeTab === 'settings' ? 'default' : 'ghost'} 
               className="w-full justify-start mb-1" 
               onClick={() => handleTabChange('settings')}
@@ -176,6 +188,10 @@ export default function AdminDashboard() {
               <TabsTrigger value="subscribers">
                 <MailCheck className="h-4 w-4 mr-2" />
                 {t('admin.subscribers')}
+              </TabsTrigger>
+              <TabsTrigger value="keywords">
+                <Search className="h-4 w-4 mr-2" />
+                Palavras-chave
               </TabsTrigger>
               <TabsTrigger value="settings">
                 <Settings className="h-4 w-4 mr-2" />
@@ -436,6 +452,197 @@ export default function AdminDashboard() {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+            
+            <TabsContent value="keywords">
+              <div className="grid gap-6">
+                <Card>
+                  <CardHeader className="bg-indigo-50 border-b border-indigo-100">
+                    <CardTitle className="flex items-center">
+                      <Search className="h-5 w-5 mr-2 text-indigo-600" />
+                      Pesquisa de Palavras-chave
+                    </CardTitle>
+                    <CardDescription>
+                      Encontre palavras-chave relevantes para melhorar o SEO do seu conteúdo infantil
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="mb-6">
+                      <form className="flex gap-4 mb-2">
+                        <div className="flex-1">
+                          <Label htmlFor="keyword-search" className="sr-only">
+                            Pesquisar palavra-chave
+                          </Label>
+                          <Input
+                            id="keyword-search"
+                            placeholder="Digite um termo para pesquisar (ex: contos infantis, histórias para crianças)"
+                            className="w-full"
+                          />
+                        </div>
+                        <Select defaultValue="google">
+                          <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Selecione o serviço" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="google">Google Trends</SelectItem>
+                            <SelectItem value="semrush">SEMrush</SelectItem>
+                            <SelectItem value="ahrefs">Ahrefs</SelectItem>
+                            <SelectItem value="ubersuggest">Ubersuggest</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <Button type="submit" className="shrink-0 gap-1">
+                          <Search className="h-4 w-4" />
+                          Pesquisar
+                        </Button>
+                      </form>
+                      <p className="text-sm text-gray-500">
+                        Dica: pesquise termos relacionados ao conteúdo infantil para sua próxima estória
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-medium">Resultado da pesquisa</h3>
+                      
+                      <div className="border rounded-md p-6 bg-gray-50 text-center">
+                        <div className="mb-4">
+                          <Search className="h-12 w-12 mx-auto text-gray-400" />
+                        </div>
+                        <h4 className="text-lg font-medium text-gray-600">Nenhuma pesquisa realizada</h4>
+                        <p className="text-sm text-gray-500 max-w-md mx-auto mt-2">
+                          Digite um termo acima e clique em "Pesquisar" para ver sugestões de palavras-chave
+                          relacionadas e seu volume de busca mensal
+                        </p>
+                      </div>
+                      
+                      {/* Área para exibir os resultados da pesquisa */}
+                      <div className="hidden">
+                        <div className="border rounded-md overflow-hidden">
+                          <div className="grid grid-cols-12 gap-2 p-3 bg-gray-100 font-medium border-b">
+                            <div className="col-span-5">Palavra-chave</div>
+                            <div className="col-span-2">Volume mensal</div>
+                            <div className="col-span-2">Dificuldade</div>
+                            <div className="col-span-3">Ações</div>
+                          </div>
+                          
+                          <div className="divide-y">
+                            {[1, 2, 3, 4, 5].map((item) => (
+                              <div key={item} className="grid grid-cols-12 gap-2 p-3 items-center hover:bg-gray-50">
+                                <div className="col-span-5 font-medium">
+                                  Estórias infantis educativas
+                                </div>
+                                <div className="col-span-2">
+                                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    2,400
+                                  </span>
+                                </div>
+                                <div className="col-span-2">
+                                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
+                                  </div>
+                                  <span className="text-xs text-gray-500">Média (45%)</span>
+                                </div>
+                                <div className="col-span-3 flex space-x-2">
+                                  <Button variant="outline" size="sm">
+                                    Salvar
+                                  </Button>
+                                  <Button variant="ghost" size="sm">
+                                    Detalhes
+                                  </Button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Palavras-chave Salvas</CardTitle>
+                    <CardDescription>
+                      Palavras-chave que você salvou para usar em seu conteúdo
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="border rounded-md">
+                      <div className="grid grid-cols-12 gap-2 p-3 bg-gray-50 font-medium border-b">
+                        <div className="col-span-5">Palavra-chave</div>
+                        <div className="col-span-2">Volume</div>
+                        <div className="col-span-3">Data de salvamento</div>
+                        <div className="col-span-2">Ações</div>
+                      </div>
+                      
+                      <div className="p-8 text-center text-gray-500">
+                        Nenhuma palavra-chave salva ainda
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Tendências de Pesquisa</CardTitle>
+                    <CardDescription>
+                      Termos populares relacionados a estórias infantis no último mês
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">estórias sobre amizade</div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '88%' }}></div>
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium ml-4">88%</div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">contos de fadas modernos</div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '72%' }}></div>
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium ml-4">72%</div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">histórias sobre valores</div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '65%' }}></div>
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium ml-4">65%</div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">estórias para dormir</div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '61%' }}></div>
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium ml-4">61%</div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">narrativas interativas infantis</div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '52%' }}></div>
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium ml-4">52%</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
             <TabsContent value="settings">
