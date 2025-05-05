@@ -49,31 +49,19 @@ function formatImageUrl(url: string, variant: "large" | "small"): string {
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
   const { t, i18n } = useTranslation();
   
-  // Mapa de tradução para categorias
-  const categoryTranslations: Record<string, string> = {
-    'amor': 'love',
-    'paz': 'peace',
-    'sabedoria': 'wisdom',
-    'bondade': 'kindness',
-    'natureza': 'nature',
-    'protecao': 'protection',
-    'familia': 'family',
-    'amizade': 'friendship'
-  };
+  // Usar chave de namespace específica para estórias
+  const storyTitleKey = `story_${story.id}_title`;
+  const storyExcerptKey = `story_${story.id}_excerpt`;
+  
+  // Translations namespace para traduções
+  const titleFromTranslation = t(storyTitleKey, { ns: 'stories', defaultValue: story.title });
+  const excerptFromTranslation = t(storyExcerptKey, { ns: 'stories', defaultValue: story.excerpt });
   
   // Determinar o caminho correto da estória com base no idioma
   const getStoryPath = (storyId: number) => {
     return i18n.language === 'pt-BR' 
       ? `/estoria/${storyId}` 
       : `/story/${storyId}`;
-  };
-  
-  // Traduzir categoria para URL
-  const getCategoryUrlParam = (categoryId: string) => {
-    if (i18n.language === 'en' && categoryTranslations[categoryId]) {
-      return categoryTranslations[categoryId];
-    }
-    return categoryId;
   };
   
   const categoryInfo = getCategoryInfo(story.categoryId);
@@ -89,7 +77,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
         <div className="w-24 h-full bg-gray-100">
           <img 
             src={imageUrl} 
-            alt={story.title} 
+            alt={titleFromTranslation} 
             className="w-24 h-full object-cover"
             loading="lazy"
             onError={(e) => {
@@ -99,10 +87,10 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
         </div>
         <div className="p-4">
           <span className={`inline-block px-2 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full mb-2`}>
-            {story.categoryName}
+            {t(`categories.${story.categoryId}`)}
           </span>
-          <h3 className="font-heading font-bold text-lg mb-1">{translatedTitle}</h3>
-          <p className="text-gray-600 text-sm">{translatedExcerpt}</p>
+          <h3 className="font-heading font-bold text-lg mb-1">{titleFromTranslation}</h3>
+          <p className="text-gray-600 text-sm">{excerptFromTranslation}</p>
         </div>
       </Link>
     );
@@ -113,7 +101,7 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
       <div className="w-full h-48 bg-gray-100 relative">
         <img 
           src={imageUrl} 
-          alt={story.title} 
+          alt={titleFromTranslation} 
           className="w-full h-48 object-cover absolute inset-0"
           loading="lazy"
           onError={(e) => {
@@ -125,12 +113,12 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <span className={`inline-block px-3 py-1 text-xs font-medium ${categoryInfo.color} text-white rounded-full`}>
-            {story.categoryName}
+            {t(`categories.${story.categoryId}`)}
           </span>
           <span className="text-sm text-gray-500">{t('stories.ageRange')}: {story.ageRange}</span>
         </div>
-        <h3 className="font-heading font-bold text-xl mb-2">{story.title}</h3>
-        <p className="text-gray-600 mb-4">{story.excerpt}</p>
+        <h3 className="font-heading font-bold text-xl mb-2">{titleFromTranslation}</h3>
+        <p className="text-gray-600 mb-4">{excerptFromTranslation}</p>
         <Button
           asChild
           variant="link"

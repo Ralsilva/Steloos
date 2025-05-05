@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { categoryInfo } from "@/lib/data";
 import { Category, Story } from "@shared/schema";
-import StoryCard from "@/components/stories/story-card";
+import StoryCard from "@/components/stories/story-card-new";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import StoryCard from "@/components/stories/story-card";
+import StoryCard from "@/components/stories/story-card-new";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Story } from "@shared/schema";
 import { useTranslation } from "react-i18next";
