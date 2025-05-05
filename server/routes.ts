@@ -38,14 +38,71 @@ function translateTitle(title: string): string {
   return translateContent(title);
 }
 
-// Função para traduzir resumos, incluindo nomes comuns
+// Função para traduzir resumos, incluindo nomes comuns e fazer adaptações específicas
 function translateExcerpt(excerpt: string): string {
+  // Mapeamento direto para resumos específicos
+  const excerptMap: Record<string, string> = {
+    "Uma menina descobre um jardim mágico onde as plantas crescem com pensamentos de paz e harmonia.": 
+      "A girl discovers a magical garden where plants grow with thoughts of peace and harmony.",
+      
+    "Como uma lagarta aprendeu que a verdadeira paz vem de dentro.": 
+      "How a caterpillar learned that true peace comes from within.",
+      
+    "Um conto sobre o poder de compartilhar e como a generosidade transforma vidas.": 
+      "A tale about the power of sharing and how generosity transforms lives.",
+      
+    "Uma história sobre como os anjos da guarda protegem e guiam as crianças.": 
+      "A story about how guardian angels protect and guide children.",
+      
+    "Uma bela explicação de como nossa alma aprende e cresce através de múltiplas experiências.": 
+      "A beautiful explanation of how our soul learns and grows through multiple experiences."
+  };
+  
+  // Verifica se o resumo está no mapeamento
+  if (excerptMap[excerpt]) {
+    return excerptMap[excerpt];
+  }
+  
+  // Se não estiver no mapeamento, usa a tradução de conteúdo padrão
   return translateContent(excerpt);
 }
 
-// Função para traduzir qualquer conteúdo, incluindo substituições de palavras comuns e nomes
+// Função para traduzir conteúdo completo das estórias
 function translateContent(text: string): string {
   if (!text) return '';
+  
+  // Mapeamento direto para os parágrafos iniciais do Jardim da Paz (ID 2)
+  if (text.startsWith('No centro de uma pequena cidade, havia um terreno abandonado')) {
+    return `In the center of a small town, there was an abandoned plot of land that nobody visited. People hurried by, always too busy to notice that sad, empty space.
+
+Sophie, a 7-year-old girl, had eyes that saw beyond what adults could see. One day, while walking to school with her mother, she felt a special energy coming from that place.
+
+"Mommy, can I go see that empty lot?" Sophie asked.
+
+Her mother, surprised by her daughter's interest in such an abandoned place, agreed with a bit of hesitation.
+
+Upon entering the lot, Sophie felt a gentle breeze and heard a whisper: "Welcome to the Garden of Peace."
+
+Sophie looked around, confused. There was no garden at all, just dry earth and some stones. "What garden?" she asked.
+
+The voice, gentle like the breeze, answered: "The garden that exists in your thoughts and in your heart. The garden that can bloom with your feelings of peace."
+
+Intrigued, Sophie sat on the ground and closed her eyes. She began to imagine a beautiful garden with colorful flowers, leafy trees, and a small lake with crystal clear waters. In her mind, she filled the garden with thoughts of peace, harmony, and love.
+
+When she opened her eyes, Sophie was amazed. A small white flower had grown exactly where she was sitting.
+
+"It's a miracle!" she exclaimed.
+
+"It's not a miracle," said the voice. "It's the power of your peaceful thoughts. Every thought of love and harmony you have is like a seed that can bloom and transform the world around you."
+
+From that day on, Sophie visited the lot every day after school. During each visit, she would sit, close her eyes, and fill her mind with thoughts of peace. And each day, more flowers would grow.
+
+Other children from the neighborhood, curious about what Sophie was doing, began to join her. Sophie taught them about the Garden of Peace and how their positive thoughts could make flowers grow.
+
+In a few months, the abandoned lot transformed into a beautiful garden, full of flowers, trees, and even a small lake, exactly as Sophie had imagined. The people of the town, who used to hurry past, now stopped to admire the garden and feel the peace that emanated from it.
+
+The Garden of Peace became a special place in the town, where people of all ages went to find tranquility. And Sophie, with her childlike wisdom, taught everyone a valuable lesson: peace begins within us, in our thoughts and feelings, and has the power to transform not only our lives but also the world around us.`;
+  }
   
   // Traduz termos específicos
   let translated = text
@@ -152,7 +209,72 @@ function translateContent(text: string): string {
     .replace(/Dia/g, "Day")
     .replace(/Dias/g, "Days")
     .replace(/Noite/g, "Night")
-    .replace(/Noites/g, "Nights");
+    .replace(/Noites/g, "Nights")
+    .replace(/cidade/g, "city")
+    .replace(/Cidade/g, "City")
+    .replace(/onde/g, "where")
+    .replace(/como/g, "how")
+    .replace(/Como/g, "How")
+    .replace(/que/g, "that")
+    .replace(/muita/g, "a lot of")
+    .replace(/muito/g, "a lot")
+    .replace(/Muito/g, "A lot")
+    .replace(/Muita/g, "A lot of")
+    .replace(/através/g, "through")
+    .replace(/dentro/g, "inside")
+    .replace(/fora/g, "outside")
+    .replace(/sobre/g, "about")
+    .replace(/entre/g, "between")
+    .replace(/junto/g, "together")
+    .replace(/juntos/g, "together")
+    .replace(/juntas/g, "together")
+    .replace(/olhos/g, "eyes")
+    .replace(/olho/g, "eye")
+    .replace(/Olhos/g, "Eyes")
+    .replace(/mão/g, "hand")
+    .replace(/mãos/g, "hands")
+    .replace(/Mão/g, "Hand")
+    .replace(/Mãos/g, "Hands")
+    .replace(/encontrar/g, "find")
+    .replace(/encontrou/g, "found")
+    .replace(/encontra/g, "finds")
+    .replace(/Encontrar/g, "Find")
+    .replace(/pensamento/g, "thought")
+    .replace(/pensamentos/g, "thoughts")
+    .replace(/Pensamento/g, "Thought")
+    .replace(/Pensamentos/g, "Thoughts")
+    .replace(/sentimento/g, "feeling")
+    .replace(/sentimentos/g, "feelings")
+    .replace(/Sentimento/g, "Feeling")
+    .replace(/Sentimentos/g, "Feelings")
+    .replace(/presente/g, "gift")
+    .replace(/presentes/g, "gifts")
+    .replace(/Presente/g, "Gift")
+    .replace(/Presentes/g, "Gifts")
+    .replace(/irmão/g, "brother")
+    .replace(/irmã/g, "sister")
+    .replace(/irmãos/g, "siblings")
+    .replace(/Irmão/g, "Brother")
+    .replace(/Irmã/g, "Sister")
+    .replace(/Irmãos/g, "Siblings")
+    .replace(/filho/g, "son")
+    .replace(/filha/g, "daughter")
+    .replace(/filhos/g, "children")
+    .replace(/Filho/g, "Son")
+    .replace(/Filha/g, "Daughter")
+    .replace(/Filhos/g, "Children")
+    .replace(/mãe/g, "mother")
+    .replace(/pai/g, "father")
+    .replace(/Mãe/g, "Mother")
+    .replace(/Pai/g, "Father")
+    .replace(/voz/g, "voice")
+    .replace(/vozes/g, "voices")
+    .replace(/Voz/g, "Voice")
+    .replace(/Vozes/g, "Voices")
+    .replace(/história/g, "history")
+    .replace(/História/g, "History")
+    .replace(/histórias/g, "histories")
+    .replace(/Histórias/g, "Histories");
     
   // Traduz nomes próprios comuns
   translated = translated
