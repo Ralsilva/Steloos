@@ -7,15 +7,35 @@ import { cacheMiddleware } from "./cache";
 
 // Função para traduzir títulos em português para inglês
 function translateTitle(title: string): string {
-  return title === "As Asas da Amizade" ? "The Wings of Friendship" : 
-         title === "O Jardim da Paz" ? "The Garden of Peace" :
-         title === "A Estrela Sábia" ? "The Wise Star" :
-         title === "O Coelho Generoso" ? "The Generous Rabbit" :
-         title === "Anjos da Guarda" ? "Guardian Angels" :
-         title === "A Jornada da Alma" ? "The Journey of the Soul" :
-         title === "O Milagre do Perdão" ? "The Miracle of Forgiveness" :
-         title === "O Presente do Coração" ? "The Gift from the Heart" :
-         title;
+  // Traduções específicas para os títulos existentes
+  const titleMap: Record<string, string> = {
+    "As Asas da Amizade": "The Wings of Friendship",
+    "O Jardim da Paz": "The Garden of Peace",
+    "A Estrela Sábia": "The Wise Star",
+    "O Coelho Generoso": "The Generous Rabbit",
+    "Anjos da Guarda": "Guardian Angels",
+    "A Jornada da Alma": "The Journey of the Soul",
+    "O Milagre do Perdão": "The Miracle of Forgiveness",
+    "O Presente do Coração": "The Gift from the Heart",
+    "A Lagarta que Encontrou a Paz": "The Caterpillar that Found Peace",
+    "O Menino e a Estrela": "The Boy and the Star",
+    "Amigos Para Sempre": "Friends Forever",
+    "Um Coração Cheio de Amor": "A Heart Full of Love",
+    "A Flor da Gratidão": "The Flower of Gratitude",
+    "O Jardim Secreto": "The Secret Garden",
+    "O Passarinho que Não Sabia Voar": "The Little Bird That Couldn't Fly",
+    "A Árvore Generosa": "The Giving Tree",
+    "O Rio da Vida": "The River of Life",
+    "A Pequena Fada da Natureza": "The Little Nature Fairy"
+  };
+  
+  // Verificar se o título tem uma tradução específica
+  if (titleMap[title]) {
+    return titleMap[title];
+  }
+  
+  // Se não tiver uma tradução específica, traduza palavra por palavra
+  return translateContent(title);
 }
 
 // Função para traduzir resumos, incluindo nomes comuns
@@ -80,7 +100,59 @@ function translateContent(text: string): string {
     .replace(/família/g, "family")
     .replace(/Família/g, "Family")
     .replace(/amizade/g, "friendship")
-    .replace(/Amizade/g, "Friendship");
+    .replace(/Amizade/g, "Friendship")
+    .replace(/lagarta/g, "caterpillar")
+    .replace(/Lagarta/g, "Caterpillar")
+    .replace(/borboleta/g, "butterfly")
+    .replace(/Borboleta/g, "Butterfly")
+    .replace(/mamãe/g, "mommy")
+    .replace(/Mamãe/g, "Mommy")
+    .replace(/papai/g, "daddy")
+    .replace(/Papai/g, "Daddy")
+    .replace(/joaninha/g, "ladybug")
+    .replace(/Joaninha/g, "Ladybug")
+    .replace(/pequeno/g, "small")
+    .replace(/pequena/g, "small")
+    .replace(/pequenos/g, "small")
+    .replace(/pequenas/g, "small")
+    .replace(/Pequeno/g, "Small")
+    .replace(/Pequena/g, "Small")
+    .replace(/Pequenos/g, "Small")
+    .replace(/Pequenas/g, "Small")
+    .replace(/árvore/g, "tree")
+    .replace(/árvores/g, "trees")
+    .replace(/Árvore/g, "Tree")
+    .replace(/Árvores/g, "Trees")
+    .replace(/flor/g, "flower")
+    .replace(/flores/g, "flowers")
+    .replace(/Flor/g, "Flower")
+    .replace(/Flores/g, "Flowers")
+    .replace(/água/g, "water")
+    .replace(/Água/g, "Water")
+    .replace(/pássaro/g, "bird")
+    .replace(/pássaros/g, "birds")
+    .replace(/Pássaro/g, "Bird")
+    .replace(/Pássaros/g, "Birds")
+    .replace(/animais/g, "animals")
+    .replace(/Animais/g, "Animals")
+    .replace(/caminho/g, "path")
+    .replace(/Caminho/g, "Path")
+    .replace(/mundo/g, "world")
+    .replace(/Mundo/g, "World")
+    .replace(/vida/g, "life")
+    .replace(/Vida/g, "Life")
+    .replace(/tempo/g, "time")
+    .replace(/Tempo/g, "Time")
+    .replace(/anos/g, "years")
+    .replace(/ano/g, "year")
+    .replace(/dia/g, "day")
+    .replace(/dias/g, "days")
+    .replace(/noite/g, "night")
+    .replace(/noites/g, "nights")
+    .replace(/Dia/g, "Day")
+    .replace(/Dias/g, "Days")
+    .replace(/Noite/g, "Night")
+    .replace(/Noites/g, "Nights");
     
   // Traduz nomes próprios comuns
   translated = translated
@@ -262,7 +334,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           ...story,
           title: translateTitle(story.title),
           excerpt: translateExcerpt(story.excerpt),
-          content: translateContent(story.content)
+          content: translateContent(story.content),
+          ageRange: story.ageRange.replace(/anos/g, "years old")
         };
         return res.json(translatedStory);
       }
@@ -308,6 +381,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           ...story,
           title: translateTitle(story.title),
           excerpt: translateExcerpt(story.excerpt),
+          content: translateContent(story.content),
+          ageRange: story.ageRange.replace(/anos/g, "years old"),
           categoryName: story.categoryName === 'Amor' ? 'Love' :
                        story.categoryName === 'Paz' ? 'Peace' :
                        story.categoryName === 'Sabedoria' ? 'Wisdom' :
