@@ -119,7 +119,7 @@ export default function StoryDetails() {
             variant="ghost"
             className="mb-4"
           >
-            <Link href="/estorias">
+            <Link href={i18n.language === 'en' ? "/stories" : "/estorias"}>
               <ArrowLeft className="mr-2 h-4 w-4" />
               {t('common.backToStories')}
             </Link>
@@ -162,7 +162,7 @@ export default function StoryDetails() {
           <h1 className="text-3xl font-bold font-heading mb-4 text-text">{t('stories.notFound.title')}</h1>
           <p className="mb-6 text-lg">{t('stories.notFound.text')}</p>
           <Button asChild>
-            <Link href="/estorias">{t('stories.viewAll')}</Link>
+            <Link href={i18n.language === 'en' ? "/stories" : "/estorias"}>{t('stories.viewAll')}</Link>
           </Button>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default function StoryDetails() {
           variant="ghost"
           className="mb-4"
         >
-          <Link href="/estorias">
+          <Link href={i18n.language === 'en' ? "/stories" : "/estorias"}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             {t('common.backToStories')}
           </Link>
@@ -324,7 +324,7 @@ export default function StoryDetails() {
         <h3 className="font-heading font-bold text-xl mb-4">{t('stories.didYouLike')}</h3>
         <p className="mb-6">{t('stories.exploreMore')}</p>
         <Button asChild>
-          <Link href="/estorias">
+          <Link href={i18n.language === 'en' ? "/stories" : "/estorias"}>
             {t('stories.viewMoreStories')}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
