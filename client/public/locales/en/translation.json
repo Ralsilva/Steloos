@@ -7,7 +7,8 @@
     "home": "Home",
     "stories": "Stories",
     "categories": "Categories",
-    "about": "About us"
+    "about": "About us",
+    "contact": "Contact"
   },
   "home": {
     "hero": {
@@ -145,8 +146,14 @@
     "contact": {
       "title": "Contact Us",
       "text": "Have a suggestion or feedback? We would love to hear from you!",
-      "email": "contact@esteloo.com"
+      "email": "contact@steloos.com"
     }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "For questions, suggestions, or comments, please contact us through the email below:",
+    "responseTime": "Response Time",
+    "responseTimeDescription": "We try to respond to all messages within 48 business hours. Thank you for your understanding."
   },
   "common": {
     "loading": "Loading...",

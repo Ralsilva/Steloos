@@ -11,6 +11,7 @@ import Stories from "@/pages/stories";
 import Categories from "@/pages/categories";
 import StoryDetails from "@/pages/story-details";
 import About from "@/pages/about";
+import Contact from "@/pages/contact";
 
 function Router() {
   return (
@@ -21,12 +22,14 @@ function Router() {
       <Route path="/categorias" component={Categories} />
       <Route path="/estoria/:id" component={StoryDetails} />
       <Route path="/sobre" component={About} />
+      <Route path="/contato" component={Contact} />
       
       {/* Rotas em inglês */}
       <Route path="/stories" component={Stories} />
       <Route path="/categories" component={Categories} />
       <Route path="/story/:id" component={StoryDetails} />
       <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );

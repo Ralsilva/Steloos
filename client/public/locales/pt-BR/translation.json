@@ -7,7 +7,8 @@
     "home": "Início",
     "stories": "Estórias",
     "categories": "Categorias",
-    "about": "Sobre nós"
+    "about": "Sobre nós",
+    "contact": "Contato"
   },
   "home": {
     "hero": {
@@ -145,8 +146,14 @@
     "contact": {
       "title": "Entre em Contato",
       "text": "Tem alguma sugestão ou feedback? Adoraríamos ouvir de você!",
-      "email": "contato@esteloo.com.br"
+      "email": "contact@steloos.com"
     }
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "description": "Para dúvidas, sugestões ou comentários, entre em contato conosco através do e-mail abaixo:",
+    "responseTime": "Tempo de Resposta",
+    "responseTimeDescription": "Procuramos responder todas as mensagens em até 48 horas úteis. Obrigado pela compreensão."
   },
   "common": {
     "loading": "Carregando...",
