@@ -18,8 +18,8 @@ export default function Contact() {
           
           <div className="inline-flex items-center justify-center bg-primary/10 text-primary rounded-lg px-6 py-4 font-medium">
             <Mail className="mr-3 h-5 w-5" />
-            <a href="mailto:contact@steloos.com" className="hover:underline">
-              contact@steloos.com
+            <a href="mailto:contact@steloos.cm" className="hover:underline">
+              contact@steloos.cm
             </a>
           </div>
         </div>

@@ -38,22 +38,33 @@ export default function Footer() {
           
           <div>
             <h3 className="text-lg font-bold mb-4 font-heading">{t('home.categories.title')}</h3>
-            <ul className="space-y-2">
-              <li><Link href="/categorias?categoria=amor" className="hover:text-primary">{t('categories.amor')}</Link></li>
-              <li><Link href="/categorias?categoria=paz" className="hover:text-primary">{t('categories.paz')}</Link></li>
-              <li><Link href="/categorias?categoria=sabedoria" className="hover:text-primary">{t('categories.sabedoria')}</Link></li>
-              <li><Link href="/categorias?categoria=bondade" className="hover:text-primary">{t('categories.bondade')}</Link></li>
-            </ul>
+            <div className="grid grid-cols-2 gap-x-4">
+              <ul className="space-y-2">
+                <li><Link href="/categorias?categoria=amor" className="hover:text-primary">{t('categories.amor')}</Link></li>
+                <li><Link href="/categorias?categoria=paz" className="hover:text-primary">{t('categories.paz')}</Link></li>
+                <li><Link href="/categorias?categoria=sabedoria" className="hover:text-primary">{t('categories.sabedoria')}</Link></li>
+                <li><Link href="/categorias?categoria=bondade" className="hover:text-primary">{t('categories.bondade')}</Link></li>
+              </ul>
+              <ul className="space-y-2">
+                <li><Link href="/categorias?categoria=protecao" className="hover:text-primary">{t('categories.protecao')}</Link></li>
+                <li><Link href="/categorias?categoria=natureza" className="hover:text-primary">{t('categories.natureza')}</Link></li>
+                <li><Link href="/categorias?categoria=familia" className="hover:text-primary">{t('categories.familia')}</Link></li>
+                <li><Link href="/categorias?categoria=amizade" className="hover:text-primary">{t('categories.amizade')}</Link></li>
+              </ul>
+            </div>
           </div>
           
           <div>
             <h3 className="text-lg font-bold mb-4 font-heading">{t('footer.contact')}</h3>
             <ul className="space-y-2">
               <li className="flex items-center">
-                <Mail className="mr-2 h-4 w-4" /> {t('about.contact.email')}
+                <Mail className="mr-2 h-4 w-4" /> 
+                <a href="mailto:contact@steloos.cm" className="hover:text-primary">contact@steloos.cm</a>
               </li>
-              <li className="flex items-center">
-                <Phone className="mr-2 h-4 w-4" /> (00) 1234-5678
+              <li className="mt-3">
+                <Link href="/contato" className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+                  {t('menu.contact')}
+                </Link>
               </li>
             </ul>
           </div>

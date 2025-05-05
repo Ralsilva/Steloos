@@ -21,6 +21,7 @@ export default function Header() {
       { name: t('menu.stories'), href: isPortuguese ? "/estorias" : "/stories" },
       { name: t('menu.categories'), href: isPortuguese ? "/categorias" : "/categories" },
       { name: t('menu.about'), href: isPortuguese ? "/sobre" : "/about" },
+      { name: t('menu.contact'), href: isPortuguese ? "/contato" : "/contact" },
     ];
   }, [t, i18n.language]);
   
