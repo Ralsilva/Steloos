@@ -1,7 +1,133 @@
 {
-  "1": {
-    "title": "As Asas da Amizade",
-    "excerpt": "Uma bela estória sobre as asas mágicas que a verdadeira amizade pode proporcionar em nossa jornada da vida.",
-    "content": "Era uma vez, em uma pequena vila na floresta, vivia um passarinho chamado Lila. Lila tinha um sonho especial - ela queria voar mais alto do que qualquer pássaro já havia voado, tocar as nuvens e ver o mundo lá de cima.\n\nMas Lila tinha um problema. Suas asas eram excepcionalmente pequenas para um pássaro da sua espécie e, por mais que tentasse, não conseguia voar mais do que alguns metros acima do chão. Os outros pássaros da vila frequentemente zombavam dela, chamando-a de 'moradora do chão' e dizendo para desistir do seu sonho impossível.\n\nApesar das zombarias, Lila praticava todos os dias, batendo suas pequenas asas com toda a força, apenas para cair de volta ao solo. Ela observava com saudade enquanto os outros pássaros voavam sem esforço pelo céu.\n\nUm dia, enquanto descansava à beira de um riacho após mais uma tentativa fracassada de voar, Lila conheceu uma pequena tartaruga chamada Tim. Tim estava fazendo seu caminho lentamente pela margem, carregando uma bela concha nas costas.\n\n\"Por que você parece tão triste?\" Tim perguntou a Lila.\n\nLila explicou seu sonho e suas limitações, com lágrimas se formando em seus olhos enquanto falava.\n\nTim escutou atentamente e então disse: \"Eu entendo sua dor. Eu também tenho um sonho - atravessar o grande lago além da floresta, mas sou muito lento, e as correntes são muito fortes para mim.\"\n\nOs dois se tornaram amigos rapidamente, compartilhando seus sonhos e frustrações. Todos os dias, eles se encontravam à beira do riacho - Lila praticava voar, e Tim praticava nadar contra a corrente.\n\nConforme as semanas passavam, Lila notou algo incrível acontecendo. Com o encorajamento de Tim e a autoconfiança que sua amizade havia lhe dado, ela estava voando um pouco mais alto a cada dia. E Tim, inspirado pela perseverança de Lila, estava nadando um pouco mais forte contra a corrente.\n\nEm uma bela manhã, Lila percebeu que agora podia voar alto o suficiente para ver o grande lago de que Tim havia falado. De seu ponto de vista, ela notou um padrão nas correntes do lago, com um caminho suave e tranquilo bem no meio.\n\nEmpolgada, ela voou de volta para Tim e descreveu o que havia visto. \"Se você seguir este caminho\", ela explicou, \"talvez consiga atravessar o lago!\"\n\nTim ficou radiante de alegria e determinado a tentar. No dia seguinte, Lila pousou no casco de Tim, e juntos eles seguiram para o lago. Quando chegaram à margem, Lila voou para cima e guiou Tim em direção à corrente suave que ela havia descoberto.\n\nCom Lila direcionando de cima e Tim nadando com todas as suas forças, eles atravessaram o grande lago - realizando o que nenhum dos dois poderia ter feito sozinho.\n\nEnquanto descansavam na margem distante, Tim olhou para Lila e disse: \"Veja como você está voando alto agora! Seu sonho se tornou realidade!\"\n\nLila sorriu e respondeu: \"E você atravessou o grande lago! Seu sonho também se tornou realidade!\"\n\nEles perceberam que foi a amizade deles - o apoio, o encorajamento e as diferentes perspectivas que ofereciam um ao outro - que lhes deu asas para voar e força para nadar.\n\nA partir daquele dia, Lila e Tim embarcaram em muitas aventuras juntos, provando que a verdadeira amizade pode nos ajudar a superar nossas limitações e alcançar o que antes parecia impossível.\n\nE enquanto viajavam, compartilhavam sua história com outros, ensinando que quando apoiamos os sonhos uns dos outros, todos encontramos asas para voar mais alto do que jamais imaginamos ser possível."
-  }
+  "story_1_title": "As Asas da Amizade",
+  "story_1_excerpt": "Uma bela estória sobre as asas mágicas que a verdadeira amizade pode proporcionar em nossa jornada de vida.",
+  
+  "story_2_title": "O Jardim da Paz",
+  "story_2_excerpt": "Uma estória sobre como uma jovem menina cria um jardim que ensina à sua comunidade o valor da paz interior e da harmonia.",
+  
+  "story_3_title": "A Estrelinha Sábia",
+  "story_3_excerpt": "Uma pequena estrela ajuda um menino a encontrar respostas para suas grandes perguntas sobre a vida.",
+  
+  "story_4_title": "O Coelho Generoso",
+  "story_4_excerpt": "Um coelhinho aprende sobre o valor de compartilhar.",
+  
+  "story_5_title": "Anjos da Guarda",
+  "story_5_excerpt": "Como os anjos nos protegem todos os dias.",
+  
+  "story_6_title": "A Jornada da Alma",
+  "story_6_excerpt": "Uma bela explicação de como nossa alma aprende e cresce através de múltiplas experiências.",
+  
+  "story_7_title": "O Milagre do Perdão",
+  "story_7_excerpt": "O poder transformador de perdoar os outros e a nós mesmos.",
+  
+  "story_8_title": "O Grande Mestre",
+  "story_8_excerpt": "Uma criança descobre que a sabedoria pode vir de fontes inesperadas.",
+  
+  "story_9_title": "A Luz Interior",
+  "story_9_excerpt": "Uma estória sobre encontrar e nutrir a centelha divina que reside em cada um de nós.",
+  
+  "story_10_title": "O Legado da Vovó",
+  "story_10_excerpt": "Uma estória emocionante sobre o amor duradouro e a sabedoria que os avós deixam em nossos corações.",
+  
+  "story_11_title": "A Ponte do Arco-Íris",
+  "story_11_excerpt": "Um conto reconfortante sobre para onde vão nossos animais de estimação amados quando deixam este mundo.",
+  
+  "story_12_title": "A Árvore das Preces",
+  "story_12_excerpt": "Como uma árvore especial na floresta se tornou um lugar onde todas as preces são ouvidas.",
+  
+  "story_13_title": "Entre Céus",
+  "story_13_excerpt": "Uma aventura entre o céu e a terra que ensina sobre a conexão entre ambos os mundos.",
+  
+  "story_14_title": "O Pequeno Pacificador",
+  "story_14_excerpt": "Uma criança que ensina aos adultos como resolver conflitos com amor e compreensão.",
+  
+  "story_15_title": "O Presente",
+  "story_15_excerpt": "Um menino pobre descobre que os presentes mais valiosos não podem ser comprados com dinheiro.",
+  
+  "story_16_title": "Amor Eterno",
+  "story_16_excerpt": "Como o verdadeiro amor transcende o tempo, o espaço e até mesmo diferentes vidas.",
+  
+  "story_17_title": "As Cores da Bondade",
+  "story_17_excerpt": "Um conto sobre como atos de bondade pintam nosso mundo com belas cores.",
+  
+  "story_18_title": "Sussurros Silenciosos",
+  "story_18_excerpt": "Aprendendo a ouvir a voz suave de Deus no silêncio de nossos corações.",
+  
+  "story_19_title": "O Amigo Celestial",
+  "story_19_excerpt": "Uma constelação que ganha vida para ajudar uma criança solitária a encontrar amigos.",
+  
+  "story_20_title": "O Tecelão de Sonhos",
+  "story_20_excerpt": "Uma jornada mágica pelo mundo dos sonhos e seus significados.",
+  
+  "story_21_title": "As Sementes da Bondade",
+  "story_21_excerpt": "Como pequenos atos de bondade podem crescer e transformar um bairro inteiro.",
+  
+  "story_22_title": "O Cesto de Bondade",
+  "story_22_excerpt": "Uma estória sobre como a bondade, quando compartilhada, nunca se esgota.",
+  
+  "story_23_title": "O Menino que Colecionava Sorrisos",
+  "story_23_excerpt": "Um garoto descobre que espalhar bondade traz a maior coleção de todas: sorrisos.",
+  
+  "story_24_title": "A Receita da Vovó Beatriz",
+  "story_24_excerpt": "Como uma avó ensina que o ingrediente secreto da vida é a bondade.",
+  
+  "story_25_title": "As Árvores Sussurrantes",
+  "story_25_excerpt": "Uma menina que descobre que pode entender a sabedoria ancestral das árvores.",
+  
+  "story_26_title": "A Sinfonia da Natureza",
+  "story_26_excerpt": "Uma bela jornada através dos sons e ritmos da natureza.",
+  
+  "story_27_title": "O Jardim de Cura",
+  "story_27_excerpt": "Um jardim mágico onde as plantas têm poderes especiais para curar o corpo e a alma.",
+  
+  "story_28_title": "O Segredo dos Vaga-lumes",
+  "story_28_excerpt": "Como uma colônia de vaga-lumes ensina uma aldeia sobre esperança em tempos difíceis.",
+  
+  "story_29_title": "O Guardião da Floresta",
+  "story_29_excerpt": "Uma árvore velha e sábia que protege a floresta e ensina uma criança sobre o cuidado com o meio ambiente.",
+  
+  "story_30_title": "A Bolha de Amor",
+  "story_30_excerpt": "Uma técnica de visualização que ajuda as crianças a criarem uma bolha protetora de amor ao seu redor.",
+  
+  "story_31_title": "A Ponte Invisível",
+  "story_31_excerpt": "Como a fé cria pontes onde nossos olhos veem apenas impossibilidades.",
+  
+  "story_32_title": "Sussurros do Céu",
+  "story_32_excerpt": "Uma criança recebe mensagens reconfortantes de um ente querido que já partiu.",
+  
+  "story_33_title": "O Escudo Dourado",
+  "story_33_excerpt": "Uma estória sobre proteção espiritual contra energias e influências negativas.",
+  
+  "story_34_title": "O Relógio do Guardião",
+  "story_34_excerpt": "Um relógio especial que lembra a uma criança que ela está sempre protegida pelo amor divino.",
+  
+  "story_35_title": "A Árvore da Família",
+  "story_35_excerpt": "Uma árvore mágica que mostra a uma criança como todos os membros da família estão conectados pelo amor.",
+  
+  "story_36_title": "A Casa do Coração",
+  "story_36_excerpt": "Como uma família aprende a construir seu lar sobre o alicerce do amor, respeito e união.",
+  
+  "story_37_title": "Gerações",
+  "story_37_excerpt": "Um conto sobre o laço especial entre avós e netos.",
+  
+  "story_38_title": "A Estrela da Família",
+  "story_38_excerpt": "Como uma constelação no céu noturno ajuda uma criança a se sentir conectada a parentes distantes.",
+  
+  "story_39_title": "O Fio de Luz",
+  "story_39_excerpt": "Uma estória sobre os fios invisíveis que conectam os membros da família mesmo quando estão separados.",
+  
+  "story_40_title": "Amigos para Sempre",
+  "story_40_excerpt": "Uma aventura que ensina sobre o valor da verdadeira amizade.",
+  
+  "story_41_title": "O Círculo de Amigos",
+  "story_41_excerpt": "Como um grupo de animais diferentes cria um círculo de amizade harmonioso apesar de suas diferenças.",
+  
+  "story_42_title": "A Pedra da Amizade",
+  "story_42_excerpt": "Uma pedra mágica que revela as qualidades de um bom amigo.",
+  
+  "story_43_title": "Os Amigos do Arco-Íris",
+  "story_43_excerpt": "Como sete crianças muito diferentes formam uma amizade inquebrantável.",
+  
+  "story_44_title": "O Teste do Verdadeiro Amigo",
+  "story_44_excerpt": "Uma aventura desafiadora que revela quem são os verdadeiros amigos."
 }

@@ -16,6 +16,10 @@ i18n
     supportedLngs: ['pt-BR', 'en'], // idiomas suportados
     debug: import.meta.env.DEV, // mostra logs de debug apenas em desenvolvimento
     
+    // Carregar namespace de estórias
+    ns: ['translation', 'stories'],
+    defaultNS: 'translation',
+    
     interpolation: {
       escapeValue: false, // não é necessário para React
     },

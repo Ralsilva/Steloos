@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; 
 import { Link } from "wouter";
 import { Story } from "@shared/schema";
 import { ArrowRight } from "lucide-react";
@@ -47,7 +47,9 @@ function formatImageUrl(url: string, variant: "large" | "small"): string {
 }
 
 export default function StoryCard({ story, variant = "large" }: StoryCardProps) {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(['translation', 'stories']);
+  const [translatedTitle, setTranslatedTitle] = useState<string>(story.title);
+  const [translatedExcerpt, setTranslatedExcerpt] = useState<string>(story.excerpt);
   
   // Mapa de tradução para categorias
   const categoryTranslations: Record<string, string> = {
@@ -75,6 +77,20 @@ export default function StoryCard({ story, variant = "large" }: StoryCardProps) 
     }
     return categoryId;
   };
+  
+  // Carregar traduções para o card da estória
+  useEffect(() => {
+    // Chaves para buscar traduções no arquivo de traduções
+    const titleKey = `story_${story.id}_title`;
+    const excerptKey = `story_${story.id}_excerpt`;
+    
+    // Obter traduções do arquivo stories.json usando i18next
+    const translatedTitleValue = t(titleKey, { ns: 'stories', defaultValue: story.title });
+    const translatedExcerptValue = t(excerptKey, { ns: 'stories', defaultValue: story.excerpt });
+    
+    setTranslatedTitle(translatedTitleValue);
+    setTranslatedExcerpt(translatedExcerptValue);
+  }, [story.id, i18n.language, t]);
   
   const categoryInfo = getCategoryInfo(story.categoryId);
   // Escolher uma imagem, ou usando a URL original formatada, ou uma imagem de fallback
