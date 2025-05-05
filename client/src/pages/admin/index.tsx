@@ -53,7 +53,11 @@ export default function AdminDashboard() {
   // Handle tab change
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    setLocation(`/admin${value !== 'dashboard' ? `/${value}` : ''}`);
+    if (value === 'dashboard') {
+      setLocation('/admin');
+    } else {
+      setLocation(`/admin/${value}`);
+    }
   };
 
   // Determine active tab from URL

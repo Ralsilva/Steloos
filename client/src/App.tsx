@@ -21,7 +21,8 @@ function Router() {
   if (isAdminRoute) {
     return (
       <Switch>
-        <Route path="/admin/:rest*" component={AdminDashboard} />
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/:tab" component={AdminDashboard} />
       </Switch>
     );
   }
