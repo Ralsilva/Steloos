@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/ui/language-switcher";
-import esteloLogo from "@/assets/esteloo-logo.png"; 
+import esteloLogo from "@/assets/steloos-logo.png"; 
 import childrenReading from "@/assets/children-reading-new.png";
 
 export default function Header() {

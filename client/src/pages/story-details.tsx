@@ -16,8 +16,8 @@ function formatImageUrl(url: string | undefined, large = true): string {
   
   // Fallback padrão para imagens
   const fallbackUrl = large
-    ? "https://via.placeholder.com/1200x800?text=Esteloo" 
-    : "https://via.placeholder.com/300x200?text=Esteloo";
+    ? "https://via.placeholder.com/1200x800?text=Steloos" 
+    : "https://via.placeholder.com/300x200?text=Steloos";
   
   try {
     // Verifica se a URL é válida
