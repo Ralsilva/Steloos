@@ -1,3 +1,4 @@
+"use client"
 import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
 import steloosLogo from "@/assets/steloos-logo.png";

@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode colors */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Kid-friendly dark mode colors - "Night Sky" theme */
+    --background: 220 40% 13%; /* Deep blue background like night sky */
+    --foreground: 210 40% 98%; /* Light text for readability */
+    --card: 222 47% 18%;       /* Slightly lighter blue for cards */
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 18%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 250 95% 76%;    /* Brighter purple in dark mode */
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 30 95% 69%;   /* Warmer orange in dark mode */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 25%;  /* Slightly lighter muted color */
+    --muted-foreground: 215 20.2% 75%;
+    --accent: 270 50% 30%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 224 50% 25%;
+    --input: 224 50% 25%;
+    --ring: 250 95% 76%;
+  }
+
+  body {
+    @apply bg-steloos-cream text-steloos-text font-body transition-colors duration-300;
+  }
+
+  .dark body, body.dark-mode {
+    @apply bg-[hsl(220,40%,13%)] text-white !important;
+    background-color: hsl(220, 40%, 13%) !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  a {
+    @apply text-steloos-text hover:text-steloos-orange transition-colors;
+  }
+
+  .dark a {
+    @apply text-white hover:text-[#FFBB8A];
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+    disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  }
+
+  .btn-primary {
+    @apply bg-steloos-orange text-white hover:bg-steloos-orange-dark transition-colors duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-steloos-blue text-white hover:bg-steloos-blue-dark transition-colors duration-300;
+  }
+
+  .btn-outline {
+    @apply border border-steloos-orange text-steloos-orange bg-white hover:bg-steloos-cream-light hover:text-steloos-orange-dark transition-colors duration-300;
+  }
+
+  .dark .btn-primary {
+    @apply bg-[#FFBB8A] text-[#1F2937] hover:bg-[#FF9D5C];
+  }
+
+  .dark .btn-secondary {
+    @apply bg-[#818CF8] hover:bg-[#6366F1];
+  }
+
+  .dark .btn-outline {
+    @apply border-[#FFBB8A] text-[#FFBB8A] bg-transparent hover:bg-[rgba(255,187,138,0.1)] hover:text-white;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-sm overflow-hidden transition-colors duration-300;
+  }
+
+  .dark .card {
+    @apply bg-[hsl(222,47%,18%)] shadow-[0_4px_12px_rgba(0,0,0,0.3)];
+  }
+
+  /* Estilos específicos para corrigir problemas de layout */
+  header, footer {
+    @apply w-full bg-white transition-colors duration-300;
+  }
+
+  .dark header, .dark footer {
+    @apply bg-[hsl(222,47%,15%)] border-[hsl(224,50%,25%)];
+  }
+
+  main {
+    @apply min-h-screen py-0;
+  }
+
+  /* Banner principal */
+  .hero-banner {
+    @apply bg-steloos-blue text-white rounded-lg p-8 mb-8 relative overflow-hidden transition-colors duration-300;
+  }
+
+  .dark .hero-banner {
+    @apply bg-[#4338CA] shadow-[0_8px_16px_rgba(0,0,0,0.3)];
+  }
+
+  /* Estilos para navegação mobile */
+  .mobile-nav {
+    @apply fixed inset-0 bg-white z-50 p-4 flex flex-col transition-colors duration-300;
+  }
+
+  .dark .mobile-nav {
+    @apply bg-[hsl(222,47%,15%)];
+  }
+
+  /* Estilos para links de navegação */
+  nav a {
+    @apply text-steloos-text hover:text-steloos-orange transition-colors duration-300;
+  }
+
+  .dark nav a {
+    @apply text-white hover:text-[#FFBB8A];
+  }
+
+  /* Estilos para categorias */
+  .category-card {
+    @apply rounded-lg p-4 hover:shadow-md transition-shadow text-white font-medium;
+  }
+
+  .category-amor {
+    @apply bg-steloos-category-amor;
+  }
+
+  .category-paz {
+    @apply bg-steloos-category-paz;
+  }
+
+  .category-protecao {
+    @apply bg-steloos-category-protecao;
+  }
+
+  .category-sabedoria {
+    @apply bg-steloos-category-sabedoria;
+  }
+
+  .category-bondade {
+    @apply bg-steloos-category-bondade;
+  }
+
+  .category-natureza {
+    @apply bg-steloos-category-natureza;
+  }
+
+  .category-familia {
+    @apply bg-steloos-category-familia;
+  }
+
+  .category-amizade {
+    @apply bg-steloos-category-amizade;
+  }
+
+  /* Estilos para cards de histórias */
+  .story-card {
+    @apply rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300;
+  }
+
+  .story-card-image {
+    @apply h-40 bg-gradient-to-r from-pink-500 to-purple-500;
+  }
+
+  .story-card-content {
+    @apply p-4 bg-white transition-colors duration-300;
+  }
+
+  .dark .story-card {
+    @apply shadow-[0_4px_12px_rgba(0,0,0,0.3)];
+  }
+
+  .dark .story-card-content {
+    @apply bg-[hsl(222,47%,18%)] text-white;
+  }
+
+  .dark .story-card-image {
+    @apply bg-gradient-to-r from-[#8B5CF6] to-[#EC4899];
+  }
+
+  /* Estilos para botões de leitura */
+  .read-more {
+    @apply text-steloos-orange hover:text-steloos-orange-dark font-medium inline-flex items-center;
+  }
+
+  /* Estilos para seções */
+  .section-title {
+    @apply text-2xl md:text-3xl font-heading font-bold mb-6 text-steloos-text;
+  }
+
+  /* Estilos para links de idioma */
+  .language-selector a {
+    @apply text-sm font-medium;
+  }
+
+  .language-selector a.active {
+    @apply text-steloos-orange font-semibold;
+  }
+
+  /* Estilos para barra de pesquisa */
+  .search-bar {
+    @apply w-full max-w-md mx-auto my-4 relative;
+  }
+
+  .search-input {
+    @apply w-full rounded-full border border-gray-200 py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-steloos-orange transition-colors duration-300;
+  }
+
+  .dark .search-input {
+    @apply bg-[hsl(222,47%,18%)] border-[hsl(224,50%,25%)] text-white focus:ring-[#FFBB8A];
+  }
+
+  /* Estilos para seção de destaques */
+  .featured-section {
+    @apply my-8;
+  }
+
+  /* Estilos para seção de recentes */
+  .recent-section {
+    @apply my-8;
+  }
+
+  /* Estilos para seção de imaginação */
+  .imagination-section {
+    @apply my-8 bg-steloos-cream-light rounded-lg p-6;
+  }
+
+  /* Estilos para seção de depoimentos */
+  .testimonials-section {
+    @apply my-8;
+  }
+
+  /* Estilos para newsletter */
+  .newsletter-section {
+    @apply my-8 bg-steloos-orange text-white rounded-lg p-6 transition-colors duration-300;
+  }
+
+  .dark .newsletter-section {
+    @apply bg-[#4338CA] shadow-[0_4px_12px_rgba(0,0,0,0.3)];
+  }
+}

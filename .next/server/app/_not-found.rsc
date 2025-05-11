@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:I[7555,[],""]
+3:I[1702,["8039","static/chunks/app/error-bf02a91b4da94441.js"],"default"]
+4:I[1295,[],""]
+5:I[1024,["6874","static/chunks/6874-4f42ef23973704ca.js","4345","static/chunks/app/not-found-0e88d2fe705196fe.js"],"default"]
+6:I[894,[],"ClientPageRoot"]
+9:I[9665,[],"MetadataBoundary"]
+b:I[9665,[],"OutletBoundary"]
+e:I[4911,[],"AsyncMetadataOutlet"]
+10:I[9665,[],"ViewportBoundary"]
+12:I[9340,["4219","static/chunks/app/global-error-0db1d5e983f4af05.js"],"default"]
+:HL["/_next/static/css/086f6008f3cc912c.css","style"]
+:HL["/_next/static/css/71d992719bdd375c.css","style"]
+0:{"P":null,"b":"kHaiOmRGKhZdtznVEI4DY","p":"","c":["","_not-found"],"i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/086f6008f3cc912c.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/71d992719bdd375c.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"pt-BR","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":"anonymous"}],["$","link",null,{"href":"https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Comic+Neue:wght@300;400;700&family=Nunito:wght@400;500;600;700&display=swap","rel":"stylesheet"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n            (function() {\n              try {\n                const savedTheme = localStorage.getItem('theme');\n                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;\n\n                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {\n                  document.documentElement.classList.add('dark');\n                  document.body.classList.add('dark-mode');\n                  document.body.style.backgroundColor = 'hsl(220, 40%, 13%)';\n                } else {\n                  document.documentElement.classList.remove('dark');\n                  document.body.classList.remove('dark-mode');\n                  document.body.style.backgroundColor = '';\n                }\n              } catch (e) {\n                console.error('Error applying theme:', e);\n              }\n            })();\n          "}}]]}],["$","body",null,{"className":"flex flex-col min-h-screen","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$3","errorStyles":[],"errorScripts":[],"template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$L5",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}],{"children":["/_not-found",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$L6",null,{"Component":"$5","searchParams":{},"params":{},"promises":["$@7","$@8"]}],["$","$L9",null,{"children":"$La"}],null,["$","$Lb",null,{"children":["$Lc","$Ld",["$","$Le",null,{"promise":"$@f"}]]}]]}],{},null,false]},null,false]},null,false],["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$1","IrRmNXvttv45_nt3vGqXU",{"children":[["$","$L10",null,{"children":"$L11"}],null]}],null]}],false]],"m":"$undefined","G":["$12",[]],"s":false,"S":true}
+13:"$Sreact.suspense"
+14:I[4911,[],"AsyncMetadata"]
+7:{}
+8:{}
+a:["$","$13",null,{"fallback":null,"children":["$","$L14",null,{"promise":"$@15"}]}]
+d:null
+11:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+c:null
+15:{"metadata":[["$","title","0",{"children":"STELOOS - Estórias de Luz para Crianças"}],["$","meta","1",{"name":"description","content":"Estórias infantis sobre paz, amor, sabedoria e valores espirituais"}]],"error":null,"digest":"$undefined"}
+f:{"metadata":"$15:metadata","error":null,"digest":"$undefined"}

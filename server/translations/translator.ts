@@ -330,6 +330,49 @@ function translateTestimonial(content: string): string {
     .replace(/paz/g, "peace");
 }
 
+// Create a proper translation dictionary
+const nameTranslations: Record<string, string> = {
+  'Ana': 'Anne',
+  'João': 'John',
+  'Maria': 'Mary',
+  'José': 'Joseph',
+  'Carlos': 'Charles',
+  'Pedro': 'Peter',
+  // Add more names as needed
+};
+
+const relationTranslations: Record<string, string> = {
+  'Mãe': 'Mother',
+  'Pai': 'Father',
+  'anos': 'years old',
+  'ano': 'year old',
+  'da': 'of',
+  'do': 'of',
+  // Add more relation terms as needed
+};
+
+// Function to translate names using the dictionary
+function translateName(name: string): string {
+  return Object.entries(nameTranslations).reduce(
+    (result, [ptName, enName]) => result.replace(new RegExp(ptName, 'g'), enName),
+    name
+  );
+}
+
+// Function to traduzir testemunhos
+function translateTestimonial(content: string): string {
+  // Esta é uma função simplificada. Para um projeto real, 
+  // você precisaria de traduções mais elaboradas.
+  return content
+    .replace(/Steloos/g, "Steloos")
+    .replace(/meu filho/g, "my son")
+    .replace(/minha filha/g, "my daughter")
+    .replace(/estórias/g, "stories")
+    .replace(/valores/g, "values")
+    .replace(/amor/g, "love")
+    .replace(/paz/g, "peace");
+}
+
 // Função principal para migrar traduções
 export async function migrateTranslations() {
   console.log("Iniciando migração de traduções...");
@@ -390,19 +433,8 @@ export async function migrateTranslations() {
       try {
         await db.update(testimonials)
           .set({ 
-            nameEn: testimonial.name.replace(/Ana/g, "Anne")
-              .replace(/João/g, "John")
-              .replace(/Maria/g, "Mary")
-              .replace(/José/g, "Joseph")
-              .replace(/Carlos/g, "Charles")
-              .replace(/Pedro/g, "Peter"),
-            relationEn: testimonial.relation
-              .replace(/Mãe/g, "Mother")
-              .replace(/Pai/g, "Father")
-              .replace(/anos/g, "years old")
-              .replace(/ano/g, "year old")
-              .replace(/da/g, "of")
-              .replace(/do/g, "of"),
+            nameEn: translateName(testimonial.name),
+            relationEn: translateRelation(testimonial.relation),
             contentEn: translateTestimonial(testimonial.content)
           })
           .where(eq(testimonials.id, testimonial.id));
@@ -419,3 +451,4 @@ export async function migrateTranslations() {
     throw error;
   }
 }
+

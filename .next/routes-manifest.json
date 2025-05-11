@@ -1,0 +1,274 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/en/stories/[id]",
+      "regex": "^/en/stories/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/en/stories/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/estorias/[id]",
+      "regex": "^/estorias/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/estorias/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/[lang]",
+      "regex": "^/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPlang": "nxtPlang"
+      },
+      "namedRegex": "^/(?<nxtPlang>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/[lang]/categorias",
+      "regex": "^/([^/]+?)/categorias(?:/)?$",
+      "routeKeys": {
+        "nxtPlang": "nxtPlang"
+      },
+      "namedRegex": "^/(?<nxtPlang>[^/]+?)/categorias(?:/)?$"
+    },
+    {
+      "page": "/[lang]/categories",
+      "regex": "^/([^/]+?)/categories(?:/)?$",
+      "routeKeys": {
+        "nxtPlang": "nxtPlang"
+      },
+      "namedRegex": "^/(?<nxtPlang>[^/]+?)/categories(?:/)?$"
+    },
+    {
+      "page": "/[lang]/estorias",
+      "regex": "^/([^/]+?)/estorias(?:/)?$",
+      "routeKeys": {
+        "nxtPlang": "nxtPlang"
+      },
+      "namedRegex": "^/(?<nxtPlang>[^/]+?)/estorias(?:/)?$"
+    },
+    {
+      "page": "/[lang]/stories",
+      "regex": "^/([^/]+?)/stories(?:/)?$",
+      "routeKeys": {
+        "nxtPlang": "nxtPlang"
+      },
+      "namedRegex": "^/(?<nxtPlang>[^/]+?)/stories(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/categorias",
+      "regex": "^/categorias(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias(?:/)?$"
+    },
+    {
+      "page": "/categorias/amizade",
+      "regex": "^/categorias/amizade(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/amizade(?:/)?$"
+    },
+    {
+      "page": "/categorias/amor",
+      "regex": "^/categorias/amor(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/amor(?:/)?$"
+    },
+    {
+      "page": "/categorias/bondade",
+      "regex": "^/categorias/bondade(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/bondade(?:/)?$"
+    },
+    {
+      "page": "/categorias/familia",
+      "regex": "^/categorias/familia(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/familia(?:/)?$"
+    },
+    {
+      "page": "/categorias/natureza",
+      "regex": "^/categorias/natureza(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/natureza(?:/)?$"
+    },
+    {
+      "page": "/categorias/paz",
+      "regex": "^/categorias/paz(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/paz(?:/)?$"
+    },
+    {
+      "page": "/categorias/protecao",
+      "regex": "^/categorias/protecao(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/protecao(?:/)?$"
+    },
+    {
+      "page": "/categorias/sabedoria",
+      "regex": "^/categorias/sabedoria(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/categorias/sabedoria(?:/)?$"
+    },
+    {
+      "page": "/contato",
+      "regex": "^/contato(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contato(?:/)?$"
+    },
+    {
+      "page": "/en",
+      "regex": "^/en(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en(?:/)?$"
+    },
+    {
+      "page": "/en/about",
+      "regex": "^/en/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/about(?:/)?$"
+    },
+    {
+      "page": "/en/categories",
+      "regex": "^/en/categories(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories(?:/)?$"
+    },
+    {
+      "page": "/en/categories/family",
+      "regex": "^/en/categories/family(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/family(?:/)?$"
+    },
+    {
+      "page": "/en/categories/friendship",
+      "regex": "^/en/categories/friendship(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/friendship(?:/)?$"
+    },
+    {
+      "page": "/en/categories/kindness",
+      "regex": "^/en/categories/kindness(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/kindness(?:/)?$"
+    },
+    {
+      "page": "/en/categories/love",
+      "regex": "^/en/categories/love(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/love(?:/)?$"
+    },
+    {
+      "page": "/en/categories/nature",
+      "regex": "^/en/categories/nature(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/nature(?:/)?$"
+    },
+    {
+      "page": "/en/categories/peace",
+      "regex": "^/en/categories/peace(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/peace(?:/)?$"
+    },
+    {
+      "page": "/en/categories/protection",
+      "regex": "^/en/categories/protection(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/protection(?:/)?$"
+    },
+    {
+      "page": "/en/categories/wisdom",
+      "regex": "^/en/categories/wisdom(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/categories/wisdom(?:/)?$"
+    },
+    {
+      "page": "/en/contact",
+      "regex": "^/en/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/contact(?:/)?$"
+    },
+    {
+      "page": "/en/stories",
+      "regex": "^/en/stories(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/stories(?:/)?$"
+    },
+    {
+      "page": "/en/stories/1",
+      "regex": "^/en/stories/1(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/en/stories/1(?:/)?$"
+    },
+    {
+      "page": "/estorias",
+      "regex": "^/estorias(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/estorias(?:/)?$"
+    },
+    {
+      "page": "/estorias/1",
+      "regex": "^/estorias/1(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/estorias/1(?:/)?$"
+    },
+    {
+      "page": "/pt-BR",
+      "regex": "^/pt\\-BR(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pt\\-BR(?:/)?$"
+    },
+    {
+      "page": "/sobre",
+      "regex": "^/sobre(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sobre(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}

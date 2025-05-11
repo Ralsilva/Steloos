@@ -4,6 +4,8 @@ import { storage } from "./storage";
 import { z } from "zod";
 import { insertNewsletterSubscriberSchema } from "@shared/schema";
 import { cacheMiddleware } from "./cache";
+import { TranslationService } from './translations/translationService';
+const translationService = new TranslationService();
 
 // Função para traduzir títulos em português para inglês
 function translateTitle(title: string): string {
@@ -855,3 +857,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
   return httpServer;
 }
+

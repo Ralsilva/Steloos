@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STELOOS - Estórias de Luz para Crianças</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FFF2E6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6366F1;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav a {
+            color: #333333;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #FF9D5C;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+            border-left: 1px solid #eee;
+            padding-left: 1rem;
+        }
+        
+        .language-selector a {
+            margin: 0 0.5rem;
+        }
+        
+        .language-selector a.active {
+            color: #FF9D5C;
+            font-weight: bold;
+        }
+        
+        main {
+            flex-grow: 1;
+        }
+        
+        .hero-banner {
+            background-color: #6366F1;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 32rem;
+        }
+        
+        .hero-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: #FF9D5C;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #F08C4B;
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: #FF9D5C;
+            border: 1px solid #FF9D5C;
+        }
+        
+        .btn-outline:hover {
+            background-color: #FFF8F5;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .category-card {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .category-amor { background-color: #F59E0B; }
+        .category-paz { background-color: #F97316; }
+        .category-fe { background-color: #3B82F6; }
+        .category-sabedoria { background-color: #8B5CF6; }
+        .category-bondade { background-color: #10B981; }
+        .category-natureza { background-color: #22C55E; }
+        .category-familia { background-color: #EC4899; }
+        .category-amizade { background-color: #6366F1; }
+        
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .story-card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story-image {
+            height: 160px;
+            background: linear-gradient(to right, #ec4899, #8b5cf6);
+        }
+        
+        .story-content {
+            padding: 1rem;
+            background-color: white;
+        }
+        
+        .story-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .story-description {
+            color: #666666;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: #FF9D5C;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .read-more:hover {
+            color: #F08C4B;
+        }
+        
+        .newsletter-section {
+            background-color: #FF9D5C;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: none;
+        }
+        
+        .newsletter-button {
+            background-color: white;
+            color: #FF9D5C;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #333333;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: #FF9D5C;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+            color: #666666;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">STELOOS</div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">Estórias</a></li>
+                        <li><a href="#">Categorias</a></li>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li class="language-selector">
+                            <a href="#">English</a>
+                            <span>|</span>
+                            <a href="#" class="active">Português</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="hero-banner">
+                <div class="hero-content">
+                    <h1 class="hero-title">STELOOS</h1>
+                    <h2 class="hero-subtitle">Estórias de Luz para Crianças</h2>
+                    <p>Compartilhando valores de paz, amor e sabedoria.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" class="btn btn-primary">Explorar Estórias</a>
+                        <a href="#" class="btn btn-outline">Ver Categorias</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2 class="section-title">Explorar por Categoria</h2>
+                <div class="categories-grid">
+                    <a href="#" class="category-card category-amor">Amor</a>
+                    <a href="#" class="category-card category-paz">Paz</a>
+                    <a href="#" class="category-card category-fe">Fé</a>
+                    <a href="#" class="category-card category-sabedoria">Sabedoria</a>
+                    <a href="#" class="category-card category-bondade">Bondade</a>
+                    <a href="#" class="category-card category-natureza">Natureza</a>
+                    <a href="#" class="category-card category-familia">Família</a>
+                    <a href="#" class="category-card category-amizade">Amizade</a>
+                </div>
+            </section>
+            
+            <section>
+                <h2 class="section-title">Estórias em Destaque</h2>
+                <div class="stories-grid">
+                    <div class="story-card">
+                        <div class="story-image"></div>
+                        <div class="story-content">
+                            <h3 class="story-title">Título da Estória 1</h3>
+                            <p class="story-description">Uma breve descrição da estória que desperta o interesse do leitor...</p>
+                            <a href="#" class="read-more">Ler mais →</a>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-image"></div>
+                        <div class="story-content">
+                            <h3 class="story-title">Título da Estória 2</h3>
+                            <p class="story-description">Uma breve descrição da estória que desperta o interesse do leitor...</p>
+                            <a href="#" class="read-more">Ler mais →</a>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-image"></div>
+                        <div class="story-content">
+                            <h3 class="story-title">Título da Estória 3</h3>
+                            <p class="story-description">Uma breve descrição da estória que desperta o interesse do leitor...</p>
+                            <a href="#" class="read-more">Ler mais →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="newsletter-section">
+                <h2>Receba Novas Estórias</h2>
+                <p>Inscreva-se para receber nossas novas estórias diretamente no seu email.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Seu email" class="newsletter-input">
+                    <button class="newsletter-button">Inscrever</button>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">Navegação</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">Estórias</a></li>
+                        <li><a href="#">Categorias</a></li>
+                        <li><a href="#">Sobre</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Amor</a></li>
+                        <li><a href="#">Paz</a></li>
+                        <li><a href="#">Sabedoria</a></li>
+                        <li><a href="#">Bondade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contact@steloos.com">contact@steloos.com</a></li>
+                        <li><a href="#">Formulário de Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 STELOOS - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

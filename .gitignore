@@ -3,9 +3,5 @@ dist
 .DS_Store
 server/public
 vite.config.ts.*
-<<<<<<< HEAD
 *.tar.gz
 .vercel
-=======
-*.tar.gz
->>>>>>> ee9d3041993a51ce3089d2a94cc5653040f110b6

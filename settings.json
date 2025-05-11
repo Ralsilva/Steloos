@@ -1,0 +1,12 @@
+{
+  "property1": "value1",
+  "property2": "value2",
+  "property3": {
+    "nestedProperty1": "nestedValue1",
+    "nestedProperty2": "nestedValue2"
+  },
+  "property4": [
+    "arrayItem1",
+    "arrayItem2"
+  ]
+}

@@ -1,43 +1,39 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import express from 'express';
-import { createServer } from 'http';
-import { registerRoutes } from '../server/routes';
-import { initializeDatabase } from '../server/storage';
+import { db } from '../server/db';
+import { storage } from '../server/storage';
 
-// Inicializa o Express
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-// Inicializa o banco de dados
-let dbInitialized = false;
-
-// Cria um servidor HTTP para o Express
-const server = createServer(app);
-
-// Registra as rotas
-registerRoutes(app);
-
-// Handler para requisições do Vercel
+// Handler principal para a API
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Inicializa o banco de dados apenas uma vez
-  if (!dbInitialized) {
-    try {
-      await initializeDatabase();
-      dbInitialized = true;
-      console.log('Database initialized successfully');
-    } catch (error) {
-      console.error(`Error initializing database: ${error}`);
-    }
+  // Configurar CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  // Responder a requisições OPTIONS (preflight)
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
   }
 
-  // Processa a requisição com o Express
-  return new Promise((resolve, reject) => {
-    app(req, res, (err) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(undefined);
-    });
-  });
+  try {
+    // Roteamento básico
+    const path = req.url?.split('?')[0] || '';
+    
+    // Exemplo de rota
+    if (path.startsWith('/api/stories') && req.method === 'GET') {
+      const stories = await storage.getStories();
+      return res.status(200).json(stories);
+    }
+    
+    // Rota padrão
+    return res.status(404).json({ error: 'Not Found' });
+  } catch (error) {
+    console.error('API error:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
+
+
+
+
